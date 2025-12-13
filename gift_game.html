@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gra: Łapanie Prezentów</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #0b1d26, #123);
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+  }
+  h1 { margin-top: 20px; }
+  #gameArea {
+    position: relative;
+    width: 100vw;
+    height: 80vh;
+    overflow: hidden;
+    border: 2px solid #fff;
+    margin-top: 20px;
+    background: url('https://i.imgur.com/3ZQeC9Y.png') no-repeat center bottom;
+    background-size: contain;
+  }
+  .present {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+  }
+  #scoreBoard {
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+  #backBtn {
+    margin-top: 10px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h1>🎁 Gra: Łapanie Prezentów 🎁</h1>
+<div id="gameArea"></div>
+<div id="scoreBoard">Wynik: <span id="score">0</span></div>
+<button id="backBtn">⬅ Powrót</button>
+<script>
+const gameArea = document.getElementById('gameArea');
+const scoreEl = document.getElementById('score');
+let score = 0;
+
+function spawnPresent() {
+    const present = document.createElement('div');
+    present.className = 'present';
+    present.textContent = '🎁';
+    present.style.left = Math.random() * (gameArea.offsetWidth - 40) + 'px';
+    present.style.top = '-40px';
+    gameArea.appendChild(present);
+
+    let speed = 1 + Math.random() * 3;
+    const fallInterval = setInterval(() => {
+        let top = parseFloat(present.style.top);
+        if (top > gameArea.offsetHeight) {
+            present.remove();
+            clearInterval(fallInterval);
+            return;
+        }
+        present.style.top = top + speed + 'px';
+    }, 16);
+
+    present.addEventListener('click', () => {
+        score++;
+        scoreEl.textContent = score;
+        present.remove();
+        clearInterval(fallInterval);
+    });
+}
+
+// Spawnowanie prezentów co 0.8s
+setInterval(spawnPresent, 800);
+
+// Powrót do głównej strony
+document.getElementById('backBtn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+</script>
+</body>
+</html>
