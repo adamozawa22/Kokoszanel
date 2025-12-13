@@ -71,58 +71,15 @@
     }
 
     .tree { position: relative; width: 0; height: 0; }
-    .layer {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 160px solid transparent;
-      border-right: 160px solid transparent;
-      border-bottom: 180px solid var(--tree-dark);
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
-    }
+    .layer { position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-bottom: 180px solid var(--tree-dark); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); }
     .layer:nth-child(1) { bottom: 120px; }
-    .layer:nth-child(2) {
-      bottom: 60px;
-      border-left-width: 190px;
-      border-right-width: 190px;
-      border-bottom-width: 210px;
-      border-bottom-color: var(--tree-light);
-    }
-    .layer:nth-child(3) {
-      bottom: 0;
-      border-left-width: 220px;
-      border-right-width: 220px;
-      border-bottom-width: 240px;
-      border-bottom-color: var(--tree-dark);
-    }
+    .layer:nth-child(2) { bottom: 60px; border-left-width: 190px; border-right-width: 190px; border-bottom-width: 210px; border-bottom-color: var(--tree-light); }
+    .layer:nth-child(3) { bottom: 0; border-left-width: 220px; border-right-width: 220px; border-bottom-width: 240px; border-bottom-color: var(--tree-dark); }
 
     .trunk { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 60px; height: 50px; background: var(--wood); border-radius: 0 0 10px 10px; }
 
-    .star {
-      position: absolute;
-      bottom: 300px;
-      left: 50%;
-      transform: translateX(-50%) rotate(0deg);
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 40px solid var(--star);
-      animation: spin 6s linear infinite, glow 2s ease-in-out infinite alternate;
-    }
-    .star::after {
-      content: "";
-      position: absolute;
-      top: 12px;
-      left: -20px;
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-top: 40px solid var(--star);
-    }
+    .star { position: absolute; bottom: 300px; left: 50%; transform: translateX(-50%) rotate(0deg); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 40px solid var(--star); animation: spin 6s linear infinite, glow 2s ease-in-out infinite alternate; }
+    .star::after { content: ""; position: absolute; top: 12px; left: -20px; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid var(--star); }
 
     @keyframes spin { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(360deg); } }
     @keyframes glow { from { filter: drop-shadow(0 0 5px var(--star)); } to { filter: drop-shadow(0 0 20px var(--star)); } }
@@ -136,8 +93,8 @@
     footer { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.8rem; opacity: 0.7; }
 
     /* Minigry */
-    #game { position: fixed; top: 10%; right: 10px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.8rem; backdrop-filter: blur(4px); }
-    #game button { margin-top: 5px; font-size: 0.8rem; padding: 5px; border-radius: 5px; cursor: pointer; }
+    #games { position: fixed; top: 10%; right: 10px; width: 180px; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.8rem; backdrop-filter: blur(4px); }
+    #games button { margin-top: 5px; font-size: 0.8rem; padding: 5px; border-radius: 5px; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -148,7 +105,6 @@
     <div class="time-box"><span id="hours">0</span><small>GODZINY</small></div>
     <div class="time-box"><span id="minutes">0</span><small>MINUTY</small></div>
     <div class="time-box"><span id="seconds">0</span><small>SEKUNDY</small></div>
-    <div class="time-box"><span id="ms">0</span><small>MS</small></div>
   </div>
 
   <div class="scene">
@@ -165,10 +121,18 @@
     </div>
   </div>
 
-  <div id="game">
+  <div id="games">
     <div>🎅 Kliknij Mikołaja!</div>
     <button id="santaBtn">🎅</button>
     <div>Wynik: <span id="score">0</span></div>
+
+    <div style="margin-top:15px;">❄️ Zbieraj śnieżki!</div>
+    <button id="snowBtn">❄️</button>
+    <div>Śnieżki: <span id="snowScore">0</span></div>
+
+    <div style="margin-top:15px;">🎁 Łap prezenty!</div>
+    <button id="giftBtn">🎁</button>
+    <div>Prezenty: <span id="giftScore">0</span></div>
   </div>
 
   <footer>Magia Świąt jest coraz bliżej ✨</footer>
@@ -178,7 +142,6 @@
     const hoursEl = document.getElementById('hours');
     const minutesEl = document.getElementById('minutes');
     const secondsEl = document.getElementById('seconds');
-    const msEl = document.getElementById('ms');
 
     function updateCountdown() {
       const now = new Date();
@@ -192,16 +155,14 @@
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-      const ms = Math.floor(diff % 1000);
 
       daysEl.textContent = days;
       hoursEl.textContent = hours;
       minutesEl.textContent = minutes;
       secondsEl.textContent = seconds;
-      msEl.textContent = ms;
     }
 
-    setInterval(updateCountdown, 50);
+    setInterval(updateCountdown, 1000);
     updateCountdown();
 
     function createSnowflake() {
@@ -217,16 +178,37 @@
 
     setInterval(createSnowflake, 200);
 
-    // Minigra - klikaj Mikołaja
+    // Minigra Mikołaj
     const santaBtn = document.getElementById('santaBtn');
     const scoreEl = document.getElementById('score');
     let score = 0;
-
     santaBtn.addEventListener('click', () => {
       score++;
       scoreEl.textContent = score;
       santaBtn.style.top = Math.random() * 100 + 'px';
       santaBtn.style.left = Math.random() * 100 + 'px';
+    });
+
+    // Minigra Śnieżki
+    const snowBtn = document.getElementById('snowBtn');
+    const snowScoreEl = document.getElementById('snowScore');
+    let snowScore = 0;
+    snowBtn.addEventListener('click', () => {
+      snowScore++;
+      snowScoreEl.textContent = snowScore;
+      snowBtn.style.top = Math.random() * 100 + 'px';
+      snowBtn.style.left = Math.random() * 100 + 'px';
+    });
+
+    // Minigra Prezenty
+    const giftBtn = document.getElementById('giftBtn');
+    const giftScoreEl = document.getElementById('giftScore');
+    let giftScore = 0;
+    giftBtn.addEventListener('click', () => {
+      giftScore++;
+      giftScoreEl.textContent = giftScore;
+      giftBtn.style.top = Math.random() * 100 + 'px';
+      giftBtn.style.left = Math.random() * 100 + 'px';
     });
   </script>
 </body>
