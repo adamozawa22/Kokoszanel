@@ -1,52 +1,60 @@
-/* TK TV - STYLE 2012 - APPLE SKEUOMORPHIC DESIGN */
+/* TK TV - STYLE 2012 - ULTRA APPLE SKEUOMORPHIC & GLASS */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-    /* Charakterystyczne szare, teksturowane tło (lniane/lnu) popularne w iOS/OSX */
-    background-color: #d1d1d1;
-    background-image: radial-gradient(#e7e7e7 1px, transparent 0);
-    background-size: 4px 4px;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+    /* Klasyczne lniane tło Apple z 2012 roku */
+    background: #bcbcbc url('https://www.transparenttextures.com/patterns/linen.png');
     color: #333;
+    background-attachment: fixed;
 }
 
 #wrapper {
     width: 980px;
-    margin: 0 auto;
-    background: #ffffff;
-    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    margin: 40px auto;
+    /* Półprzezroczysta tafla szkła */
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(10px); /* Efekt rozmycia tła pod spodem */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    overflow: hidden;
 }
 
-/* Elegancki, czarny, lśniący pasek nawigacji Apple */
+/* Lśniący, czarny pasek nawigacji z odbiciem */
 header {
-    background: #444 linear-gradient(to bottom, #444 0%, #111 100%);
-    padding: 20px 40px;
+    background: linear-gradient(to bottom, #4c4c4c 0%, #111111 50%, #000000 51%, #111111 100%);
+    padding: 25px 40px;
     border-bottom: 1px solid #000;
+    position: relative;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 #logo-box h1 {
-    font-size: 24px;
+    font-size: 26px;
     margin: 0;
     color: #fff;
-    font-weight: 200; /* Apple lubiło wtedy cienkie fonty obok grubych */
+    font-weight: 200;
     text-align: center;
     letter-spacing: 1px;
+    text-shadow: 0 -1px 0 #000;
 }
 
 #logo-box p {
     margin: 5px 0 0 0;
-    color: #999;
-    font-size: 11px;
+    color: #aaa;
+    font-size: 10px;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
-/* Nawigacja w stylu paska menu Mac OS X */
+/* Aluminiowy pasek menu z efektem wypukłości */
 nav {
-    background: #f6f6f6 linear-gradient(to bottom, #f6f6f6 0%, #ececec 50%, #dcdcdc 51%, #dfdfdf 100%);
-    border-bottom: 1px solid #bcbcbc;
+    background: linear-gradient(to bottom, #f0f0f0 0%, #d1d1d1 50%, #bcbcbc 51%, #b0b0b0 100%);
+    border-bottom: 1px solid #888;
+    box-shadow: inset 0 1px 0 #fff;
 }
 
 .nav-menu {
@@ -59,115 +67,67 @@ nav {
 
 .nav-menu li a {
     display: block;
-    padding: 12px 25px;
+    padding: 14px 25px;
     text-decoration: none;
     color: #333;
     font-size: 12px;
     font-weight: bold;
-    border-right: 1px solid #dcdcdc;
-    text-shadow: 0 1px 0 #fff;
+    border-right: 1px solid #a0a0a0;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    transition: 0.2s;
 }
 
 .nav-menu li a:hover, .nav-menu li a.active {
-    background: linear-gradient(to bottom, #e2e2e2 0%, #bcbcbc 100%);
-    color: #000;
+    background: linear-gradient(to bottom, #999 0%, #666 100%);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
 }
 
-/* Główne pole treści - czyste i białe */
+/* Kontener treści */
 #content-area {
     padding: 50px;
 }
 
 .category-header {
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
     margin-bottom: 40px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.8);
 }
 
 .category-header h2 {
-    margin: 0;
-    font-size: 32px;
-    color: #111;
+    font-size: 34px;
+    color: #222;
     font-weight: 300;
     text-align: center;
 }
 
-.post {
-    margin-bottom: 60px;
-}
-
-.post-title {
-    color: #000;
-    font-size: 26px;
-    margin: 0 0 10px 0;
-    font-weight: bold;
-}
-
-.post-info {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 20px;
-}
-
-.post-layout {
-    display: flex;
-    gap: 30px;
-}
-
-.post-img {
-    background: #fff;
-    padding: 0;
-    border: 1px solid #d2d2d2;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.post-description {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #444;
-}
-
-/* Przyciski w stylu iOS 6 / Aqua */
+/* Przyciski w stylu Aqua (iOS 6) */
 .btn-more {
     display: inline-block;
-    margin-top: 20px;
-    padding: 8px 25px;
-    background: #fff linear-gradient(to bottom, #ffffff 0%, #f0f0f0 50%, #e0e0e0 51%, #d0d0d0 100%);
-    color: #333;
+    padding: 10px 30px;
+    /* Bardzo głęboki gradient "szklany" */
+    background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 50%, #cecece 51%, #b8b8b8 100%);
+    color: #222;
     text-decoration: none;
-    border-radius: 20px;
-    border: 1px solid #b3b3b3;
+    border-radius: 25px;
+    border: 1px solid #999;
     font-weight: bold;
     font-size: 12px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 #fff;
     text-shadow: 0 1px 0 #fff;
 }
 
 .btn-more:hover {
-    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
-    color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-    border-color: #1e5799;
+    background: linear-gradient(to bottom, #b8b8b8 0%, #cecece 50%, #e0e0e0 51%, #ffffff 100%);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-.line-divider {
-    height: 1px;
-    background: #e2e2e2;
-    margin: 50px 0;
-}
-
-/* Stopka */
 footer {
-    background: #f2f2f2;
+    background: rgba(230, 230, 230, 0.7);
     padding: 40px;
     text-align: center;
-    border-top: 1px solid #e2e2e2;
-    font-size: 12px;
-    color: #888;
-}
-
-.f-line {
-    display: none; /* Apple nie używało jaskrawych linii w stopce */
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 11px;
+    color: #666;
 }
