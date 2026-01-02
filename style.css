@@ -1,4 +1,181 @@
-/* TK TV - STYLE 2008 - FULL CSS BACKGROUND */
+/* TK TV - STYLE 2008 - ELECTRONICS PORTAL */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    color: #333;
+    
+    /* GENEROWANE TŁO AURORA - TYLKO W CSS */
+    background-color: #002244;
+    background-image: 
+        radial-gradient(at 10% 10%, #1a5276 0%, transparent 45%),
+        radial-gradient(at 90% 10%, #2980b9 0%, transparent 45%),
+        radial-gradient(at 50% 100%, #001122 0%, transparent 50%);
+    background-attachment: fixed;
+}
+
+#wrapper {
+    width: 980px;
+    margin: 35px auto;
+    background: #ffffff;
+    border: 1px solid #003366;
+    border-radius: 15px;
+    box-shadow: 0 15px 60px rgba(0,0,0,0.6);
+    overflow: hidden;
+}
+
+/* Szklany Header Web 2.0 */
+header {
+    background: linear-gradient(to bottom, #114477 0%, #2266aa 50%, #115599 51%, #3388cc 100%);
+    padding: 50px 40px;
+    border-bottom: 4px solid #ff9900;
+    position: relative;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 48%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 100%);
+}
+
+#logo-box h1 {
+    font-size: 62px;
+    margin: 0;
+    color: #fff;
+    font-weight: 800;
+    text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+    letter-spacing: -3px;
+}
+
+#logo-box p {
+    margin: 0;
+    color: #ff9900;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Srebrzysta Nawigacja - Styl Vista/Office */
+nav {
+    background: linear-gradient(to bottom, #ffffff 0%, #e8e8e8 50%, #dcdcdc 51%, #f4f4f4 100%);
+    border-bottom: 1px solid #aaa;
+}
+
+.nav-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-menu li a {
+    display: block;
+    padding: 16px 20px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 12px;
+    border-right: 1px solid #ccc;
+    text-transform: uppercase;
+}
+
+.nav-menu li a:hover, .nav-menu li a.active {
+    background: #fff;
+    color: #0066cc;
+    box-shadow: inset 0 -3px 0 #0066cc;
+}
+
+/* Główne pole treści */
+#content-area {
+    padding: 40px;
+    background: #fff;
+}
+
+.post {
+    margin-bottom: 45px;
+}
+
+.post-title {
+    color: #0055aa;
+    font-size: 30px;
+    margin: 0 0 8px 0;
+    font-weight: normal;
+    letter-spacing: -1px;
+}
+
+.post-info {
+    font-size: 11px;
+    color: #777;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    background: #f9f9f9;
+    padding: 5px 10px;
+    border-left: 3px solid #ff9900;
+}
+
+.post-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.post-img {
+    background: #fff;
+    padding: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.post-description {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Przycisk Glossy */
+.btn-more {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: linear-gradient(to bottom, #4488cc 0%, #2266aa 50%, #114477 51%, #2266aa 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px; /* Zaokrąglony przycisk Web 2.0 */
+    border: 1px solid #003366;
+    font-weight: bold;
+    font-size: 11px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.btn-more:hover {
+    filter: contrast(1.2);
+    transform: translateY(-1px);
+}
+
+.line-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #eee, transparent);
+    margin: 45px 0;
+}
+
+/* Stopka */
+footer {
+    background: #f8f8f8;
+    padding: 40px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    font-size: 12px;
+    color: #888;
+}
+
+.f-line {
+    height: 5px;
+    background: linear-gradient(to right, #114477, #3388cc, #114477);
+    margin-bottom: 20px;
+}/* TK TV - STYLE 2008 - FULL CSS BACKGROUND */
 
 body {
     margin: 0;
