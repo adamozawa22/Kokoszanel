@@ -1,133 +1,119 @@
-/* TK TV - STYLE 2012 - ULTRA APPLE SKEUOMORPHIC & GLASS */
+/* TK TV - FINAL APPLE 2012 SKEUOMORPHIC STYLE */
 
 body {
     margin: 0;
     padding: 0;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
-    /* Klasyczne lniane tło Apple z 2012 roku */
+    /* Klasyczny lniany wzór Apple */
     background: #bcbcbc url('https://www.transparenttextures.com/patterns/linen.png');
-    color: #333;
     background-attachment: fixed;
+    color: #333;
 }
 
 #wrapper {
     width: 980px;
     margin: 40px auto;
-    /* Półprzezroczysta tafla szkła */
-    background: rgba(255, 255, 255, 0.85); 
-    backdrop-filter: blur(10px); /* Efekt rozmycia tła pod spodem */
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 10px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(15px);
+    border: 1px solid #999;
+    border-radius: 8px;
+    box-shadow: 0 30px 100px rgba(0,0,0,0.5);
     overflow: hidden;
 }
 
-/* Lśniący, czarny pasek nawigacji z odbiciem */
+/* Czarny lśniący nagłówek z efektem szkła */
 header {
-    background: linear-gradient(to bottom, #4c4c4c 0%, #111111 50%, #000000 51%, #111111 100%);
-    padding: 25px 40px;
+    background: linear-gradient(to bottom, #4c4c4c 0%, #111 50%, #000 51%, #111 100%);
+    padding: 30px;
     border-bottom: 1px solid #000;
-    position: relative;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
 #logo-box h1 {
-    font-size: 26px;
-    margin: 0;
     color: #fff;
+    text-align: center;
+    font-size: 28px;
     font-weight: 200;
-    text-align: center;
-    letter-spacing: 1px;
     text-shadow: 0 -1px 0 #000;
+    margin: 0;
 }
 
-#logo-box p {
-    margin: 5px 0 0 0;
-    color: #aaa;
-    font-size: 10px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-/* Aluminiowy pasek menu z efektem wypukłości */
+/* Metalowy pasek nawigacji */
 nav {
     background: linear-gradient(to bottom, #f0f0f0 0%, #d1d1d1 50%, #bcbcbc 51%, #b0b0b0 100%);
-    border-bottom: 1px solid #888;
+    border-bottom: 1px solid #8a8a8a;
     box-shadow: inset 0 1px 0 #fff;
 }
 
 .nav-menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
+    list-style: none;
+    margin: 0; padding: 0;
 }
 
 .nav-menu li a {
+    padding: 15px 30px;
     display: block;
-    padding: 14px 25px;
     text-decoration: none;
     color: #333;
-    font-size: 12px;
     font-weight: bold;
+    font-size: 13px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
     border-right: 1px solid #a0a0a0;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-    transition: 0.2s;
 }
 
 .nav-menu li a:hover, .nav-menu li a.active {
-    background: linear-gradient(to bottom, #999 0%, #666 100%);
+    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
 }
 
-/* Kontener treści */
-#content-area {
-    padding: 50px;
-}
-
-.category-header {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-    padding-bottom: 15px;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.8);
-}
-
-.category-header h2 {
-    font-size: 34px;
-    color: #222;
-    font-weight: 300;
-    text-align: center;
-}
-
-/* Przyciski w stylu Aqua (iOS 6) */
+/* --- PRZYCISK W STYLU APPLE 2012 (AQUA/GUMDROP) --- */
 .btn-more {
     display: inline-block;
-    padding: 10px 30px;
-    /* Bardzo głęboki gradient "szklany" */
-    background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 50%, #cecece 51%, #b8b8b8 100%);
-    color: #222;
-    text-decoration: none;
-    border-radius: 25px;
-    border: 1px solid #999;
+    padding: 8px 25px;
+    font-size: 13px;
     font-weight: bold;
-    font-size: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 #fff;
+    text-decoration: none;
+    border-radius: 18px;
+    transition: all 0.2s ease;
+    
+    /* Standardowy szary wygląd (szklany) */
+    color: #333;
+    border: 1px solid #999;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 50%, #e0e0e0 51%, #d0d0d0 100%);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1), inset 0 1px 0 #fff;
     text-shadow: 0 1px 0 #fff;
 }
 
+/* EFEKT PO NAJECHANIU: NIEBIESKI I ODWRÓCENIE GRADIENTU */
 .btn-more:hover {
-    background: linear-gradient(to bottom, #b8b8b8 0%, #cecece 50%, #e0e0e0 51%, #ffffff 100%);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    color: #fff;
+    border-color: #1a4d80;
+    /* Odwrócony i niebieski gradient (świecący efekt Apple) */
+    background: linear-gradient(to bottom, #2989d8 0%, #1e5799 50%, #207cca 51%, #7db9e8 100%);
+    box-shadow: 0 2px 8px rgba(30, 144, 255, 0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+    transform: translateY(-1px);
+}
+
+/* Efekt kliknięcia */
+.btn-more:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.line-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+    margin: 40px 0;
 }
 
 footer {
-    background: rgba(230, 230, 230, 0.7);
-    padding: 40px;
+    padding: 30px;
     text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.03);
     font-size: 11px;
-    color: #666;
+    color: #888;
 }
