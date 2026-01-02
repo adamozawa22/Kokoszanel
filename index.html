@@ -1,173 +1,227 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odliczanie do Świąt + Minigry</title>
-  <style>
-    :root {
-      --bg: #0b1d26;
-      --snow: #ffffff;
-      --tree-dark: #0f5f3a;
-      --tree-light: #1fa463;
-      --star: #ffd966;
-      --wood: #6b3f1d;
-      --cursor-color: #ffd966;
-    }
+    <meta charset="UTF-8">
+    <title>TK TV - Twoje okno na stare komputery</title>
+    <style>
+        /* ESTETYKA FRUTIGER AERO / WEB 2.0 - TK TV EDITION */
+        body {
+            background: #e1e9f0 url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+            background-attachment: fixed;
+            font-family: "Tahoma", "Verdana", sans-serif;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: radial-gradient(circle at top, #123, var(--bg));
-      color: #fff;
-      overflow: hidden;
-      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="6" fill="yellow"/></svg>') 16 16, auto;
-    }
+        #main-container {
+            width: 980px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #c0c0c0;
+            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
 
-    h1 { text-align: center; margin-top: 20px; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: 2px; }
+        header {
+            /* Głęboki błękit z gradientem jak w Windows 7 */
+            background: #1e5799; 
+            background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+            padding: 50px 30px;
+            text-align: left;
+            position: relative;
+            border-bottom: 5px solid #0055aa;
+        }
 
-    .countdown { display: flex; justify-content: center; gap: 15px; margin: 20px 0 30px; flex-wrap: wrap; }
-    .time-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(6px); padding: 10px 15px; border-radius: 14px; text-align: center; min-width: 70px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-    .time-box span { display: block; font-size: 1.6rem; font-weight: bold; }
-    .time-box small { font-size: 0.7rem; opacity: 0.8; letter-spacing: 1px; }
+        /* Połysk na górze strony */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 45%;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 0 0 50% 50% / 0 0 20% 20%;
+        }
 
-    .scene { position: relative; height: 55vh; display: flex; justify-content: center; align-items: flex-end; }
+        header h1 {
+            color: #fff;
+            font-size: 64px;
+            margin: 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
+            font-weight: bold;
+            letter-spacing: -2px;
+            display: inline-block;
+        }
 
-    .tree { position: relative; width: 0; height: 0; }
-    .layer { position: absolute; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-bottom: 180px solid var(--tree-dark); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4)); }
-    .layer:nth-child(1) { bottom: 120px; }
-    .layer:nth-child(2) { bottom: 60px; border-left-width: 190px; border-right-width: 190px; border-bottom-width: 210px; border-bottom-color: var(--tree-light); }
-    .layer:nth-child(3) { bottom: 0; border-left-width: 220px; border-right-width: 220px; border-bottom-width: 240px; border-bottom-color: var(--tree-dark); }
+        header span {
+            color: #ff3300; /* Kolor "Rec" lub "Live" */
+            font-size: 18px;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            vertical-align: middle;
+            margin-left: 15px;
+            box-shadow: inset 0 0 5px #000;
+        }
 
-    .trunk { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 60px; height: 50px; background: var(--wood); border-radius: 0 0 10px 10px; }
+        nav {
+            background: #333 linear-gradient(to bottom, #555 0%, #111 100%);
+            padding: 12px;
+            border-bottom: 1px solid #000;
+        }
 
-    .star { position: absolute; bottom: 300px; left: 50%; transform: translateX(-50%) rotate(0deg); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 40px solid var(--star); animation: spin 6s linear infinite, glow 2s ease-in-out infinite alternate; }
-    .star::after { content: ""; position: absolute; top: 12px; left: -20px; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 40px solid var(--star); }
-    @keyframes spin { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(360deg); } }
-    @keyframes glow { from { filter: drop-shadow(0 0 5px var(--star)); } to { filter: drop-shadow(0 0 20px var(--star)); } }
+        .menu-item {
+            color: #ddd;
+            text-decoration: none;
+            padding: 8px 20px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 15px;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
 
-    .ornament { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: red; box-shadow: 0 0 10px currentColor; animation: blink 3s infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .menu-item:hover {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 1px solid #888;
+            text-shadow: 0 0 10px #fff;
+        }
 
-    .snowflake { position: fixed; top: -10px; color: var(--snow); font-size: 1rem; pointer-events: none; animation: fall linear forwards; }
-    @keyframes fall { to { transform: translateY(110vh); } }
+        #content {
+            padding: 40px;
+        }
 
-    footer { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 0.8rem; opacity: 0.7; }
+        /* STYL ARTYKUŁÓW */
+        .blog-post {
+            margin-bottom: 60px;
+            position: relative;
+        }
 
-    #games { position: fixed; top: 10%; right: 10px; width: 180px; background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px; text-align: center; font-size: 0.8rem; backdrop-filter: blur(4px); }
-    #games button { margin-top: 5px; font-size: 0.8rem; padding: 5px; border-radius: 5px; cursor: pointer; }
-  </style>
+        .post-header {
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .post-title {
+            color: #207cca;
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .post-meta {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .post-image-box {
+            float: left;
+            margin-right: 25px;
+            margin-bottom: 15px;
+            background: #fff;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .post-image-box img {
+            border-radius: 8px;
+            display: block;
+        }
+
+        .post-body {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* Przezroczysty separator */
+        .separator {
+            clear: both;
+            height: 1px;
+            background: radial-gradient(circle, #ccc 0%, rgba(255,255,255,0) 100%);
+            margin-top: 40px;
+        }
+
+        footer {
+            background: #f4f4f4;
+            padding: 25px;
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid #ddd;
+            text-transform: uppercase;
+        }
+
+        /* Pomocnicza klasa do czyszczenia floatów */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
 </head>
 <body>
-  <h1>🎄 Odliczanie do Świąt 🎄</h1>
 
-  <div class="countdown">
-    <div class="time-box"><span id="days">0</span><small>DNI</small></div>
-    <div class="time-box"><span id="hours">0</span><small>GODZINY</small></div>
-    <div class="time-box"><span id="minutes">0</span><small>MINUTY</small></div>
-    <div class="time-box"><span id="seconds">0</span><small>SEKUNDY</small></div>
-  </div>
+<div id="main-container">
+    <header>
+        <h1>TK TV</h1> <span>● ON AIR</span>
+    </header>
 
-  <div class="scene">
-    <div class="tree">
-      <div class="star"></div>
-      <div class="layer"></div>
-      <div class="layer"></div>
-      <div class="layer"></div>
-      <div class="trunk"></div>
-      <div class="ornament" style="bottom:180px; left:-40px; color:#ff4d4d"></div>
-      <div class="ornament" style="bottom:140px; left:30px; color:#4dd2ff"></div>
-      <div class="ornament" style="bottom:90px; left:-80px; color:#ffd966"></div>
-      <div class="ornament" style="bottom:60px; left:70px; color:#b366ff"></div>
-      <div style="position:absolute; bottom:20px; left:50%; transform: translateX(-50%); cursor:pointer; font-size:24px;" id="giftTree">🎁</div>
-    </div>
-  </div>
+    <nav>
+        <a href="#" class="menu-item">PROGRAM TV</a>
+        <a href="#" class="menu-item">RETRO SPRZĘT</a>
+        <a href="#" class="menu-item">RECENZJE</a>
+        <a href="#" class="menu-item">KONTAKT</a>
+    </nav>
 
-  <div id="games">
-    <div>🎅 Kliknij Mikołaja!</div>
-    <button id="santaBtn">🎅</button>
-    <div>Wynik: <span id="score">0</span></div>
+    <div id="content">
 
-    <div style="margin-top:15px;">❄️ Zbieraj śnieżki!</div>
-    <button id="snowBtn">❄️</button>
-    <div>Śnieżki: <span id="snowScore">0</span></div>
+        <article class="blog-post clearfix">
+            <div class="post-header">
+                <h2 class="post-title">Odcinek 1: Pierwszy PC w TK TV</h2>
+                <div class="post-meta">Data emisji: 24 sierpnia 2009 | Autor: Redakcja TK TV</div>
+            </div>
+            
+            <div class="post-image-box">
+                <img src="https://via.placeholder.com/300x200" alt="Stary komputer">
+            </div>
+            
+            <div class="post-body">
+                <p>W dzisiejszym wydaniu <strong>TK TV</strong> przyjrzymy się maszynie, od której wszystko się zaczęło. Przed nami jednostka centralna oparta na procesorze Intel 8086. Choć dziś, w dobie procesorów wielordzeniowych, wydaje się to tylko kupą złomu, w 1981 roku był to szczyt technologii.</p>
+                <p>Sprawdzimy, czy na tym sprzęcie uda nam się uruchomić arkusz kalkulacyjny i jak wyglądała praca bez myszki komputerowej. Zostańcie z nami przed monitorami!</p>
+            </div>
+            <div class="separator"></div>
+        </article>
+        <article class="blog-post clearfix">
+            <div class="post-header">
+                <h2 class="post-title">Odcinek 2: Magia Dźwięku Sound Blaster</h2>
+                <div class="post-meta">Data emisji: 15 sierpnia 2009 | Autor: Redakcja TK TV</div>
+            </div>
+            
+            <div class="post-image-box">
+                <img src="https://via.placeholder.com/300x200" alt="Karta dźwiękowa">
+            </div>
+            
+            <div class="post-body">
+                <p>Czy pamiętacie ten moment, kiedy Wasz komputer zamiast pisków zaczął wydawać prawdziwą muzykę? W tym wpisie wspominamy legendarne karty Sound Blaster. To one zrewolucjonizowały świat gier komputerowych, wprowadzając nas w nową erę multimediów.</p>
+                <p>W TK TV pokażemy Wam, jak wyglądała instalacja takich kart w slotach ISA – to były czasy, kiedy każdy bit miał znaczenie!</p>
+            </div>
+            <div class="separator"></div>
+        </article>
+        </div>
 
-    <div style="margin-top:15px;">🎁 Łap prezenty!</div>
-    <button id="giftBtn">🎁</button>
-    <div>Prezenty: <span id="giftScore">0</span></div>
-  </div>
+    <footer>
+        &copy; 2009 TK TV - Telewizja Retro Komputerowa. <br>
+        Wszelkie prawa zastrzeżone. Strona korzysta z technologii CSS3 i HTML5 (Beta).
+    </footer>
+</div>
 
-  <footer>Magia Świąt jest coraz bliżej ✨</footer>
-
-  <script>
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
-
-    function updateCountdown() {
-      const now = new Date();
-      let year = now.getFullYear();
-      const christmas = new Date(year, 11, 25, 0, 0, 0);
-      if (now > christmas) christmas.setFullYear(year + 1);
-      const diff = christmas - now;
-      daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-      hoursEl.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      minutesEl.textContent = Math.floor((diff / (1000 * 60)) % 60);
-      secondsEl.textContent = Math.floor((diff / 1000) % 60);
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.className = 'snowflake';
-      snowflake.textContent = '❄';
-      snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.animationDuration = 5 + Math.random() * 5 + 's';
-      snowflake.style.opacity = Math.random();
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 10000);
-    }
-
-    setInterval(createSnowflake, 200);
-
-    // Minigry panelowe
-    const santaBtn = document.getElementById('santaBtn');
-    const scoreEl = document.getElementById('score');
-    let score = 0;
-    santaBtn.addEventListener('click', () => {
-      score++; scoreEl.textContent = score;
-      santaBtn.style.top = Math.random() * 100 + 'px';
-      santaBtn.style.left = Math.random() * 100 + 'px';
-    });
-
-    const snowBtn = document.getElementById('snowBtn');
-    const snowScoreEl = document.getElementById('snowScore');
-    let snowScore = 0;
-    snowBtn.addEventListener('click', () => {
-      snowScore++; snowScoreEl.textContent = snowScore;
-      snowBtn.style.top = Math.random() * 100 + 'px';
-      snowBtn.style.left = Math.random() * 100 + 'px';
-    });
-
-    const giftBtn = document.getElementById('giftBtn');
-    const giftScoreEl = document.getElementById('giftScore');
-    let giftScore = 0;
-    giftBtn.addEventListener('click', () => {
-      giftScore++; giftScoreEl.textContent = giftScore;
-      giftBtn.style.top = Math.random() * 100 + 'px';
-      giftBtn.style.left = Math.random() * 100 + 'px';
-    });
-
-    // Podstrona z grą spadających prezentów
-    const giftTree = document.getElementById('giftTree');
-    giftTree.addEventListener('click', () => {
-      window.location.href = 'gift_game.html';
-    });
-  </script>
 </body>
 </html>
