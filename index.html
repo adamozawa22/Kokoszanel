@@ -2,59 +2,83 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>TK TV - Archiwum Technologii</title>
+    <title>TK TV - Microsoft Experience 2008</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="container">
+<div id="outer-container">
     <header>
-        <div id="logo-area">
-            <h1>TK TV</h1>
-            <div class="status-badge">● ON AIR</div>
+        <div class="top-meta">
+            <span>Polska (Zmień)</span> | <span>Microsoft Worldwide</span>
+        </div>
+        <div class="header-main">
+            <h1 id="main-logo">TK TV</h1>
+            <div id="search-area">
+                <input type="text" value="Szukaj w serwisie..." onfocus="if(this.value=='Szukaj w serwisie...')this.value=''">
+                <input type="submit" value="GO" class="search-btn">
+            </div>
         </div>
     </header>
 
     <nav>
-        <a href="#" class="nav-link">Strona Główna</a>
-        <a href="#" class="nav-link">Baza Wiedzy</a>
-        <a href="#" class="nav-link">Video-Testy</a>
-        <a href="#" class="nav-link">O Redakcji</a>
+        <ul class="nav-bar">
+            <li><a href="#" class="nav-active">Strona Główna</a></li>
+            <li><a href="#">Archiwum Systemów</a></li>
+            <li><a href="#">Sprzęt i Sterowniki</a></li>
+            <li><a href="#">Społeczność TK TV</a></li>
+            <li class="ms-store"><a href="#">Sklep</a></li>
+        </ul>
     </nav>
 
-    <div id="main-content">
-
-        <article class="post">
-            <h2 class="post-title">IBM PC 5150 – Początek legendy</h2>
-            <div class="post-meta">Dodano: 15 Listopada 2009 | Kategoria: Klasyki</div>
-            
-            <div class="post-content">
-                <div class="post-image">
-                    <img src="https://via.placeholder.com/300x200" alt="IBM PC">
-                </div>
-                <p>W dzisiejszym odcinku <strong>TK TV</strong> przyjrzymy się maszynie, która zmieniła wszystko. IBM PC 5150 to nie tylko kawał żelaza, to fundament dzisiejszej informatyki. Z procesorem 4.77 MHz na pokładzie, ten komputer wyznaczył standardy, z których korzystamy do dzisiaj.</p>
-                <p>Sprawdzamy jak radzi sobie w podstawowych zadaniach biurowych z lat 80. i czy "PC-Speaker" wciąż brzmi tak samo dobrze (lub irytująco) jak dawniej.</p>
-            </div>
-            <div class="post-footer-line"></div>
-        </article>
-        <article class="post">
-            <h2 class="post-title">Amiga 500: Multimedia przed erą PC</h2>
-            <div class="post-meta">Dodano: 02 Listopada 2009 | Kategoria: Retro Gaming</div>
-            
-            <div class="post-content">
-                <div class="post-image">
-                    <img src="https://via.placeholder.com/300x200" alt="Amiga 500">
-                </div>
-                <p>Amiga 500 była dla wielu z nas pierwszym kontaktem z prawdziwą grafiką i dźwiękiem stereo. W TK TV wspominamy czasy, kiedy 4096 kolorów robiło na wszystkich piorunujące wrażenie, a gry wczytywało się z dyskietek 3.5 cala.</p>
-                <p>Czy system Workbench wciąż jest tak intuicyjny? Przekonajcie się sami oglądając nasz najnowszy wpis!</p>
-            </div>
-            <div class="post-footer-line"></div>
-        </article>
+    <div id="billboard">
+        <div class="billboard-text">
+            <h2>Premiera w TK TV: Era 8-bitowców</h2>
+            <p>Odkryj sekrety architektury, która zdefiniowała domową rozrywkę. Tylko u nas pełna dokumentacja techniczna i wywiady.</p>
+            <a href="#" class="glossy-button">Dowiedz się więcej</a>
         </div>
+    </div>
+
+    <div id="main-body">
+        <div id="left-column">
+            
+            <article class="news-item">
+                <h3 class="news-title">Początki MS-DOS: Jak Bill Gates zmienił świat</h3>
+                <p class="news-date">Opublikowano: 12 maja 2008</p>
+                <div class="news-content">
+                    <div class="img-wrapper">
+                        <img src="https://via.placeholder.com/200x130" alt="MS-DOS Logo">
+                    </div>
+                    <p>W dzisiejszym materiale wideo na <strong>TK TV</strong> analizujemy historię systemu operacyjnego, który stał się fundamentem dla potęgi PC. Zaglądamy do kodu źródłowego wersji 1.0 i sprawdzamy, ile z tamtych rozwiązań przetrwało do dziś w Windows Vista.</p>
+                </div>
+                <div class="news-footer">
+                    <a href="#">Czytaj cały artykuł ></a>
+                </div>
+            </article>
+            <hr class="section-divider">
+            <article class="news-item">
+                <h3 class="news-title">Kultowe procesory: Intel 80386</h3>
+                <p class="news-date">Opublikowano: 05 maja 2008</p>
+                <div class="news-content">
+                    <div class="img-wrapper">
+                        <img src="https://via.placeholder.com/200x130" alt="Intel 386">
+                    </div>
+                    <p>To był prawdziwy przełom. 32-bitowa architektura wprowadziła komputery osobiste w zupełnie nową erę. W TK TV testujemy autentyczną jednostkę z 1986 roku i próbujemy uruchomić na niej najnowsze oprogramowanie biurowe.</p>
+                </div>
+                <div class="news-footer">
+                    <a href="#">Czytaj cały artykuł ></a>
+                </div>
+            </article>
+            <hr class="section-divider">
+            </div>
+    </div>
 
     <footer>
-        <p>&copy; 2009 TK TV. Wszystkie prawa zastrzeżone. <br>
-        Projekt i realizacja: Twój Web Designer.</p>
+        <div class="footer-top"></div>
+        <div class="footer-content">
+            <p>Zapisz się do newslettera TK TV | Kontakt | Mapa witryny</p>
+            <p class="copyright">&copy; 2008 Microsoft & TK TV Corporation. Wszystkie prawa zastrzeżone. <img src="https://via.placeholder.com/60x20/003399/ffffff?text=TK+TV" style="vertical-align: middle; margin-left: 10px;"></p>
+        </div>
     </footer>
 </div>
 
