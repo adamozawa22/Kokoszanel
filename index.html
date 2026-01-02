@@ -2,224 +2,59 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>TK TV - Twoje okno na stare komputery</title>
-    <style>
-        /* ESTETYKA FRUTIGER AERO / WEB 2.0 - TK TV EDITION */
-        body {
-            background: #e1e9f0 url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
-            background-attachment: fixed;
-            font-family: "Tahoma", "Verdana", sans-serif;
-            color: #222;
-            margin: 0;
-            padding: 0;
-        }
-
-        #main-container {
-            width: 980px;
-            margin: 40px auto;
-            background: #ffffff;
-            border-radius: 20px;
-            border: 1px solid #c0c0c0;
-            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
-            overflow: hidden;
-        }
-
-        header {
-            /* Głęboki błękit z gradientem jak w Windows 7 */
-            background: #1e5799; 
-            background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
-            padding: 50px 30px;
-            text-align: left;
-            position: relative;
-            border-bottom: 5px solid #0055aa;
-        }
-
-        /* Połysk na górze strony */
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 45%;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 0 0 50% 50% / 0 0 20% 20%;
-        }
-
-        header h1 {
-            color: #fff;
-            font-size: 64px;
-            margin: 0;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.6);
-            font-weight: bold;
-            letter-spacing: -2px;
-            display: inline-block;
-        }
-
-        header span {
-            color: #ff3300; /* Kolor "Rec" lub "Live" */
-            font-size: 18px;
-            text-transform: uppercase;
-            background: rgba(0,0,0,0.3);
-            padding: 5px 10px;
-            border-radius: 5px;
-            vertical-align: middle;
-            margin-left: 15px;
-            box-shadow: inset 0 0 5px #000;
-        }
-
-        nav {
-            background: #333 linear-gradient(to bottom, #555 0%, #111 100%);
-            padding: 12px;
-            border-bottom: 1px solid #000;
-        }
-
-        .menu-item {
-            color: #ddd;
-            text-decoration: none;
-            padding: 8px 20px;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 15px;
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .menu-item:hover {
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-            border: 1px solid #888;
-            text-shadow: 0 0 10px #fff;
-        }
-
-        #content {
-            padding: 40px;
-        }
-
-        /* STYL ARTYKUŁÓW */
-        .blog-post {
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .post-header {
-            border-bottom: 2px solid #e0e0e0;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-        }
-
-        .post-title {
-            color: #207cca;
-            font-size: 32px;
-            margin: 0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .post-meta {
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
-        }
-
-        .post-image-box {
-            float: left;
-            margin-right: 25px;
-            margin-bottom: 15px;
-            background: #fff;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .post-image-box img {
-            border-radius: 8px;
-            display: block;
-        }
-
-        .post-body {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #444;
-        }
-
-        /* Przezroczysty separator */
-        .separator {
-            clear: both;
-            height: 1px;
-            background: radial-gradient(circle, #ccc 0%, rgba(255,255,255,0) 100%);
-            margin-top: 40px;
-        }
-
-        footer {
-            background: #f4f4f4;
-            padding: 25px;
-            text-align: center;
-            font-size: 11px;
-            color: #777;
-            border-top: 1px solid #ddd;
-            text-transform: uppercase;
-        }
-
-        /* Pomocnicza klasa do czyszczenia floatów */
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-    </style>
+    <title>TK TV - Archiwum Technologii</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="main-container">
+<div id="container">
     <header>
-        <h1>TK TV</h1> <span>● ON AIR</span>
+        <div id="logo-area">
+            <h1>TK TV</h1>
+            <div class="status-badge">● ON AIR</div>
+        </div>
     </header>
 
     <nav>
-        <a href="#" class="menu-item">PROGRAM TV</a>
-        <a href="#" class="menu-item">RETRO SPRZĘT</a>
-        <a href="#" class="menu-item">RECENZJE</a>
-        <a href="#" class="menu-item">KONTAKT</a>
+        <a href="#" class="nav-link">Strona Główna</a>
+        <a href="#" class="nav-link">Baza Wiedzy</a>
+        <a href="#" class="nav-link">Video-Testy</a>
+        <a href="#" class="nav-link">O Redakcji</a>
     </nav>
 
-    <div id="content">
+    <div id="main-content">
 
-        <article class="blog-post clearfix">
-            <div class="post-header">
-                <h2 class="post-title">Odcinek 1: Pierwszy PC w TK TV</h2>
-                <div class="post-meta">Data emisji: 24 sierpnia 2009 | Autor: Redakcja TK TV</div>
-            </div>
+        <article class="post">
+            <h2 class="post-title">IBM PC 5150 – Początek legendy</h2>
+            <div class="post-meta">Dodano: 15 Listopada 2009 | Kategoria: Klasyki</div>
             
-            <div class="post-image-box">
-                <img src="https://via.placeholder.com/300x200" alt="Stary komputer">
+            <div class="post-content">
+                <div class="post-image">
+                    <img src="https://via.placeholder.com/300x200" alt="IBM PC">
+                </div>
+                <p>W dzisiejszym odcinku <strong>TK TV</strong> przyjrzymy się maszynie, która zmieniła wszystko. IBM PC 5150 to nie tylko kawał żelaza, to fundament dzisiejszej informatyki. Z procesorem 4.77 MHz na pokładzie, ten komputer wyznaczył standardy, z których korzystamy do dzisiaj.</p>
+                <p>Sprawdzamy jak radzi sobie w podstawowych zadaniach biurowych z lat 80. i czy "PC-Speaker" wciąż brzmi tak samo dobrze (lub irytująco) jak dawniej.</p>
             </div>
-            
-            <div class="post-body">
-                <p>W dzisiejszym wydaniu <strong>TK TV</strong> przyjrzymy się maszynie, od której wszystko się zaczęło. Przed nami jednostka centralna oparta na procesorze Intel 8086. Choć dziś, w dobie procesorów wielordzeniowych, wydaje się to tylko kupą złomu, w 1981 roku był to szczyt technologii.</p>
-                <p>Sprawdzimy, czy na tym sprzęcie uda nam się uruchomić arkusz kalkulacyjny i jak wyglądała praca bez myszki komputerowej. Zostańcie z nami przed monitorami!</p>
-            </div>
-            <div class="separator"></div>
+            <div class="post-footer-line"></div>
         </article>
-        <article class="blog-post clearfix">
-            <div class="post-header">
-                <h2 class="post-title">Odcinek 2: Magia Dźwięku Sound Blaster</h2>
-                <div class="post-meta">Data emisji: 15 sierpnia 2009 | Autor: Redakcja TK TV</div>
-            </div>
+        <article class="post">
+            <h2 class="post-title">Amiga 500: Multimedia przed erą PC</h2>
+            <div class="post-meta">Dodano: 02 Listopada 2009 | Kategoria: Retro Gaming</div>
             
-            <div class="post-image-box">
-                <img src="https://via.placeholder.com/300x200" alt="Karta dźwiękowa">
+            <div class="post-content">
+                <div class="post-image">
+                    <img src="https://via.placeholder.com/300x200" alt="Amiga 500">
+                </div>
+                <p>Amiga 500 była dla wielu z nas pierwszym kontaktem z prawdziwą grafiką i dźwiękiem stereo. W TK TV wspominamy czasy, kiedy 4096 kolorów robiło na wszystkich piorunujące wrażenie, a gry wczytywało się z dyskietek 3.5 cala.</p>
+                <p>Czy system Workbench wciąż jest tak intuicyjny? Przekonajcie się sami oglądając nasz najnowszy wpis!</p>
             </div>
-            
-            <div class="post-body">
-                <p>Czy pamiętacie ten moment, kiedy Wasz komputer zamiast pisków zaczął wydawać prawdziwą muzykę? W tym wpisie wspominamy legendarne karty Sound Blaster. To one zrewolucjonizowały świat gier komputerowych, wprowadzając nas w nową erę multimediów.</p>
-                <p>W TK TV pokażemy Wam, jak wyglądała instalacja takich kart w slotach ISA – to były czasy, kiedy każdy bit miał znaczenie!</p>
-            </div>
-            <div class="separator"></div>
+            <div class="post-footer-line"></div>
         </article>
         </div>
 
     <footer>
-        &copy; 2009 TK TV - Telewizja Retro Komputerowa. <br>
-        Wszelkie prawa zastrzeżone. Strona korzysta z technologii CSS3 i HTML5 (Beta).
+        <p>&copy; 2009 TK TV. Wszystkie prawa zastrzeżone. <br>
+        Projekt i realizacja: Twój Web Designer.</p>
     </footer>
 </div>
 
