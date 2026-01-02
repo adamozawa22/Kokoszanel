@@ -1,208 +1,170 @@
-/* TK TV - Stylistyka Microsoft / Windows Vista (2008) */
+/* TK TV - STYLE 2008 - FULL CSS BACKGROUND */
 
 body {
-    background: #4a769b url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
-    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
     margin: 0;
     padding: 0;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
     color: #333;
+    
+    /* GENEROWANE TŁO AURORA 2008 */
+    background-color: #003366;
+    background-image: 
+        radial-gradient(at 0% 0%, #1e90ff 0%, transparent 50%),
+        radial-gradient(at 100% 0%, #00bfff 0%, transparent 50%),
+        radial-gradient(at 50% 100%, #001a33 0%, transparent 50%);
+    background-attachment: fixed;
 }
 
-#outer-container {
+#wrapper {
     width: 960px;
-    margin: 20px auto;
-    background-color: #fff;
-    border: 1px solid #2b567a;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    margin: 40px auto;
+    background: #ffffff;
+    border: 1px solid #1c3d5a;
+    border-radius: 12px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.6);
+    overflow: hidden;
 }
 
-/* Header w stylu Vista */
+/* Szklany Header */
 header {
-    background: #003399 linear-gradient(to bottom, #0055cc 0%, #003399 100%);
-    color: white;
-    padding: 10px 20px 30px 20px;
-    border-bottom: 2px solid #ffba00; /* Złoty akcent Microsoftu */
+    background: linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
+    padding: 45px 35px;
+    border-bottom: 3px solid #ffaa00;
+    position: relative;
 }
 
-.top-meta {
-    font-size: 11px;
-    text-align: right;
-    margin-bottom: 15px;
-    opacity: 0.8;
+header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
 }
 
-.header-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#main-logo {
-    font-size: 48px;
-    font-weight: bold;
+#logo-box h1 {
+    font-size: 56px;
     margin: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    color: #fff;
     font-style: italic;
+    text-shadow: 2px 4px 5px rgba(0,0,0,0.4);
+    letter-spacing: -2px;
 }
 
-#search-area input[type="text"] {
-    padding: 5px;
-    border-radius: 4px 0 0 4px;
-    border: 1px solid #ccc;
-    width: 200px;
-}
-
-.search-btn {
-    padding: 5px 10px;
-    background: #ffba00;
-    border: 1px solid #d49a00;
+#logo-box p {
+    margin: 0;
+    color: #ffaa00;
     font-weight: bold;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
-/* Nawigacja z lustrzanym odbiciem */
+/* Srebrna Nawigacja */
 nav {
-    background: #e2e2e2 linear-gradient(to bottom, #f9f9f9 0%, #d1d1d1 50%, #bcbcbc 51%, #d5d5d5 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #e1e1e1 50%, #d1d1d1 51%, #f1f1f1 100%);
     border-bottom: 1px solid #999;
 }
 
-.nav-bar {
+.nav-menu {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-.nav-bar li a {
+.nav-menu li a {
     display: block;
-    padding: 12px 20px;
+    padding: 15px 30px;
     text-decoration: none;
-    color: #333;
-    font-size: 13px;
+    color: #2b4e77;
     font-weight: bold;
-    border-right: 1px solid #ccc;
+    font-size: 13px;
+    border-right: 1px solid #bbb;
+    text-shadow: 1px 1px 0 #fff;
 }
 
-.nav-bar li a:hover {
+.nav-menu li a:hover, .nav-menu li a.active {
     background: #fff;
-    color: #003399;
+    color: #ff8800;
 }
 
-.nav-active {
-    background: #fff;
-    border-bottom: 2px solid #003399;
-}
-
-.ms-store {
-    margin-left: auto;
-}
-
-/* Billboard - Blue Aero Look */
-#billboard {
-    background: #004b99 url('https://www.transparenttextures.com/patterns/glass-track.png');
-    background: linear-gradient(135deg, #004b99 0%, #0078d7 100%);
+/* Treść główna */
+#content-area {
     padding: 40px;
-    color: white;
-    border-bottom: 4px solid #eee;
 }
 
-#billboard h2 {
-    font-size: 30px;
-    margin: 0 0 15px 0;
+.post {
+    margin-bottom: 40px;
+}
+
+.post-title {
+    color: #207cca;
+    font-size: 28px;
+    margin: 0 0 5px 0;
     font-weight: normal;
 }
 
-#billboard p {
-    font-size: 16px;
-    max-width: 600px;
-    margin-bottom: 25px;
-}
-
-.glossy-button {
-    display: inline-block;
-    padding: 10px 25px;
-    background: #5cb85c linear-gradient(to bottom, #8fcf8f 0%, #5cb85c 50%, #449d44 51%, #5cb85c 100%);
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 6px;
-    border: 1px solid #3d8b3d;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-/* Content Area */
-#main-body {
-    padding: 30px;
-    background: #fff;
-}
-
-.news-item {
-    margin-bottom: 30px;
-}
-
-.news-title {
-    color: #003399;
-    font-size: 22px;
-    margin-bottom: 5px;
-}
-
-.news-date {
+.post-info {
     font-size: 11px;
-    color: #888;
-    margin-bottom: 15px;
+    color: #999;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
 }
 
-.news-content {
-    overflow: hidden;
+.post-layout {
+    display: flex;
+    gap: 20px;
 }
 
-.img-wrapper {
-    float: left;
-    margin-right: 20px;
-    border: 5px solid #f2f2f2;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+.post-img {
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
 }
 
-.news-content p {
+.post-description {
     font-size: 14px;
     line-height: 1.6;
 }
 
-.news-footer a {
-    color: #0066cc;
-    font-size: 12px;
+/* Guzik Glossy */
+.btn-more {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1c69b8 51%, #2e82d3 100%);
+    color: white;
     text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #1a548b;
     font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
-.section-divider {
-    border: 0;
+.btn-more:hover {
+    filter: brightness(1.1);
+}
+
+.line-divider {
     height: 1px;
-    background: #e0e0e0;
-    margin: 30px 0;
+    background: linear-gradient(to right, #fff, #ddd, #fff);
+    margin: 40px 0;
 }
 
-/* Footer */
+/* Stopka */
 footer {
-    background: #f1f1f1;
-    border-top: 1px solid #ccc;
-}
-
-.footer-top {
-    height: 5px;
-    background: #003399;
-}
-
-.footer-content {
+    background: #f4f4f4;
     padding: 30px;
     text-align: center;
+    border-top: 1px solid #ccc;
     font-size: 12px;
     color: #666;
 }
 
-.copyright {
-    margin-top: 20px;
-    font-weight: bold;
-    color: #333;
+.f-line {
+    height: 4px;
+    background: #207cca;
+    margin-bottom: 15px;
 }
