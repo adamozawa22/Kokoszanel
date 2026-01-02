@@ -2,267 +2,64 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>TK TV - Retro Komputery</title>
-    <style>
-        /* TK TV - STYL VISTA / OFFICE 2007 (ERA 2008) */
-        
-        body {
-            /* Tło: Technologiczna niebieska tekstura w stylu 2008 roku */
-            background: #002d5b url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            background-attachment: fixed;
-            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        #outer-wrapper {
-            width: 960px;
-            margin: 25px auto;
-            background-color: #ffffff;
-            border: 1px solid #1c3d5a;
-            box-shadow: 0 0 30px rgba(0,0,0,0.7);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        header {
-            /* Bardzo mocny, szklany gradient Vista Blue */
-            background: #1e5799 linear-gradient(to bottom, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%);
-            color: white;
-            padding: 35px 30px;
-            position: relative;
-            border-bottom: 3px solid #ff9900; /* Pomarańczowy akcent energii */
-        }
-
-        /* Efekt lustrzanego odbicia na nagłówku */
-        header::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 45%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
-        }
-
-        #logo-container h1 {
-            font-size: 54px;
-            margin: 0;
-            font-weight: bold;
-            font-style: italic;
-            text-shadow: 2px 4px 6px rgba(0,0,0,0.4);
-            letter-spacing: -2px;
-        }
-
-        #logo-container p {
-            margin: 0;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.9;
-        }
-
-        nav {
-            /* Srebrny pasek nawigacji Office 2007 */
-            background: #d8e2ed linear-gradient(to bottom, #f9fbfd 0%, #d8e2ed 50%, #c1d1e4 51%, #d8e2ed 100%);
-            border-bottom: 1px solid #8e9cad;
-            padding: 0 15px;
-        }
-
-        .nav-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
-
-        .nav-list li a {
-            display: block;
-            padding: 12px 25px;
-            text-decoration: none;
-            color: #2b4e77;
-            font-size: 13px;
-            font-weight: bold;
-            border-right: 1px solid #aebccb;
-            transition: 0.2s;
-        }
-
-        .nav-list li a:hover {
-            background: #ffffff;
-            color: #ff9900;
-        }
-
-        /* Sekcja wyróżniona (Billboard) */
-        #feature-area {
-            background: #f0f5f9;
-            padding: 30px;
-            border-bottom: 1px solid #d0d7de;
-            display: flex;
-            align-items: center;
-        }
-
-        .feature-box {
-            background: #fff;
-            padding: 20px;
-            border: 1px solid #c0c6cb;
-            border-radius: 10px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            width: 100%;
-        }
-
-        .feature-box h2 {
-            margin-top: 0;
-            color: #1e5799;
-            font-weight: normal;
-        }
-
-        /* Styl postów na blogu */
-        #main-content {
-            padding: 40px;
-        }
-
-        .post {
-            margin-bottom: 50px;
-            overflow: hidden;
-        }
-
-        .post-title {
-            color: #2b4e77;
-            font-size: 26px;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #e2eaf3;
-            padding-bottom: 5px;
-        }
-
-        .post-date {
-            font-size: 11px;
-            color: #888;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .post-image-frame {
-            float: left;
-            margin-right: 25px;
-            padding: 6px;
-            background: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .post-image-frame img {
-            display: block;
-        }
-
-        .post-text {
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        /* Szklany przycisk "Czytaj więcej" */
-        .glass-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 20px;
-            background: #2e82d3 linear-gradient(to bottom, #5ba3e5 0%, #2e82d3 50%, #1c69b8 51%, #2e82d3 100%);
-            color: white;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 4px;
-            border: 1px solid #1a548b;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .glass-btn:hover {
-            filter: brightness(1.1);
-        }
-
-        .divider {
-            clear: both;
-            height: 1px;
-            background: linear-gradient(to right, #fff, #c1d1e4, #fff);
-            margin: 40px 0;
-        }
-
-        footer {
-            background: #e2e8ef;
-            padding: 30px;
-            text-align: center;
-            border-top: 1px solid #bdc7d3;
-            font-size: 12px;
-            color: #555;
-        }
-
-        .footer-line {
-            height: 4px;
-            background: #1e5799;
-            margin-bottom: 10px;
-        }
-    </style>
+    <title>TK TV - Portal Retro</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="outer-wrapper">
+<div id="wrapper">
     <header>
-        <div id="logo-container">
+        <div id="logo-box">
             <h1>TK TV</h1>
-            <p>Twoja Telewizja o Starych Komputerach</p>
+            <p>TWOJA TELEWIZJA O RETRO KOMPUTERACH</p>
         </div>
     </header>
 
     <nav>
-        <ul class="nav-list">
-            <li><a href="#">START</a></li>
-            <li><a href="#">BAZA SPRZĘTU</a></li>
-            <li><a href="#">VIDEO RECENZJE</a></li>
-            <li><a href="#">FORUM</a></li>
+        <ul class="nav-menu">
+            <li><a href="#" class="active">START</a></li>
+            <li><a href="#">TESTY SPRZĘTU</a></li>
+            <li><a href="#">PROGRAMY TV</a></li>
             <li><a href="#">KONTAKT</a></li>
         </ul>
     </nav>
 
-    <div id="feature-area">
-        <div class="feature-box">
-            <h2>Nadajemy 24/7 o Retro Sprzęcie!</h2>
-            <p>Witaj w TK TV. Jesteśmy Twoim głównym źródłem informacji o komputerach z lat 80. i 90. Sprawdź nasze najnowsze artykuły poniżej.</p>
-        </div>
-    </div>
-
-    <div id="main-content">
+    <main id="content-area">
 
         <article class="post">
-            <h2 class="post-title">Legenda Commodore 64</h2>
-            <span class="post-date">Opublikowano: 10 Lipca 2008</span>
-            
-            <div class="post-image-frame">
-                <img src="https://via.placeholder.com/280x180" alt="Commodore 64">
+            <h2 class="post-title">Odcinek 105: Powrót do 386 DX</h2>
+            <div class="post-info">Data: 12 czerwca 2008 | Autor: Redakcja</div>
+            <div class="post-layout">
+                <div class="post-img">
+                    <img src="https://via.placeholder.com/260x170" alt="Procesor 386">
+                </div>
+                <div class="post-description">
+                    <p>W dzisiejszym wydaniu <strong>TK TV</strong> wyciągamy z piwnicy legendarną maszynę z procesorem Intel 386 DX. Sprawdzimy, czy ten 32-bitowy klasyk poradzi sobie z Windowsem 3.11 i czy odpalimy na nim pierwszą część Cywilizacji. To będzie prawdziwa podróż w czasie!</p>
+                </div>
             </div>
-            
-            <div class="post-text">
-                Dzisiaj w TK TV przyjrzymy się bliżej najlepiej sprzedającemu się komputerowi w historii. Commodore 64 to maszyna, która dla wielu z nas była oknem na świat informatyki. Dzięki układowi SID, dźwięk z tego komputera do dziś budzi podziw wśród muzyków. Zapraszamy do lektury naszej pełnej analizy tego 8-bitowego potwora.
-            </div>
-            <a href="#" class="glass-btn">CZYTAJ WIĘCEJ</a>
-            <div class="divider"></div>
+            <a href="#" class="btn-more">OGLĄDAJ TERAZ</a>
+            <div class="line-divider"></div>
         </article>
         <article class="post">
-            <h2 class="post-title">Atari ST vs Amiga 500</h2>
-            <span class="post-date">Opublikowano: 25 Czerwca 2008</span>
-            
-            <div class="post-image-frame">
-                <img src="https://via.placeholder.com/280x180" alt="Retro Wars">
+            <h2 class="post-title">Karta dźwiękowa Gravis Ultrasound</h2>
+            <div class="post-info">Data: 01 czerwca 2008 | Autor: Redakcja</div>
+            <div class="post-layout">
+                <div class="post-img">
+                    <img src="https://via.placeholder.com/260x170" alt="Gravis Ultrasound">
+                </div>
+                <div class="post-description">
+                    <p>Dźwięk, który zmienił wszystko. W tym artykule na TK TV przybliżamy historię karty Gravis Ultrasound. Dowiedz się, dlaczego demoscenowcy ją pokochali i dlaczego Sound Blaster musiał czuć oddech konkurencji na plecach.</p>
+                </div>
             </div>
-            
-            <div class="post-text">
-                Wielka wojna 16-bitowców! W tym odcinku TK TV sprawdzamy, który komputer lepiej radził sobie z grafiką, a który był lepszym narzędziem dla muzyków. Porównujemy systemy operacyjne TOS oraz AmigaOS. To starcie gigantów, które musisz zobaczyć!
-            </div>
-            <a href="#" class="glass-btn">CZYTAJ WIĘCEJ</a>
-            <div class="divider"></div>
+            <a href="#" class="btn-more">OGLĄDAJ TERAZ</a>
+            <div class="line-divider"></div>
         </article>
-        </div>
+        </main>
 
     <footer>
-        <div class="footer-line"></div>
-        <p><strong>TK TV - Telewizja Retro</strong></p>
-        <p>Projekt strony: 2008 Retro Design Studio. Wszystkie materiały wideo należą do TK TV.</p>
+        <div class="f-line"></div>
+        <p><strong>TK TV - RETRO PORTAL</strong></p>
+        <p>Wszystkie treści dostępne bez praw zastrzeżonych. Kopiuj i dziel się wiedzą!</p>
     </footer>
 </div>
 
