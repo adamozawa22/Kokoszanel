@@ -1,29 +1,32 @@
-/* TK TV - LIGHT APPLE 2012 STYLE */
+/* TK TV - LIGHT APPLE 2012 STYLE + ROUNDED IMAGES */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Lucida Grande", sans-serif;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+    /* Jasne lniane tło */
     background: #d1d1d1 url('https://www.transparenttextures.com/patterns/linen.png');
     background-attachment: fixed;
+    color: #333;
 }
 
 #wrapper {
     width: 980px;
     margin: 30px auto;
     background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    border-radius: 10px; /* Lekko zaokrąglony główny kontener */
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
     overflow: hidden;
     border: 1px solid #aaa;
 }
 
-/* Srebrny, aluminiowy nagłówek - czysty i jasny */
+/* Srebrny, aluminiowy nagłówek */
 header {
     background: linear-gradient(to bottom, #ebebeb 0%, #d5d5d5 50%, #c5c5c5 51%, #c5c5c5 100%);
     padding: 30px;
     border-bottom: 1px solid #999;
     text-align: center;
+    box-shadow: inset 0 1px 0 #fff;
 }
 
 header h1 {
@@ -32,6 +35,7 @@ header h1 {
     color: #333;
     text-shadow: 0 1px 0 #fff;
     font-weight: 200;
+    letter-spacing: 1px;
 }
 
 header p {
@@ -46,6 +50,7 @@ header p {
 nav {
     background: linear-gradient(to bottom, #f6f6f6 0%, #e1e1e1 100%);
     border-bottom: 1px solid #ccc;
+    box-shadow: inset 0 1px 0 #fff;
 }
 
 .nav-menu {
@@ -64,60 +69,89 @@ nav {
     font-size: 13px;
     text-shadow: 0 1px 0 #fff;
     border-right: 1px solid #d1d1d1;
+    transition: all 0.2s ease;
 }
 
 .nav-menu li a:hover, .nav-menu li a.active {
-    background: linear-gradient(to bottom, #7db9e8 0%, #1e5799 100%);
+    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
 }
 
-/* Treść */
+/* Treść główna */
 #content-area {
-    padding: 40px;
+    padding: 50px;
 }
+
+/* --- NOWOŚĆ: STYL ZAOKRĄGLONYCH ZDJĘĆ --- */
+#content-area img {
+    border-radius: 12px; /* To zaokrągla rogi zdjęć */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Miękki cień pod zdjęciem */
+    border: 1px solid rgba(0,0,0,0.1); /* Subtelna ramka */
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto; /* Centrowanie zdjęć */
+}
+/* ---------------------------------------- */
 
 .article-main-title {
-    font-size: 24px;
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee;
+    font-size: 26px;
+    color: #222;
+    font-weight: 300;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
 }
 
-/* NIEBIESKIE PRZYCISKI APPLE */
+section.post h2 {
+    font-weight: 300;
+    font-size: 28px;
+    color: #111;
+}
+
+section.post p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #444;
+}
+
+/* NIEBIESKIE PRZYCISKI APPLE (GUMDROP) */
 .btn-more {
     display: inline-block;
-    padding: 10px 30px;
+    padding: 12px 35px;
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 25px; /* Bardziej okrągłe przyciski */
     color: #fff;
     border: 1px solid #1a4d80;
     /* Niebieski gradient Apple */
     background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
     text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
-    transition: transform 0.1s;
+    transition: all 0.1s ease;
 }
 
 .btn-more:hover {
-    /* Odwrócenie i rozjaśnienie przy najechaniu */
+    /* Odwrócenie gradientu - efekt podświetlenia */
     background: linear-gradient(to bottom, #2989d8 0%, #1e5799 50%, #207cca 51%, #7db9e8 100%);
-    box-shadow: 0 4px 10px rgba(30, 144, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4), inset 0 -1px 0 rgba(0,0,0,0.2);
+    transform: translateY(-1px);
 }
 
 .btn-more:active {
-    transform: translateY(2px);
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
 }
 
 footer {
     padding: 30px;
     text-align: center;
-    background: #f0f0f0;
+    background: #f4f4f4;
     border-top: 1px solid #ddd;
     font-size: 11px;
-    color: #999;
+    color: #888;
+    box-shadow: inset 0 1px 0 #fff;
 }
