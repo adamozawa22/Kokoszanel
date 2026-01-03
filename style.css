@@ -1,47 +1,56 @@
-/* TK TV - APPLE.COM 2015 OFFICIAL DESIGN CLONE */
+/* TK TV - LIGHT APPLE 2012 STYLE + ROUNDED IMAGES */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #fff;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
+    /* Jasne lniane tło */
+    background: #d1d1d1 url('https://www.transparenttextures.com/patterns/linen.png');
+    background-attachment: fixed;
     color: #333;
-    -webkit-font-smoothing: antialiased;
 }
 
-/* Global Navigation - Ten słynny ciemny pasek Apple */
+#wrapper {
+    width: 980px;
+    margin: 30px auto;
+    background: #ffffff;
+    border-radius: 10px; /* Lekko zaokrąglony główny kontener */
+    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+    overflow: hidden;
+    border: 1px solid #aaa;
+}
+
+/* Srebrny, aluminiowy nagłówek */
 header {
-    background: rgba(51, 51, 51, 0.97);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    width: 100%;
-    height: 44px; /* Dokładna wysokość paska Apple */
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: linear-gradient(to bottom, #ebebeb 0%, #d5d5d5 50%, #c5c5c5 51%, #c5c5c5 100%);
+    padding: 30px;
+    border-bottom: 1px solid #999;
+    text-align: center;
+    box-shadow: inset 0 1px 0 #fff;
 }
 
 header h1 {
-    font-family: "Trebuchet MS", sans-serif;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 600;
     margin: 0;
+    font-size: 32px;
+    color: #333;
+    text-shadow: 0 1px 0 #fff;
+    font-weight: 200;
     letter-spacing: 1px;
 }
 
-/* Menu Nawigacyjne - Czyste linki tekstowe */
+header p {
+    margin: 5px 0 0 0;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Nawigacja Mac OS X */
 nav {
-    position: fixed;
-    top: 44px;
-    width: 100%;
-    background: #f2f2f2; /* Podmenu Apple */
-    border-bottom: 1px solid #d6d6d6;
-    z-index: 9998;
+    background: linear-gradient(to bottom, #f6f6f6 0%, #e1e1e1 100%);
+    border-bottom: 1px solid #ccc;
+    box-shadow: inset 0 1px 0 #fff;
 }
 
 .nav-menu {
@@ -49,93 +58,100 @@ nav {
     justify-content: center;
     list-style: none;
     margin: 0; padding: 0;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
 .nav-menu li a {
-    padding: 12px 20px;
+    padding: 12px 25px;
     display: block;
     text-decoration: none;
-    color: #333;
-    font-size: 12px;
-    font-weight: 400;
-    transition: color 0.3s;
+    color: #444;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 0 1px 0 #fff;
+    border-right: 1px solid #d1d1d1;
+    transition: all 0.2s ease;
 }
 
 .nav-menu li a:hover, .nav-menu li a.active {
-    color: #007aff; /* Niebieski akcent */
+    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
 }
 
-/* Wrapper tła */
-#wrapper {
-    margin-top: 100px; /* Miejsce na dwa paski nawigacji */
-    width: 100%;
-}
-
-/* Hero Section - Główny artykuł */
+/* Treść główna */
 #content-area {
-    max-width: 100%;
-    padding: 0;
+    padding: 50px;
 }
+
+/* --- NOWOŚĆ: STYL ZAOKRĄGLONYCH ZDJĘĆ --- */
+#content-area img {
+    border-radius: 12px; /* To zaokrągla rogi zdjęć */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Miękki cień pod zdjęciem */
+    border: 1px solid rgba(0,0,0,0.1); /* Subtelna ramka */
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto; /* Centrowanie zdjęć */
+}
+/* ---------------------------------------- */
 
 .article-main-title {
-    font-size: 56px;
-    font-weight: 600;
-    color: #111;
-    text-align: center;
-    margin-top: 80px;
-    margin-bottom: 10px;
-    letter-spacing: -1px;
-}
-
-.article-subtitle {
     font-size: 26px;
-    color: #666;
-    text-align: center;
+    color: #222;
     font-weight: 300;
-    margin-bottom: 40px;
-}
-
-/* Zdjęcia w stylu Apple (duże, bez ramek, lekko zaokrąglone wewnątrz kontenera) */
-#content-area img {
-    display: block;
-    width: 100%;
-    max-width: 900px;
-    height: auto;
-    border-radius: 18px;
-    margin: 40px auto;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-}
-
-/* PRZYCISKI - IDENTYCZNE JAK ZAKŁADKI / LINKI APPLE */
-.btn-more {
-    display: block;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
     text-align: center;
-    font-size: 21px;
-    font-weight: 400;
-    color: #007aff;
-    text-decoration: none;
-    margin: 20px 0;
-    transition: color 0.3s;
 }
 
-.btn-more:after {
-    content: " >"; /* Słynna strzałka Apple */
-    font-size: 18px;
-    vertical-align: middle;
+section.post h2 {
+    font-weight: 300;
+    font-size: 28px;
+    color: #111;
+}
+
+section.post p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #444;
+}
+
+/* NIEBIESKIE PRZYCISKI APPLE (GUMDROP) */
+.btn-more {
+    display: inline-block;
+    padding: 12px 35px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 25px; /* Bardziej okrągłe przyciski */
+    color: #fff;
+    border: 1px solid #1a4d80;
+    /* Niebieski gradient Apple */
+    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+    transition: all 0.1s ease;
 }
 
 .btn-more:hover {
-    text-decoration: underline;
+    /* Odwrócenie gradientu - efekt podświetlenia */
+    background: linear-gradient(to bottom, #2989d8 0%, #1e5799 50%, #207cca 51%, #7db9e8 100%);
+    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4), inset 0 -1px 0 rgba(0,0,0,0.2);
+    transform: translateY(-1px);
 }
 
-/* Stopka */
+.btn-more:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+}
+
 footer {
-    background: #f2f2f2;
-    padding: 50px 20px;
+    padding: 30px;
     text-align: center;
+    background: #f4f4f4;
+    border-top: 1px solid #ddd;
+    font-size: 11px;
     color: #888;
-    font-size: 12px;
-    margin-top: 100px;
+    box-shadow: inset 0 1px 0 #fff;
 }
