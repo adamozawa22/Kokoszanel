@@ -1,1 +1,128 @@
+/* TK TV - ULTIMATE iOS 7 CLONE STYLE */
 
+body {
+    margin: 0;
+    padding: 0;
+    /* Klasyczna tapeta iOS 7 - kolorowy gradient */
+    background: linear-gradient(135deg, #70e1f5 0%, #ffd194 100%);
+    background-attachment: fixed;
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+}
+
+#wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Efekt Frosted Glass (Szkło szronione) */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    
+    min-height: 100vh;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Header - Cienkie i czyste */
+header {
+    padding: 80px 20px 40px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    /* Logo - inny font, bardzo cienki i elegancki */
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 64px;
+    font-weight: 100; /* Ultra Light vibe */
+    color: #000;
+    letter-spacing: -3px;
+    text-transform: lowercase; /* iOS 7 często używał małych liter dla nowoczesności */
+}
+
+header p {
+    margin-top: 5px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #555;
+    font-weight: 300;
+}
+
+/* Nawigacja - Styl "iOS Control Center" */
+nav {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0; padding: 0;
+}
+
+.nav-menu li a {
+    padding: 20px 30px;
+    display: block;
+    text-decoration: none;
+    color: #007aff; /* Oficjalny niebieski z iOS 7 */
+    font-size: 17px;
+    font-weight: 300;
+    transition: background 0.3s;
+}
+
+/* Aktywna zakładka w stylu iOS 7 */
+.nav-menu li a:hover, .nav-menu li a.active {
+    background: rgba(0, 122, 255, 0.1);
+    font-weight: 400;
+}
+
+#content-area {
+    padding: 60px 40px;
+}
+
+/* Nazwa artykułu - bardzo cienka (Ultra Light) */
+.article-main-title {
+    font-size: 42px;
+    color: #000;
+    font-weight: 100;
+    line-height: 1.2;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+/* Zdjęcia - Okrągłe jak w iOS 7 (Smooth Corners) */
+#content-area img {
+    border-radius: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    margin: 40px auto;
+}
+
+/* PRZYCISKI - IDENTYCZNE JAK ZAKŁADKI (BEZ RAMEK) */
+.btn-more {
+    display: inline-block;
+    padding: 15px 0;
+    font-size: 20px;
+    font-weight: 300;
+    text-decoration: none;
+    color: #007aff; /* Tylko kolor tekstu, jak w przyciskach systemowych iOS 7 */
+    background: transparent;
+    border: none;
+    transition: opacity 0.2s;
+}
+
+.btn-more:hover {
+    opacity: 0.5;
+}
+
+/* Stopka */
+footer {
+    padding: 60px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    color: #888;
+}
