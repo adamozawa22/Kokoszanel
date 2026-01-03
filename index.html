@@ -72,3 +72,209 @@
             display: flex;
             padding: 20px;
             gap: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .picture-frame {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #718597;
+            background: white;
+            padding: 4px;
+            position: relative;
+        }
+
+        .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        .status-dot {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            background: #5cb85c;
+            color: white;
+            font-size: 10px;
+            padding: 1px 4px;
+            border: 2px solid white;
+            font-weight: bold;
+        }
+
+        .content-scroll {
+            background: white;
+            margin: 10px;
+            border: 1px solid #919191;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        #msn-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 250px;
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        #msn-toast.show { transform: translateY(0); }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+<div id="loading-overlay">
+    <div style="width: 300px; text-align: center;">
+        <div class="loader animate" style="margin-bottom: 20px;"></div>
+        <p id="loading-text" style="font-weight: bold; color: #15428b; margin-bottom: 10px;">Nawiązywanie połączenia...</p>
+        <div role="progressbar" id="connection-bar"><div style="width: 0%;"></div></div>
+        <p id="loading-percent" style="font-size: 10px; margin-top: 5px; color: #666;">0%</p>
+    </div>
+</div>
+
+<div id="msn-toast" class="window glass">
+    <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
+        <img src="profilowe.pfp.jpg" width="40" style="border: 1px solid #ccc;">
+        <div>
+            <div style="font-size: 11px; font-weight: bold;">Adam</div>
+            <div style="font-size: 10px;">właśnie się zalogował.</div>
+        </div>
+    </div>
+</div>
+
+<div id="chat-window" class="window glass">
+    <div class="title-bar">
+        <div class="title-bar-text">Rozmowa z: Adam</div>
+        <div class="title-bar-controls">
+            <button aria-label="Close" onclick="this.closest('#chat-window').style.display='none'"></button>
+        </div>
+    </div>
+    <div class="window-body">
+        <div style="background: white; border: 1px solid #718597; height: 100px; padding: 5px; font-size: 12px; overflow-y: auto; margin-bottom: 10px;">
+            <p><strong style="color: #0066cc;">Adam mówi:</strong><br>Cześć! Skoro tu jesteś, pewnie chcesz nawiązać współpracę? :)</p>
+        </div>
+        <input type="text" placeholder="Napisz odpowiedź..." style="width: 100%;" disabled>
+    </div>
+</div>
+
+<div id="main-window" class="window glass msn-card">
+    <div class="title-bar">
+        <div class="title-bar-text">Profil: Adam :)</div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
+        <div class="header-profile">
+            <div class="picture-frame">
+                <img src="profilowe.pfp.jpg" alt="PFP">
+                <div class="status-dot">OK</div>
+            </div>
+            <div>
+                <div style="font-size: 18px; font-weight: bold; color: #003399;">Adam</div>
+                <div style="font-size: 13px; color: #444; margin-top: 5px;">< . . . Szukam wyzwań! . . . ></div>
+            </div>
+        </div>
+
+        <div class="content-scroll has-scrollbar">
+            <ul class="tree-view has-connector">
+                <li>
+                    <details open>
+                        <summary>[+] Kim jestem?</summary>
+                        <ul>
+                            <li>> Pasjonat UI/UX z Polski</li>
+                            <li>> Web Developer & Designer</li>
+                            <li>> Lubię retro-design</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details open>
+                        <summary>[+] Umiejętności</summary>
+                        <ul>
+                            <li>> Piracenie gier</li>
+                            <li>> Tworzenie stron internetowych</li>
+                            <li>> Łatwe nawiązywanie relacji</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>[+] Kontakt</summary>
+                        <ul>
+                            <li>> E-mail: adambiznes@tutamail.com</li>
+                            <li>> Discord: elagawin</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+
+        <div class="status-bar">
+            <p class="status-bar-field">Status: Dostępny</p>
+            <button style="margin: 2px; height: 18px; font-size: 10px;" onclick="doNudge()">NUDGE</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const overlay = document.getElementById('loading-overlay');
+    const mainWindow = document.getElementById('main-window');
+    const bar = document.querySelector('#connection-bar div');
+    const percentLabel = document.getElementById('loading-percent');
+    const statusLabel = document.getElementById('loading-text');
+    const toast = document.getElementById('msn-toast');
+    const chatWin = document.getElementById('chat-window');
+
+    let progress = 0;
+    const statuses = ["Nawiązywanie połączenia...", "Logowanie...", "Pobieranie profilu...", "Gotowe!"];
+
+    function updateProgress() {
+        let jump = Math.floor(Math.random() * 15) + 15;
+        progress += jump;
+        if (progress > 100) progress = 100;
+
+        bar.style.width = progress + "%";
+        percentLabel.innerText = progress + "%";
+
+        if (progress > 30) statusLabel.innerText = statuses[1];
+        if (progress > 70) statusLabel.innerText = statuses[2];
+        if (progress >= 100) statusLabel.innerText = statuses[3];
+
+        if (progress < 100) {
+            let delay = Math.floor(Math.random() * 400) + 300;
+            setTimeout(updateProgress, delay);
+        } else {
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    mainWindow.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        toast.classList.add('show');
+                        setTimeout(() => toast.classList.remove('show'), 3500);
+                    }, 800);
+
+                    // Pokazanie okna czatu po 3 sekundach
+                    setTimeout(() => {
+                        chatWin.style.display = 'block';
+                    }, 3000);
+
+                }, 400);
+            }, 600);
+        }
+    }
+
+    function doNudge() {
+        mainWindow.classList.add('nudge-effect');
+        setTimeout(() => mainWindow.classList.remove('nudge-effect'), 400);
+    }
+
+    window.addEventListener('load', updateProgress);
+</script>
+</body>
+</html>
