@@ -39,12 +39,13 @@
         .msn-card {
             width: 420px;
             max-height: 90vh;
-            display: flex;
-            flex-direction: column;
             display: none; 
-            animation: fadeIn 0.4s ease-in;
+            flex-direction: column;
             position: relative;
         }
+
+        /* Tylko do pierwszego pokazania */
+        .initial-fade { animation: fadeIn 0.4s ease-in; }
 
         #chat-window {
             width: 300px;
@@ -57,7 +58,7 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
-        /* NUDGE ANIMACJA */
+        /* NUDGE ANIMACJA - Czyste trzęsienie bez fade */
         @keyframes nudge {
             0% { transform: translate(0,0); }
             20% { transform: translate(-8px,-8px); }
@@ -66,7 +67,7 @@
             80% { transform: translate(8px,-8px); }
             100% { transform: translate(0,0); }
         }
-        .nudge-effect { animation: nudge 0.2s linear 2; }
+        .nudge-effect { animation: nudge 0.2s linear 2 !important; }
 
         .header-profile {
             display: flex;
@@ -203,6 +204,25 @@
                 </li>
                 <li>
                     <details>
+                        <summary>[+] Edukacja</summary>
+                        <ul>
+                            <li>> Szkoła podstawowa :(</li>
+                            <li>> Kursy online</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>[+] Zainteresowania</summary>
+                        <ul>
+                            <li>> Gry komputerowe</li>
+                            <li>> Muzyka pop</li>
+                            <li>> Tworzenie stron internetowych</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
                         <summary>[+] Kontakt</summary>
                         <ul>
                             <li>> E-mail: adambiznes@tutamail.com</li>
@@ -215,7 +235,7 @@
 
         <div class="status-bar">
             <p class="status-bar-field">Status: Dostępny</p>
-            <button style="margin: 2px; height: 18px; font-size: 10px;" onclick="doNudge()">NUDGE</button>
+            <button style="margin: 2px; height: 18px; font-size: 10px; cursor: pointer;" onclick="doNudge()">NUDGE</button>
         </div>
     </div>
 </div>
@@ -252,14 +272,15 @@
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.classList.add('hidden');
+                    // Pokazujemy okno i dodajemy animację wejścia tylko raz
                     mainWindow.style.display = 'flex';
+                    mainWindow.classList.add('initial-fade');
                     
                     setTimeout(() => {
                         toast.classList.add('show');
                         setTimeout(() => toast.classList.remove('show'), 3500);
                     }, 800);
 
-                    // Pokazanie okna czatu po 3 sekundach
                     setTimeout(() => {
                         chatWin.style.display = 'block';
                     }, 3000);
@@ -270,8 +291,13 @@
     }
 
     function doNudge() {
+        // Usuwamy klasę fadeIn jeśli jest, żeby nie przeszkadzała
+        mainWindow.classList.remove('initial-fade');
+        // Dodajemy potrząsanie
         mainWindow.classList.add('nudge-effect');
-        setTimeout(() => mainWindow.classList.remove('nudge-effect'), 400);
+        setTimeout(() => {
+            mainWindow.classList.remove('nudge-effect');
+        }, 400);
     }
 
     window.addEventListener('load', updateProgress);
