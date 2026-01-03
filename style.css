@@ -1,10 +1,9 @@
-/* TK TV - ULTRA AERO GLASS APPLE STYLE */
+/* TK TV - PREMIUM GLASS STYLE WITH CUSTOM LOGO FONT */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Lucida Grande", sans-serif;
-    /* Ciemniejsze tło lnu, żeby szkło było lepiej widoczne */
+    font-family: "Lucida Grande", "Segoe UI", sans-serif;
     background: #a1a1a1 url('https://www.transparenttextures.com/patterns/linen.png');
     background-attachment: fixed;
 }
@@ -12,42 +11,49 @@ body {
 #wrapper {
     width: 980px;
     margin: 40px auto;
-    /* Mocna przezroczystość i rozmycie (Aero Effect) */
-    background: rgba(255, 255, 255, 0.45); 
-    backdrop-filter: blur(25px); 
-    -webkit-backdrop-filter: blur(25px);
-    
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
 }
 
-/* Szklany, jasny nagłówek */
+/* --- NOWY STYL LOGO TK TV --- */
 header {
-    background: linear-gradient(to bottom, 
-        rgba(255,255,255,0.8) 0%, 
-        rgba(220,220,220,0.4) 50%, 
-        rgba(200,200,200,0.3) 51%, 
-        rgba(220,220,220,0.4) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(200,200,200,0.4) 100%);
     padding: 35px;
-    border-bottom: 1px solid rgba(0,0,0,0.15);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
     text-align: center;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 header h1 {
     margin: 0;
-    font-size: 36px;
-    color: #222;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
-    font-weight: 200;
+    /* Inny font dla Logo: Trebuchet MS jest elegancki i nowoczesny */
+    font-family: "Trebuchet MS", "Arial Black", sans-serif;
+    font-size: 48px; /* Większe logo */
+    font-weight: bold;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: -2px; /* Ciasny odstęp liter jak w logotypach TV */
+    text-shadow: 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Przezroczysta nawigacja */
+header p {
+    margin-top: -5px;
+    font-family: "Lucida Grande", sans-serif; /* Powrót do standardu dla podtytułu */
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Menu w stylu "Zakładek" */
 nav {
-    background: rgba(255, 255, 255, 0.3);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background: linear-gradient(to bottom, #f9f9f9 0%, #e2e2e2 100%);
+    border-bottom: 1px solid #bbb;
 }
 
 .nav-menu {
@@ -58,83 +64,61 @@ nav {
 }
 
 .nav-menu li a {
-    padding: 15px 30px;
+    padding: 14px 28px;
     display: block;
     text-decoration: none;
-    color: #222;
+    color: #444;
     font-weight: bold;
     font-size: 13px;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-    border-right: 1px solid rgba(0,0,0,0.05);
+    text-shadow: 0 1px 0 #fff;
+    border-right: 1px solid #ccc;
 }
 
 .nav-menu li a:hover, .nav-menu li a.active {
-    background: linear-gradient(to bottom, #7db9e8 0%, #1e5799 100%);
+    background: linear-gradient(to bottom, #7db9e8 0%, #2989d8 100%);
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
 }
 
 #content-area {
     padding: 50px;
 }
 
+/* Nagłówek artykułu */
 .article-main-title {
-    font-size: 28px;
+    font-size: 26px;
     color: #000;
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
-    text-shadow: 0 1px 0 #fff;
+    font-family: "Lucida Grande", sans-serif;
 }
 
-/* ZAOKRĄGLONE ZDJĘCIA Z EFEKTEM POŁYSKU */
+/* Zaokrąglone zdjęcia */
 #content-area img {
-    border-radius: 20px;
+    border-radius: 20px; /* Mocniejsze zaokrąglenie */
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.5);
-    margin: 25px auto;
+    border: 1px solid rgba(255,255,255,0.8);
 }
 
-/* --- PRZYCISKI ULTRA AERO / AQUA --- */
+/* Przyciski w stylu niebieskich zakładek */
 .btn-more {
     display: inline-block;
-    padding: 12px 40px;
+    padding: 12px 35px;
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
     color: #fff;
-    border-radius: 30px;
-    border: 1px solid #0e3866;
-    
-    /* Wielowarstwowy gradient (efekt mokrego szkła) */
-    background: linear-gradient(to bottom, 
-        #a6d5ff 0%, 
-        #7db9e8 49%, 
-        #207cca 50%, 
-        #1e5799 100%);
-    
-    box-shadow: 
-        0 4px 15px rgba(0,0,0,0.2), 
-        inset 0 1px 1px rgba(255,255,255,0.7);
-    
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
-    transition: all 0.2s ease;
+    border-radius: 6px;
+    border: 1px solid #1e5799;
+    background: linear-gradient(to bottom, #7db9e8 0%, #2989d8 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
 }
 
 .btn-more:hover {
-    /* Rozświetlenie Aero przy najechaniu */
-    transform: translateY(-2px);
-    background: linear-gradient(to bottom, 
-        #bce0ff 0%, 
-        #8ccbff 49%, 
-        #3d94e6 50%, 
-        #2989d8 100%);
-    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.5), inset 0 1px 1px #fff;
-}
-
-.btn-more:active {
-    transform: translateY(1px);
-    box-shadow: inset 0 3px 8px rgba(0,0,0,0.4);
+    opacity: 0.9;
+    box-shadow: 0 4px 12px rgba(41, 137, 216, 0.4);
 }
 
 footer {
@@ -143,4 +127,5 @@ footer {
     background: rgba(255,255,255,0.2);
     border-top: 1px solid rgba(0,0,0,0.1);
     font-size: 11px;
+    color: #444;
 }
