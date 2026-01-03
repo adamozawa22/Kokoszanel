@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows Live Messenger - Adam</title>
+    <title>Windows 7 - Adam Messenger</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
             background: #abd1ff url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
             background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
@@ -32,30 +29,55 @@
             transition: opacity 0.5s;
         }
 
-        #connection-bar div { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* PASEK ZADAŃ */
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: rgba(40, 71, 108, 0.8);
+            backdrop-filter: blur(5px);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            z-index: 2000;
+        }
+
+        .start-button {
+            width: 36px;
+            height: 36px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Windows_7_Start_button_icon.svg/1024px-Windows_7_Start_button_icon.svg.png') no-repeat center;
+            background-size: contain;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .taskbar-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            padding: 2px 10px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            margin-right: 5px;
+            display: none; /* Pokazujemy skryptem */
+        }
 
         /* OKNA */
         .window {
             position: absolute;
             z-index: 10;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .title-bar { cursor: move; }
 
-        #main-window {
-            width: 420px;
-            display: none;
-        }
-
-        #chat-window {
-            width: 300px;
-            top: 50px;
-            left: 50px;
-            display: none;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-        .initial-fade { animation: fadeIn 0.4s ease-in; }
+        .holiday-progress { margin: 5px 0 2px 15px; width: 85%; height: 12px; }
+        .holiday-timer { font-size: 10px; color: #444; margin-left: 15px; margin-bottom: 8px; font-weight: bold;}
 
         @keyframes nudge {
             0% { transform: translate(0,0); }
@@ -66,64 +88,6 @@
             100% { transform: translate(0,0); }
         }
         .nudge-effect { animation: nudge 0.2s linear 2 !important; }
-
-        .header-profile {
-            display: flex;
-            padding: 20px;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .picture-frame {
-            width: 100px;
-            height: 100px;
-            border: 1px solid #718597;
-            background: white;
-            padding: 4px;
-            position: relative;
-        }
-
-        .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        .status-dot {
-            position: absolute;
-            bottom: -5px;
-            right: -5px;
-            background: #5cb85c;
-            color: white;
-            font-size: 10px;
-            padding: 1px 4px;
-            border: 2px solid white;
-            font-weight: bold;
-        }
-
-        .content-scroll {
-            background: white;
-            margin: 10px;
-            border: 1px solid #919191;
-            flex-grow: 1;
-            overflow-y: auto;
-            max-height: 350px;
-        }
-
-        /* Stylizacja pasków postępu wewnątrz drzewka */
-        .holiday-progress {
-            margin: 5px 0 10px 15px;
-            width: 80%;
-        }
-
-        #msn-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 250px;
-            transform: translateY(150%);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-        }
-        #msn-toast.show { transform: translateY(0); }
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -137,22 +101,18 @@
     </div>
 </div>
 
-<div id="msn-toast" class="window glass">
-    <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
-        <img src="profilowe.pfp.jpg" width="40" style="border: 1px solid #ccc;">
-        <div>
-            <div style="font-size: 11px; font-weight: bold;">Adam</div>
-            <div style="font-size: 10px;">właśnie się zalogował.</div>
-        </div>
-    </div>
+<div class="taskbar">
+    <div class="start-button"></div>
+    <div id="task-main" class="taskbar-item" onclick="toggleWindow('main-window')">Messenger (Adam)</div>
+    <div id="task-chat" class="taskbar-item" onclick="toggleWindow('chat-window')">Rozmowa</div>
 </div>
 
-<div id="chat-window" class="window glass">
+<div id="chat-window" class="window glass" style="width: 300px; top: 100px; left: 50px;">
     <div class="title-bar">
         <div class="title-bar-text">Rozmowa z: Adam</div>
         <div class="title-bar-controls">
-            <button aria-label="Minimize" onclick="this.closest('.window').style.display='none'"></button>
-            <button aria-label="Close" onclick="this.closest('.window').style.display='none'"></button>
+            <button aria-label="Minimize" onclick="toggleWindow('chat-window')"></button>
+            <button aria-label="Close" onclick="toggleWindow('chat-window')"></button>
         </div>
     </div>
     <div class="window-body">
@@ -163,21 +123,20 @@
     </div>
 </div>
 
-<div id="main-window" class="window glass">
+<div id="main-window" class="window glass" style="width: 420px; top: 50px; left: 400px;">
     <div class="title-bar">
         <div class="title-bar-text">Profil: Adam :)</div>
         <div class="title-bar-controls">
-            <button aria-label="Minimize" onclick="this.closest('.window').style.display='none'"></button>
-            <button aria-label="Maximize"></button>
-            <button aria-label="Close"></button>
+            <button aria-label="Minimize" onclick="toggleWindow('main-window')"></button>
+            <button aria-label="Close" onclick="toggleWindow('main-window')"></button>
         </div>
     </div>
 
-    <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
-        <div class="header-profile">
-            <div class="picture-frame">
-                <img src="profilowe.pfp.jpg" alt="PFP">
-                <div class="status-dot">OK</div>
+    <div class="window-body" style="margin: 0; padding: 0;">
+        <div style="display: flex; padding: 20px; gap: 20px; background: rgba(255,255,255,0.2);">
+            <div style="width: 100px; height: 100px; border: 1px solid #718597; background: white; padding: 4px; position: relative;">
+                <img src="profilowe.pfp.jpg" style="width: 100%; height: 100%; object-fit: cover;">
+                <div style="position: absolute; bottom: -5px; right: -5px; background: #5cb85c; color: white; font-size: 10px; padding: 1px 4px; border: 2px solid white; font-weight: bold;">OK</div>
             </div>
             <div>
                 <div style="font-size: 18px; font-weight: bold; color: #003399;">Adam</div>
@@ -185,20 +144,23 @@
             </div>
         </div>
 
-        <div class="content-scroll has-scrollbar">
+        <div style="background: white; margin: 10px; border: 1px solid #919191; max-height: 300px; overflow-y: auto;">
             <ul class="tree-view has-connector">
                 <li>
                     <details open>
-                        <summary>[+] Odliczanie do świąt</summary>
+                        <summary>[+] Odliczanie</summary>
                         <ul>
                             <li>> Wielkanoc (2026):
-                                <div role="progressbar" class="holiday-progress"><div id="p-wielkanoc" style="width: 0%;"></div></div>
+                                <div role="progressbar" class="holiday-progress"><div id="p-wielkanoc"></div></div>
+                                <div id="t-wielkanoc" class="holiday-timer">Pozostało: --</div>
                             </li>
                             <li>> Wigilia:
-                                <div role="progressbar" class="holiday-progress"><div id="p-wigilia" style="width: 0%;"></div></div>
+                                <div role="progressbar" class="holiday-progress"><div id="p-wigilia"></div></div>
+                                <div id="t-wigilia" class="holiday-timer">Pozostało: --</div>
                             </li>
                             <li>> Nowy Rok:
-                                <div role="progressbar" class="holiday-progress"><div id="p-nowyrok" style="width: 0%;"></div></div>
+                                <div role="progressbar" class="holiday-progress"><div id="p-nowyrok"></div></div>
+                                <div id="t-nowyrok" class="holiday-timer">Pozostało: --</div>
                             </li>
                         </ul>
                     </details>
@@ -206,28 +168,13 @@
                 <li>
                     <details open>
                         <summary>[+] Kim jestem?</summary>
-                        <ul>
-                            <li>> Pasjonat UI/UX z Polski</li>
-                            <li>> Web Developer & Designer</li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>[+] Umiejętności</summary>
-                        <ul>
-                            <li>> Piracenie gier</li>
-                            <li>> Tworzenie stron internetowych</li>
-                        </ul>
+                        <ul><li>> Web Developer & Designer</li></ul>
                     </details>
                 </li>
                 <li>
                     <details>
                         <summary>[+] Kontakt</summary>
-                        <ul>
-                            <li>> E-mail: adambiznes@tutamail.com</li>
-                            <li>> Discord: elagawin</li>
-                        </ul>
+                        <ul><li>> E-mail: adambiznes@tutamail.com</li></ul>
                     </details>
                 </li>
             </ul>
@@ -235,107 +182,101 @@
 
         <div class="status-bar">
             <p class="status-bar-field">Status: Dostępny</p>
-            <button style="margin: 2px; height: 18px; font-size: 10px; cursor: pointer;" onclick="doNudge()">NUDGE</button>
+            <button onclick="doNudge()" style="cursor: pointer;">NUDGE</button>
         </div>
     </div>
 </div>
 
 <script>
-    // --- OBSŁUGA ŁADOWANIA ---
     const overlay = document.getElementById('loading-overlay');
-    const mainWindow = document.getElementById('main-window');
     const bar = document.querySelector('#connection-bar div');
-    const percentLabel = document.getElementById('loading-percent');
-    const statusLabel = document.getElementById('loading-text');
-    const toast = document.getElementById('msn-toast');
-    const chatWin = document.getElementById('chat-window');
-
+    
+    // --- PROGRES ŁADOWANIA ---
     let progress = 0;
     function updateProgress() {
-        let jump = Math.floor(Math.random() * 15) + 15;
-        progress += jump;
+        progress += Math.floor(Math.random() * 20) + 15;
         if (progress > 100) progress = 100;
         bar.style.width = progress + "%";
-        percentLabel.innerText = progress + "%";
+        document.getElementById('loading-percent').innerText = progress + "%";
 
         if (progress < 100) {
-            setTimeout(updateProgress, Math.floor(Math.random() * 400) + 300);
+            setTimeout(updateProgress, 400);
         } else {
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
-                    overlay.classList.add('hidden');
-                    mainWindow.style.display = 'flex';
-                    mainWindow.classList.add('initial-fade');
-                    calculateHolidays();
-                    setTimeout(() => { toast.classList.add('show'); }, 800);
-                    setTimeout(() => { chatWin.style.display = 'block'; }, 2500);
-                }, 400);
+                    overlay.style.display = 'none';
+                    showWindow('main-window', 'task-main');
+                    setTimeout(() => showWindow('chat-window', 'task-chat'), 2000);
+                    setInterval(updateTimers, 1000);
+                }, 500);
             }, 600);
         }
     }
 
-    // --- PRZECIĄGANIE OKIEN ---
-    function makeDraggable(el) {
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        const titleBar = el.querySelector(".title-bar");
-        if (titleBar) {
-            titleBar.onmousedown = dragMouseDown;
-        }
-        function dragMouseDown(e) {
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-            el.style.zIndex = "100"; // Przenieś na wierzch przy kliknięciu
-        }
-        function elementDrag(e) {
-            e.preventDefault();
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            el.style.top = (el.offsetTop - pos2) + "px";
-            el.style.left = (el.offsetLeft - pos1) + "px";
-        }
-        function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
-        }
+    // --- OBSŁUGA OKIEN ---
+    function showWindow(id, taskId) {
+        document.getElementById(id).style.display = 'flex';
+        document.getElementById(taskId).style.display = 'block';
     }
 
-    makeDraggable(mainWindow);
-    makeDraggable(chatWin);
-
-    // --- ODLICZANIE ---
-    function calculateHolidays() {
-        const now = new Date();
-        const year = now.getFullYear();
-        
-        const holidays = {
-            "p-wielkanoc": new Date(year, 3, 5), // 5 Kwietnia 2026
-            "p-wigilia": new Date(year, 11, 24),
-            "p-nowyrok": new Date(year + 1, 0, 1)
-        };
-
-        for (let id in holidays) {
-            const startOfYear = new Date(year, 0, 1);
-            const diffTotal = holidays[id] - startOfYear;
-            const diffCurrent = now - startOfYear;
-            let perc = (diffCurrent / diffTotal) * 100;
-            if (perc > 100) perc = 100;
-            document.getElementById(id).style.width = perc + "%";
-        }
+    function toggleWindow(id) {
+        const win = document.getElementById(id);
+        win.style.display = (win.style.display === 'none') ? 'flex' : 'none';
     }
 
     function doNudge() {
-        mainWindow.classList.remove('initial-fade');
-        mainWindow.classList.add('nudge-effect');
-        setTimeout(() => mainWindow.classList.remove('nudge-effect'), 400);
+        const win = document.getElementById('main-window');
+        win.classList.add('nudge-effect');
+        setTimeout(() => win.classList.remove('nudge-effect'), 400);
     }
 
-    window.addEventListener('load', updateProgress);
+    // --- LICZNIK I PASKI ---
+    function updateTimers() {
+        const now = new Date();
+        const dates = {
+            "wielkanoc": new Date(2026, 3, 5),
+            "wigilia": new Date(2026, 11, 24),
+            "nowyrok": new Date(2027, 0, 1)
+        };
+
+        for (let key in dates) {
+            const diff = dates[key] - now;
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const m = Math.floor((diff / (1000 * 60)) % 60);
+                const s = Math.floor((diff / 1000) % 60);
+                
+                document.getElementById('t-' + key).innerText = `Pozostało: ${d}d ${h}g ${m}m ${s}s`;
+                
+                // Procent roku (uproszczony)
+                const start = new Date(now.getFullYear(), 0, 1);
+                const total = dates[key] - start;
+                const current = now - start;
+                document.getElementById('p-' + key).style.width = Math.min(100, (current/total)*100) + "%";
+            }
+        }
+    }
+
+    // --- PRZECIĄGANIE ---
+    function makeDraggable(el) {
+        let p1 = 0, p2 = 0, p3 = 0, p4 = 0;
+        el.querySelector(".title-bar").onmousedown = (e) => {
+            p3 = e.clientX; p4 = e.clientY;
+            document.onmouseup = () => { document.onmouseup = null; document.onmousemove = null; };
+            document.onmousemove = (e) => {
+                p1 = p3 - e.clientX; p2 = p4 - e.clientY;
+                p3 = e.clientX; p4 = e.clientY;
+                el.style.top = (el.offsetTop - p2) + "px";
+                el.style.left = (el.offsetLeft - p1) + "px";
+            };
+        };
+    }
+    makeDraggable(document.getElementById('main-window'));
+    makeDraggable(document.getElementById('chat-window'));
+
+    window.onload = updateProgress;
 </script>
 </body>
 </html>
