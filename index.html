@@ -3,128 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internet Explorer - Moje Portfolio</title>
+    <title>Profil MSN - O Mnie</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
-            background: #337ab7 url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
+            background: #abd1ff url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
             background-size: cover;
-            margin: 0;
-            padding: 20px;
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
         }
 
-        /* Kontener przeglądarki */
-        .ie-window {
-            width: 90%;
-            max-width: 1000px;
-            height: 85vh;
+        /* Stylizacja okna komunikatora */
+        .msn-card {
+            width: 400px;
+            max-height: 90vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeIn 0.8s ease-out;
         }
 
-        /* Pasek adresu i nawigacji */
-        .ie-nav-bar {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-profile {
             display: flex;
-            align-items: center;
-            padding: 5px 10px;
-            gap: 10px;
+            padding: 20px;
+            gap: 20px;
             background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .back-forward-btns {
-            display: flex;
-            gap: 2px;
-        }
-
-        .ie-address-bar {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
+        /* Ramka na zdjęcie (Avatar) */
+        .picture-frame {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #718597;
             background: white;
-            border: 1px solid #a0a0a0;
-            padding: 2px 8px;
-            height: 24px;
-            border-radius: 2px;
+            padding: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            position: relative;
         }
 
-        .ie-address-bar span {
-            color: #555;
-            font-size: 13px;
+        .picture-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .ie-tabs {
-            display: flex;
-            padding-left: 50px;
-            margin-bottom: -1px;
+        /* Mała kropka statusu na zdjęciu */
+        .status-dot {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background: #5cb85c;
+            border: 2px solid white;
+            border-radius: 50%;
         }
 
-        .ie-tab {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid #a0a0a0;
-            padding: 4px 15px;
-            border-bottom: none;
-            margin-right: 2px;
-            font-size: 12px;
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
-            cursor: pointer;
+        .info-column {
+            flex: 1;
         }
 
-        .ie-tab.active {
-            background: white;
+        .display-name {
+            font-size: 18px;
             font-weight: bold;
+            color: #003399;
+            margin-bottom: 4px;
         }
 
-        /* Treść strony */
-        .ie-content-area {
+        .personal-msg {
+            font-size: 13px;
+            color: #444;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .content-scroll {
             background: white;
+            margin: 10px;
+            border: 1px solid #919191;
             flex-grow: 1;
             overflow-y: auto;
-            border-top: 1px solid #a0a0a0;
-            padding: 40px;
+            padding: 5px;
         }
 
-        .website-header {
-            border-bottom: 2px solid #0055aa;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
+        /* Customizacja TreeView pod CV */
+        .tree-view li {
+            padding: 2px 0;
         }
 
-        /* Splash screen */
-        #loading-screen {
+        .section-icon {
+            margin-right: 8px;
+        }
+
+        .footer-actions {
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background: #f0f0f0;
+        }
+
+        #loading-overlay {
             position: fixed;
             inset: 0;
-            background: white;
-            z-index: 1000;
+            background: #e3efff;
+            z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div id="loading-screen">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Internet_Explorer_10_logo.png" width="100" alt="IE Logo">
-    <div style="margin-top: 20px; width: 300px;">
-        <p style="text-align: center;">Trwa łączenie z serwerem portfolio...</p>
-        <div role="progressbar" class="marquee"></div>
-    </div>
+<div id="loading-overlay">
+    <div class="loader animate"></div>
+    <p style="margin-top: 20px; font-weight: bold; color: #15428b;">Logowanie do profilu...</p>
 </div>
 
-<div class="window glass ie-window">
+<div class="window glass msn-card">
     <div class="title-bar">
-        <div class="title-bar-text">Internet Explorer - Moje CV (2026)</div>
+        <div class="title-bar-text">Informacje o kontakcie: Twoje Imię</div>
         <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -132,87 +141,36 @@
         </div>
     </div>
 
-    <div class="window-body" style="margin: 0; display: flex; flex-direction: column; flex-grow: 1;">
-        <div class="ie-nav-bar">
-            <div class="back-forward-btns">
-                <button disabled style="min-width: 30px; border-radius: 50%;">←</button>
-                <button disabled style="min-width: 30px; border-radius: 50%;">→</button>
+    <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
+        
+        <div class="header-profile">
+            <div class="picture-frame">
+                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix" alt="To ja!">
+                <div class="status-dot"></div>
             </div>
-            <div class="ie-address-bar">
-                <span style="color: green; margin-right: 5px;">🔒</span>
-                <span>http://www.twoje-cv-2026.pl/o-mnie</span>
-            </div>
-            <button>Odśwież</button>
-        </div>
-
-        <div class="ie-tabs">
-            <div class="ie-tab active">O mnie - Moje CV</div>
-            <div class="ie-tab">Projekty</div>
-            <div class="ie-tab">Kontakt</div>
-            <div class="ie-tab" style="width: 20px; text-align: center;">+</div>
-        </div>
-
-        <div class="ie-content-area">
-            <div class="website-header">
-                <h1 style="color: #0055aa; margin: 0;">Jan Kowalski</h1>
-                <p style="font-style: italic; color: #666;">Fullstack Developer & UI Enthusiast</p>
-            </div>
-
-            <section>
-                <h3>Witamy na mojej stronie!</h3>
-                <p>Używając technologii z 2011 roku w 2026 roku, pokazuję swoje przywiązanie do detali i klasycznego designu. Poniżej znajdziesz moje doświadczenie:</p>
+            <div class="info-column">
+                <div class="display-name">Imię "Nick" Nazwisko</div>
+                <div class="personal-msg">"Koduję, projektuję i czasem piję za dużo kawy ☕"</div>
                 
-                <table class="listview" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Rok</th>
-                            <th>Firma</th>
-                            <th>Stanowisko</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2024-2026</td>
-                            <td>Future Tech</td>
-                            <td>Senior React Developer</td>
-                        </tr>
-                        <tr>
-                            <td>2022-2024</td>
-                            <td>OldSchool Solutions</td>
-                            <td>Junior Web Designer</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section style="margin-top: 30px;">
-                <h3>Umiejętności techniczne</h3>
-                <div class="group">
-                    <p>Programowanie: JavaScript, HTML5, CSS3, PHP</p>
-                    <div role="progressbar" class="animate"><div style="width: 85%;"></div></div>
-                    
-                    <p>Projektowanie: Photoshop, Figma, Windows Aero</p>
-                    <div role="progressbar" class="animate"><div style="width: 70%;"></div></div>
+                <div class="group" style="padding: 5px; font-size: 11px;">
+                    <strong>Status:</strong> Dostępny<br>
+                    <strong>Email:</strong> mojanazwa@msn.pl
                 </div>
-            </section>
+            </div>
         </div>
 
-        <div class="status-bar">
-            <p class="status-bar-field">Gotowe</p>
-            <p class="status-bar-field">Internet | Tryb chroniony: Włączony</p>
-            <p class="status-bar-field" style="width: 100px;">100%</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Symulacja ładowania strony
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            document.getElementById('loading-screen').classList.add('hidden');
-        }, 3000); // Ładuje przez 3 sekundy
-    });
-</script>
-
-</body>
-</html>
+        <div class="content-scroll has-scrollbar">
+            <ul class="tree-view has-connector has-collapse-button">
+                <li>
+                    <details open>
+                        <summary><span class="section-icon">👤</span>Kim jestem?</summary>
+                        <ul>
+                            <li>Jestem pasjonatem starych interfejsów i nowoczesnego kodu.</li>
+                            <li>Mieszkam w Warszawie i uwielbiam retro-computing.</li>
+                            <li>Moim celem jest tworzenie stron, które mają duszę.</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>
