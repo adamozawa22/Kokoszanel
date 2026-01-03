@@ -44,9 +44,13 @@
             position: relative;
         }
 
-        .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
+        /* Twoje nowe PFP */
+        .picture-frame img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
 
-        /* Znaczek statusu zamiast kropki */
         .status-badge {
             position: absolute;
             bottom: -5px;
@@ -70,7 +74,6 @@
             overflow-y: auto;
         }
 
-        /* Powiadomienie Toast (wyskakujące okienko) */
         #msn-toast {
             position: fixed;
             bottom: 20px;
@@ -83,7 +86,6 @@
 
         #msn-toast.show { transform: translateY(0); }
 
-        /* Ekran ładowania */
         #loading-overlay {
             position: fixed;
             inset: 0;
@@ -107,17 +109,17 @@
 
 <div id="msn-toast" class="window glass">
     <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
-        <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=John" width="40" style="border: 1px solid #ccc;">
+        <img src="https://i.pinimg.com/564x/0f/52/7d/0f527d7f7e9f390d4016930d674b2f6b.jpg" width="40" style="border: 1px solid #ccc;">
         <div>
-            <div style="font-size: 11px; font-weight: bold;">Twoje Imię</div>
-            <div style="font-size: 10px;">właśnie się zalogował(a).</div>
+            <div style="font-size: 11px; font-weight: bold;">Użytkownik</div>
+            <div style="font-size: 10px;">właśnie się zalogował.</div>
         </div>
     </div>
 </div>
 
 <div class="window glass msn-card">
     <div class="title-bar">
-        <div class="title-bar-text">Informacje: Twoje Imię :)</div>
+        <div class="title-bar-text">Profil: Informacje :)</div>
         <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -129,12 +131,12 @@
         
         <div class="header-profile">
             <div class="picture-frame">
-                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=John" alt="Avatar">
+                <img src="https://i.pinimg.com/564x/0f/52/7d/0f527d7f7e9f390d4016930d674b2f6b.jpg" alt="PFP">
                 <div class="status-badge">OK</div>
             </div>
             <div class="info-column">
-                <div class="display-name">Imię "Kandydat" Nazwisko</div>
-                <div class="personal-msg">< . . . Koduję i projektuję . . . ></div>
+                <div class="display-name">Imię "Nick" Nazwisko</div>
+                <div class="personal-msg">< . . . Status tekstowy . . . ></div>
                 <div style="font-size: 11px; color: #666; margin-top: 5px;">
                     Status: [ Dostępny ]
                 </div>
@@ -145,30 +147,31 @@
             <ul class="tree-view has-connector">
                 <li>
                     <details open>
-                        <summary>[+] Kim jestem?</summary>
+                        <summary>[+] Sekcja O Mnie</summary>
                         <ul>
-                            <li>> Fan technologii retro</li>
-                            <li>> Web Developer / Designer</li>
+                            <li>> Tu wpisz coś o sobie</li>
+                            <li>> Twój cel lub motto</li>
                             <li>> Lokalizacja: Polska</li>
                         </ul>
                     </details>
                 </li>
                 <li>
-                    <details>
-                        <summary>[+] Co potrafię?</summary>
+                    <details open>
+                        <summary>[+] Umiejętności</summary>
                         <ul>
-                            <li>[ CSS7 ] [ HTML5 ] [ JS ]</li>
-                            <li>[ UI/UX ] [ Adobe PS ]</li>
+                            <li>> Kodowanie HTML/CSS</li>
+                            <li>> Projektowanie retro UI</li>
+                            <li>> Obsługa komputera :)</li>
                         </ul>
                     </details>
                 </li>
                 <li>
                     <details>
-                        <summary>[+] Moje hobby</summary>
+                        <summary>[+] Kontakt / Inne</summary>
                         <ul>
-                            <li>_ Muzyka elektroniczna</li>
-                            <li>_ Stare komputery</li>
-                            <li>_ Kawa :)</li>
+                            <li>> E-mail: przyklad@poczta.pl</li>
+                            <li>> GitHub: twoj-nick</li>
+                            <li>> Ulubione: Stare gry</li>
                         </ul>
                     </details>
                 </li>
@@ -176,12 +179,12 @@
         </div>
 
         <div class="status-bar">
-            <p class="status-bar-field">Ostatnie logowanie: Teraz</p>
-            <p class="status-bar-field">Wersja: 1.0.2</p>
+            <p class="status-bar-field">Status: Gotowy</p>
+            <p class="status-bar-field">Sesja: Aktywna</p>
         </div>
 
         <div style="padding: 10px; display: flex; justify-content: flex-end; gap: 5px;">
-            <button>Wyślij wiadomość</button>
+            <button>Edytuj profil</button>
             <button class="default">Zamknij</button>
         </div>
     </div>
@@ -192,23 +195,16 @@
         const loader = document.getElementById('loading-overlay');
         const toast = document.getElementById('msn-toast');
 
-        // 1. Zdejmij ekran ładowania
         setTimeout(() => {
             loader.style.opacity = '0';
             setTimeout(() => {
                 loader.classList.add('hidden');
-                
-                // 2. Pokaż powiadomienie po wejściu na stronę
                 setTimeout(() => {
                     toast.classList.add('show');
-                    // Schowaj powiadomienie po 5 sekundach
-                    setTimeout(() => {
-                        toast.classList.remove('show');
-                    }, 5000);
+                    setTimeout(() => { toast.classList.remove('show'); }, 5000);
                 }, 1000);
-
             }, 500);
-        }, 2000);
+        }, 1500);
     });
 </script>
 
