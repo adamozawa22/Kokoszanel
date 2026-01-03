@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
-            background: #abd1ff url('https://pl.pinterest.com/pin/618822805077538750/') no-repeat center center fixed;
+            background: #abd1ff url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -15,20 +15,15 @@
             height: 100vh;
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
+            overflow: hidden;
         }
 
-        /* Stylizacja okna komunikatora */
         .msn-card {
-            width: 400px;
+            width: 420px;
             max-height: 90vh;
             display: flex;
             flex-direction: column;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            z-index: 2;
         }
 
         .header-profile {
@@ -39,7 +34,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        /* Ramka na zdjęcie (Avatar) */
         .picture-frame {
             width: 100px;
             height: 100px;
@@ -50,41 +44,23 @@
             position: relative;
         }
 
-        .picture-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Mała kropka statusu na zdjęciu */
-        .status-dot {
+        /* Znaczek statusu zamiast kropki */
+        .status-badge {
             position: absolute;
             bottom: -5px;
             right: -5px;
-            width: 18px;
-            height: 18px;
             background: #5cb85c;
+            color: white;
+            font-size: 10px;
+            padding: 1px 4px;
             border: 2px solid white;
-            border-radius: 50%;
-        }
-
-        .info-column {
-            flex: 1;
-        }
-
-        .display-name {
-            font-size: 18px;
             font-weight: bold;
-            color: #003399;
-            margin-bottom: 4px;
         }
 
-        .personal-msg {
-            font-size: 13px;
-            color: #444;
-            font-style: italic;
-            margin-bottom: 10px;
-        }
+        .display-name { font-size: 18px; font-weight: bold; color: #003399; }
+        .personal-msg { font-size: 13px; color: #444; margin-top: 5px; }
 
         .content-scroll {
             background: white;
@@ -92,26 +68,22 @@
             border: 1px solid #919191;
             flex-grow: 1;
             overflow-y: auto;
-            padding: 5px;
         }
 
-        /* Customizacja TreeView pod CV */
-        .tree-view li {
-            padding: 2px 0;
+        /* Powiadomienie Toast (wyskakujące okienko) */
+        #msn-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 250px;
+            transform: translateY(150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
         }
 
-        .section-icon {
-            margin-right: 8px;
-        }
+        #msn-toast.show { transform: translateY(0); }
 
-        .footer-actions {
-            padding: 10px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            background: #f0f0f0;
-        }
-
+        /* Ekran ładowania */
         #loading-overlay {
             position: fixed;
             inset: 0;
@@ -122,18 +94,30 @@
             justify-content: center;
             align-items: center;
         }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div id="loading-overlay">
     <div class="loader animate"></div>
-    <p style="margin-top: 20px; font-weight: bold; color: #15428b;">Logowanie do profilu...</p>
+    <p style="margin-top: 20px; font-weight: bold; color: #15428b;">Logowanie: [ . . . ]</p>
+</div>
+
+<div id="msn-toast" class="window glass">
+    <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
+        <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=John" width="40" style="border: 1px solid #ccc;">
+        <div>
+            <div style="font-size: 11px; font-weight: bold;">Twoje Imię</div>
+            <div style="font-size: 10px;">właśnie się zalogował(a).</div>
+        </div>
+    </div>
 </div>
 
 <div class="window glass msn-card">
     <div class="title-bar">
-        <div class="title-bar-text">Informacje o kontakcie: Twoje Imię</div>
+        <div class="title-bar-text">Informacje: Twoje Imię :)</div>
         <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -145,49 +129,46 @@
         
         <div class="header-profile">
             <div class="picture-frame">
-                <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Felix" alt="To ja!">
-                <div class="status-dot"></div>
+                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=John" alt="Avatar">
+                <div class="status-badge">OK</div>
             </div>
             <div class="info-column">
-                <div class="display-name">Imię "Nick" Nazwisko</div>
-                <div class="personal-msg">"Koduję, projektuję i czasem piję za dużo kawy ☕"</div>
-                
-                <div class="group" style="padding: 5px; font-size: 11px;">
-                    <strong>Status:</strong> Dostępny<br>
-                    <strong>Email:</strong> mojanazwa@msn.pl
+                <div class="display-name">Imię "Kandydat" Nazwisko</div>
+                <div class="personal-msg">< . . . Koduję i projektuję . . . ></div>
+                <div style="font-size: 11px; color: #666; margin-top: 5px;">
+                    Status: [ Dostępny ]
                 </div>
             </div>
         </div>
 
         <div class="content-scroll has-scrollbar">
-            <ul class="tree-view has-connector has-collapse-button">
+            <ul class="tree-view has-connector">
                 <li>
                     <details open>
-                        <summary><span class="section-icon">👤</span>Kim jestem?</summary>
+                        <summary>[+] Kim jestem?</summary>
                         <ul>
-                            <li>Jestem pasjonatem starych interfejsów i nowoczesnego kodu.</li>
-                            <li>Mieszkam w Warszawie i uwielbiam retro-computing.</li>
-                            <li>Moim celem jest tworzenie stron, które mają duszę.</li>
+                            <li>> Fan technologii retro</li>
+                            <li>> Web Developer / Designer</li>
+                            <li>> Lokalizacja: Polska</li>
                         </ul>
                     </details>
                 </li>
                 <li>
                     <details>
-                        <summary><span class="section-icon">🛠️</span>Moje supermoce (Skille)</summary>
+                        <summary>[+] Co potrafię?</summary>
                         <ul>
-                            <li><strong>Frontend:</strong> React, Vue, 7.css, Tailwind</li>
-                            <li><strong>Backend:</strong> Node.js, Python</li>
-                            <li><strong>Design:</strong> Photoshop, Figma</li>
+                            <li>[ CSS7 ] [ HTML5 ] [ JS ]</li>
+                            <li>[ UI/UX ] [ Adobe PS ]</li>
                         </ul>
                     </details>
                 </li>
                 <li>
                     <details>
-                        <summary><span class="section-icon">🎮</span>Po godzinach (Zainteresowania)</summary>
+                        <summary>[+] Moje hobby</summary>
                         <ul>
-                            <li>Gry RPG z lat 2000.</li>
-                            <li>Kolekcjonowanie starych klawiatur.</li>
-                            <li>Górskie wędrówki.</li>
+                            <li>_ Muzyka elektroniczna</li>
+                            <li>_ Stare komputery</li>
+                            <li>_ Kawa :)</li>
                         </ul>
                     </details>
                 </li>
@@ -195,25 +176,39 @@
         </div>
 
         <div class="status-bar">
-            <p class="status-bar-field">Ostatnia aktywność: Dzisiaj</p>
-            <p class="status-bar-field">Wersja profilu: 1.0</p>
+            <p class="status-bar-field">Ostatnie logowanie: Teraz</p>
+            <p class="status-bar-field">Wersja: 1.0.2</p>
         </div>
 
-        <div class="footer-actions">
-            <button onclick="alert('Wysłano zaproszenie!')">Dodaj mnie</button>
-            <button class="default">Napisz wiadomość</button>
+        <div style="padding: 10px; display: flex; justify-content: flex-end; gap: 5px;">
+            <button>Wyślij wiadomość</button>
+            <button class="default">Zamknij</button>
         </div>
     </div>
 </div>
 
 <script>
-    // Prosty skrypt zdejmujący ekran ładowania
     window.addEventListener('load', () => {
+        const loader = document.getElementById('loading-overlay');
+        const toast = document.getElementById('msn-toast');
+
+        // 1. Zdejmij ekran ładowania
         setTimeout(() => {
-            const loader = document.getElementById('loading-overlay');
             loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 500);
-        }, 1500);
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                
+                // 2. Pokaż powiadomienie po wejściu na stronę
+                setTimeout(() => {
+                    toast.classList.add('show');
+                    // Schowaj powiadomienie po 5 sekundach
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 5000);
+                }, 1000);
+
+            }, 500);
+        }, 2000);
     });
 </script>
 
