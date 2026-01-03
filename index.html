@@ -128,4 +128,63 @@
         }
 
         h1 { font-size: 24px; color: #1e395b; margin-top: 0; font-weight: normal; }
-        h2 { font-size: 16px
+        h2 { font-size: 16px; color: #1e395b; border-bottom: 1px solid #b5c7de; padding-bottom: 8px; margin-top: 25px;}
+        
+        /* Przyciski operacyjne */
+        .win7-btn {
+            display: inline-block;
+            padding: 6px 18px;
+            background: linear-gradient(to bottom, #f2f2f2, #ebebeb 50%, #dddddd 51%, #cfcfcf);
+            border: 1px solid #707070;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .win7-btn:hover {
+            border-color: #3c7fb1;
+            background: linear-gradient(to bottom, #f0f7ff, #d9eefc 50%, #bee0f7 51%, #a7d9f5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="window">
+    <div class="title-bar">
+        <div class="title-text">Panel sterowania profilem</div>
+        <div style="color: white; font-size: 16px; letter-spacing: 5px; cursor: default;">_ ▢ ✕</div>
+    </div>
+
+    <ul class="nav-menu">
+        <li><a href="index.html" class="active">START</a></li>
+        <li><a href="projekty.html">PROJEKTY</a></li>
+        <li><a href="kontakt.html">KONTAKT</a></li>
+    </ul>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <img src="https://via.placeholder.com/100" alt="Profil" class="profile-pic">
+            <div style="font-size: 11px; color: #4d6082; text-align: center;">
+                <strong style="font-size: 13px;">Użytkownik</strong><br>
+                Zalogowano
+            </div>
+        </aside>
+
+        <section class="content">
+            <h1>O mnie</h1>
+            <p>To jest Twoja nowa strona główna zainspirowana estetyką Windows 7 Aero. Wszystkie elementy zostały zoptymalizowane pod kątem przejrzystości i klasycznego stylu.</p>
+            
+            <h2>Moja działalność</h2>
+            <p>Kliknij w zakładkę <strong>Projekty</strong>, aby zobaczyć nad czym aktualnie pracuję, lub przejdź do sekcji <strong>Kontakt</strong>, jeśli chcesz porozmawiać o współpracy.</p>
+            
+            <div style="margin-top: 30px;">
+                <button class="win7-btn">Edytuj profil</button>
+                <button class="win7-btn">Wyloguj</button>
+            </div>
+        </section>
+    </div>
+</div>
+
+</body>
+</html>
