@@ -3,119 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSN Messenger - Moje CV</title>
+    <title>Internet Explorer - Moje Portfolio</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
-            background: #abd1ff url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
+            background: #337ab7 url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
             background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 20px;
             font-family: "Segoe UI", Tahoma, sans-serif;
-        }
-
-        /* Ekran logowania */
-        #login-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(227, 239, 255, 0.9);
-            z-index: 100;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s;
+            align-items: flex-start;
         }
 
-        .messenger-window {
-            width: 380px;
-            max-height: 90vh;
+        /* Kontener przeglądarki */
+        .ie-window {
+            width: 90%;
+            max-width: 1000px;
+            height: 85vh;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .user-header {
-            display: flex;
-            padding: 15px;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .avatar-box {
-            width: 96px;
-            height: 96px;
-            border: 1px solid #718597;
-            background: white;
-            padding: 3px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        .status-text-area { flex: 1; }
-
-        .nickname { font-weight: bold; font-size: 16px; color: #003399; }
-
-        .personal-message { 
-            font-size: 12px; 
-            color: #555; 
-            border: 1px transparent solid;
-            padding: 2px;
-        }
-
-        .personal-message:hover {
-            border: 1px solid #ccc;
-            background: white;
-        }
-
-        .now-playing {
-            font-size: 11px;
-            color: #2e5fb2;
-            margin-top: 4px;
+        /* Pasek adresu i nawigacji */
+        .ie-nav-bar {
             display: flex;
             align-items: center;
-            gap: 5px;
-        }
-
-        .main-content {
-            background: white;
-            margin: 0 10px 10px 10px;
-            border: 1px solid #919191;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .category-header {
-            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
-            padding: 2px 10px;
-            font-weight: bold;
-            font-size: 12px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            padding: 5px 20px;
+            padding: 5px 10px;
             gap: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .back-forward-btns {
+            display: flex;
+            gap: 2px;
+        }
+
+        .ie-address-bar {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #a0a0a0;
+            padding: 2px 8px;
+            height: 24px;
+            border-radius: 2px;
+        }
+
+        .ie-address-bar span {
+            color: #555;
+            font-size: 13px;
+        }
+
+        .ie-tabs {
+            display: flex;
+            padding-left: 50px;
+            margin-bottom: -1px;
+        }
+
+        .ie-tab {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid #a0a0a0;
+            padding: 4px 15px;
+            border-bottom: none;
+            margin-right: 2px;
+            font-size: 12px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
             cursor: pointer;
         }
 
-        .contact-item:hover { background-color: #e8f3ff; }
+        .ie-tab.active {
+            background: white;
+            font-weight: bold;
+        }
 
-        .status-icon { width: 12px; height: 12px; border-radius: 50%; }
-        .online { background: #5cb85c; box-shadow: 0 0 3px #449d44; }
-        .busy { background: #d9534f; }
+        /* Treść strony */
+        .ie-content-area {
+            background: white;
+            flex-grow: 1;
+            overflow-y: auto;
+            border-top: 1px solid #a0a0a0;
+            padding: 40px;
+        }
 
-        .skill-tag {
-            font-size: 10px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            padding: 0 4px;
-            border-radius: 3px;
+        .website-header {
+            border-bottom: 2px solid #0055aa;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        /* Splash screen */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .hidden { display: none !important; }
@@ -123,18 +114,17 @@
 </head>
 <body>
 
-<div id="login-overlay">
-    <div class="loader animate" style="margin-bottom: 20px;"></div>
-    <div style="text-align: center;">
-        <h2 style="margin: 0;">Windows Live</h2>
-        <p>Logowanie do profilu: <strong>kandydat@cv.pl</strong></p>
+<div id="loading-screen">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Internet_Explorer_10_logo.png" width="100" alt="IE Logo">
+    <div style="margin-top: 20px; width: 300px;">
+        <p style="text-align: center;">Trwa łączenie z serwerem portfolio...</p>
+        <div role="progressbar" class="marquee"></div>
     </div>
-    <div role="progressbar" class="marquee" style="width: 250px; margin-top: 20px;"></div>
 </div>
 
-<div class="window glass messenger-window">
+<div class="window glass ie-window">
     <div class="title-bar">
-        <div class="title-bar-text">Windows Live Messenger</div>
+        <div class="title-bar-text">Internet Explorer - Moje CV (2026)</div>
         <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -142,95 +132,4 @@
         </div>
     </div>
 
-    <div class="window-body" style="padding: 0; display: flex; flex-direction: column;">
-        
-        <div class="user-header">
-            <div class="avatar-box">
-                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=John" alt="Avatar">
-            </div>
-            <div class="status-text-area">
-                <div class="nickname">Twoje Imię i Nazwisko</div>
-                <div class="personal-message">Dostępny - Szukam nowych wyzwań w IT!</div>
-                <div class="now-playing">
-                    <span>🎵</span> <strong>Obecnie pracuję nad:</strong> Projektem Portfolio 2026
-                </div>
-                <div style="margin-top: 10px;">
-                    <select style="font-size: 11px;">
-                        <option>Dostępny (Szukam pracy)</option>
-                        <option>Zajęty (W trakcie projektu)</option>
-                        <option>Niewidoczny</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-content has-scrollbar">
-            
-            <div class="category-header">Doświadczenie zawodowe (2)</div>
-            <div class="contact-item">
-                <div class="status-icon online"></div>
-                <div>
-                    <strong>Junior Web Developer</strong> - TechCorp <br>
-                    <small>2024 - Obecnie | Budowanie UI w React</small>
-                </div>
-            </div>
-            <div class="contact-item">
-                <div class="status-icon online"></div>
-                <div>
-                    <strong>Stażysta IT</strong> - Software House <br>
-                    <small>2023 - 2024 | Wsparcie techniczne</small>
-                </div>
-            </div>
-
-            <div class="category-header">Umiejętności (Online)</div>
-            <div class="contact-item">
-                <div class="status-icon online"></div>
-                <div><strong>HTML5 / CSS3</strong> <span class="skill-tag">Ekspert</span></div>
-            </div>
-            <div class="contact-item">
-                <div class="status-icon online"></div>
-                <div><strong>JavaScript</strong> <span class="skill-tag">Średnio-zaawansowany</span></div>
-            </div>
-            <div class="contact-item">
-                <div class="status-icon online"></div>
-                <div><strong>UI Design (Windows Aero)</strong> <span class="skill-tag">Pasja</span></div>
-            </div>
-
-            <div class="category-header">Edukacja (1)</div>
-            <div class="contact-item">
-                <div class="status-icon busy"></div>
-                <div>
-                    <strong>Informatyka</strong> - Politechnika <br>
-                    <small>Studia inżynierskie</small>
-                </div>
-            </div>
-
-            <div class="category-header">Kontakt</div>
-            <div class="contact-item">
-                <span>📧</span>
-                <div><strong>E-mail:</strong> kontakt@twoja-domena.pl</div>
-            </div>
-        </div>
-
-        <div class="status-bar">
-            <p class="status-bar-field">Status: Gotowy do pracy</p>
-            <p class="status-bar-field">Lokalizacja: Polska</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Animacja wejścia
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            const login = document.getElementById('login-overlay');
-            login.style.opacity = '0';
-            setTimeout(() => {
-                login.classList.add('hidden');
-            }, 500);
-        }, 2500); // 2.5 sekundy ładowania
-    });
-</script>
-
-</body>
-</html>
+    <div class="window
