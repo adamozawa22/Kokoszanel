@@ -3,90 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSN Messenger - Logowanie...</title>
+    <title>MSN Messenger - Moje CV</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
-            background-color: #e3efff;
+            background: #abd1ff url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
-            overflow: hidden;
         }
 
-        /* Styl dla ekranu ładowania */
-        #splash-screen {
+        /* Ekran logowania */
+        #login-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, #ffffff 0%, #e3efff 100%);
+            inset: 0;
+            background: rgba(227, 239, 255, 0.9);
+            z-index: 100;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s;
         }
 
-        .logo-placeholder {
-            font-size: 24px;
-            font-weight: bold;
-            color: #15428b;
-            margin-bottom: 20px;
+        .messenger-window {
+            width: 380px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-header {
+            display: flex;
+            padding: 15px;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .avatar-box {
+            width: 96px;
+            height: 96px;
+            border: 1px solid #718597;
+            background: white;
+            padding: 3px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .status-text-area { flex: 1; }
+
+        .nickname { font-weight: bold; font-size: 16px; color: #003399; }
+
+        .personal-message { 
+            font-size: 12px; 
+            color: #555; 
+            border: 1px transparent solid;
+            padding: 2px;
+        }
+
+        .personal-message:hover {
+            border: 1px solid #ccc;
+            background: white;
+        }
+
+        .now-playing {
+            font-size: 11px;
+            color: #2e5fb2;
+            margin-top: 4px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
         }
 
-        /* Ukrywanie elementów */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Styl okna głównego */
-        .messenger-window {
-            width: 350px;
-            display: none; /* Ukryte na starcie */
-        }
-
-        .avatar-container {
-            width: 80px;
-            height: 80px;
-            border: 1px solid #999;
-            padding: 2px;
+        .main-content {
             background: white;
-        }
-
-        .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
-
-        .contact-list {
-            height: 250px;
+            margin: 0 10px 10px 10px;
+            border: 1px solid #919191;
+            flex-grow: 1;
             overflow-y: auto;
-            background: white;
-            margin: 10px 0;
-            border: 1px solid #a0a0a0;
         }
+
+        .category-header {
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            padding: 2px 10px;
+            font-weight: bold;
+            font-size: 12px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 5px 20px;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .contact-item:hover { background-color: #e8f3ff; }
+
+        .status-icon { width: 12px; height: 12px; border-radius: 50%; }
+        .online { background: #5cb85c; box-shadow: 0 0 3px #449d44; }
+        .busy { background: #d9534f; }
+
+        .skill-tag {
+            font-size: 10px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div id="splash-screen">
-    <div class="logo-placeholder">
-        <div class="loader animate"></div> 
-        Windows Live Messenger
+<div id="login-overlay">
+    <div class="loader animate" style="margin-bottom: 20px;"></div>
+    <div style="text-align: center;">
+        <h2 style="margin: 0;">Windows Live</h2>
+        <p>Logowanie do profilu: <strong>kandydat@cv.pl</strong></p>
     </div>
-    <div style="width: 200px;">
-        <p>Trwa logowanie...</p>
-        <div role="progressbar" class="marquee"></div>
-    </div>
+    <div role="progressbar" class="marquee" style="width: 250px; margin-top: 20px;"></div>
 </div>
 
-<div id="main-window" class="window glass messenger-window">
+<div class="window glass messenger-window">
     <div class="title-bar">
         <div class="title-bar-text">Windows Live Messenger</div>
         <div class="title-bar-controls">
@@ -96,80 +142,93 @@
         </div>
     </div>
 
-    <div class="window-body has-space">
-        <div id="internal-loading">
-            <p>Synchronizacja kontaktów...</p>
-            <div role="progressbar" id="sync-progress" class="animate">
-                <div style="width: 0%;"></div>
+    <div class="window-body" style="padding: 0; display: flex; flex-direction: column;">
+        
+        <div class="user-header">
+            <div class="avatar-box">
+                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=John" alt="Avatar">
+            </div>
+            <div class="status-text-area">
+                <div class="nickname">Twoje Imię i Nazwisko</div>
+                <div class="personal-message">Dostępny - Szukam nowych wyzwań w IT!</div>
+                <div class="now-playing">
+                    <span>🎵</span> <strong>Obecnie pracuję nad:</strong> Projektem Portfolio 2026
+                </div>
+                <div style="margin-top: 10px;">
+                    <select style="font-size: 11px;">
+                        <option>Dostępny (Szukam pracy)</option>
+                        <option>Zajęty (W trakcie projektu)</option>
+                        <option>Niewidoczny</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <div id="profile-content" class="hidden">
-            <div style="display: flex; gap: 15px; margin-bottom: 10px;">
-                <div class="avatar-container">
-                    <img src="https://via.placeholder.com/80" alt="Avatar">
-                </div>
+        <div class="main-content has-scrollbar">
+            
+            <div class="category-header">Doświadczenie zawodowe (2)</div>
+            <div class="contact-item">
+                <div class="status-icon online"></div>
                 <div>
-                    <div style="font-weight: bold; color: #15428b;">Twoja Nazwa</div>
-                    <div style="font-size: 11px; color: green;">● Dostępny</div>
-                    <input type="text" value="Co słychać?" style="width: 150px; margin-top: 5px;">
+                    <strong>Junior Web Developer</strong> - TechCorp <br>
+                    <small>2024 - Obecnie | Budowanie UI w React</small>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="status-icon online"></div>
+                <div>
+                    <strong>Stażysta IT</strong> - Software House <br>
+                    <small>2023 - 2024 | Wsparcie techniczne</small>
                 </div>
             </div>
 
-            <div class="contact-list">
-                <ul class="tree-view">
-                    <li>
-                        <details open>
-                            <summary>Znajomi (1/1)</summary>
-                            <ul>
-                                <li>● <strong>O mnie:</strong> Lubię stare UI!</li>
-                                <li>○ Programowanie</li>
-                            </ul>
-                        </details>
-                    </li>
-                </ul>
+            <div class="category-header">Umiejętności (Online)</div>
+            <div class="contact-item">
+                <div class="status-icon online"></div>
+                <div><strong>HTML5 / CSS3</strong> <span class="skill-tag">Ekspert</span></div>
+            </div>
+            <div class="contact-item">
+                <div class="status-icon online"></div>
+                <div><strong>JavaScript</strong> <span class="skill-tag">Średnio-zaawansowany</span></div>
+            </div>
+            <div class="contact-item">
+                <div class="status-icon online"></div>
+                <div><strong>UI Design (Windows Aero)</strong> <span class="skill-tag">Pasja</span></div>
+            </div>
+
+            <div class="category-header">Edukacja (1)</div>
+            <div class="contact-item">
+                <div class="status-icon busy"></div>
+                <div>
+                    <strong>Informatyka</strong> - Politechnika <br>
+                    <small>Studia inżynierskie</small>
+                </div>
+            </div>
+
+            <div class="category-header">Kontakt</div>
+            <div class="contact-item">
+                <span>📧</span>
+                <div><strong>E-mail:</strong> kontakt@twoja-domena.pl</div>
             </div>
         </div>
 
-        <div class="status-bar" style="margin-top: 10px;">
-            <p class="status-bar-field" id="status-text">Łączenie...</p>
+        <div class="status-bar">
+            <p class="status-bar-field">Status: Gotowy do pracy</p>
+            <p class="status-bar-field">Lokalizacja: Polska</p>
         </div>
     </div>
 </div>
 
 <script>
-    // Prosta symulacja ładowania
+    // Animacja wejścia
     window.addEventListener('load', () => {
-        const splash = document.getElementById('splash-screen');
-        const mainWindow = document.getElementById('main-window');
-        const progressBar = document.querySelector('#sync-progress div');
-        const internalLoading = document.getElementById('internal-loading');
-        const profileContent = document.getElementById('profile-content');
-        const statusText = document.getElementById('status-text');
-
-        // 1. Ukryj splash screen po 2 sekundach
         setTimeout(() => {
-            splash.style.opacity = '0';
+            const login = document.getElementById('login-overlay');
+            login.style.opacity = '0';
             setTimeout(() => {
-                splash.classList.add('hidden');
-                mainWindow.style.display = 'block';
-                
-                // 2. Symuluj pasek postępu wewnątrz okna
-                let width = 0;
-                const interval = setInterval(() => {
-                    if (width >= 100) {
-                        clearInterval(interval);
-                        internalLoading.classList.add('hidden');
-                        profileContent.classList.remove('hidden');
-                        statusText.innerText = "Zalogowano";
-                    } else {
-                        width += 5;
-                        progressBar.style.width = width + '%';
-                    }
-                }, 100);
-
+                login.classList.add('hidden');
             }, 500);
-        }, 2000);
+        }, 2500); // 2.5 sekundy ładowania
     });
 </script>
 
