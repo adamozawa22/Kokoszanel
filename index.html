@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil MSN - Kim Jestem</title>
+    <title>MSN Messenger - Nawiązywanie połączenia...</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
@@ -18,12 +18,31 @@
             overflow: hidden;
         }
 
+        /* EKRAN ŁĄCZENIA */
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: #e3efff;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s;
+        }
+
+        .loading-box {
+            width: 300px;
+            text-align: center;
+        }
+
+        /* OKNO PROFILU */
         .msn-card {
             width: 420px;
             max-height: 90vh;
             display: flex;
             flex-direction: column;
-            z-index: 2;
+            display: none; /* Ukryte do czasu połączenia */
         }
 
         .header-profile {
@@ -40,31 +59,10 @@
             border: 1px solid #718597;
             background: white;
             padding: 4px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             position: relative;
         }
 
-        /* Twoje lokalne zdjęcie profilowe */
-        .picture-frame img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-        }
-
-        .status-badge {
-            position: absolute;
-            bottom: -5px;
-            right: -5px;
-            background: #5cb85c;
-            color: white;
-            font-size: 10px;
-            padding: 1px 4px;
-            border: 2px solid white;
-            font-weight: bold;
-        }
-
-        .display-name { font-size: 18px; font-weight: bold; color: #003399; }
-        .personal-msg { font-size: 13px; color: #444; margin-top: 5px; }
+        .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
 
         .content-scroll {
             background: white;
@@ -74,52 +72,27 @@
             overflow-y: auto;
         }
 
-        #msn-toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 250px;
-            transform: translateY(150%);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 1000;
-        }
-
-        #msn-toast.show { transform: translateY(0); }
-
-        #loading-overlay {
-            position: fixed;
-            inset: 0;
-            background: #e3efff;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
 <div id="loading-overlay">
-    <div class="loader animate"></div>
-    <p style="margin-top: 20px; font-weight: bold; color: #15428b;">Logowanie: [ . . . ]</p>
-</div>
-
-<div id="msn-toast" class="window glass">
-    <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
-        <img src="profilowe.pfp.jpg" width="40" style="border: 1px solid #ccc;">
-        <div>
-            <div style="font-size: 11px; font-weight: bold;">Użytkownik</div>
-            <div style="font-size: 10px;">właśnie się zalogował.</div>
+    <div class="loading-box">
+        <div class="loader animate" style="margin-bottom: 20px;"></div>
+        <p id="loading-text" style="font-weight: bold; color: #15428b; margin-bottom: 10px;">
+            Nawiązywanie połączenia...
+        </p>
+        <div role="progressbar" id="connection-bar">
+            <div style="width: 0%;"></div>
         </div>
+        <p id="loading-percent" style="font-size: 10px; margin-top: 5px; color: #666;">0%</p>
     </div>
 </div>
 
-<div class="window glass msn-card">
+<div id="main-window" class="window glass msn-card">
     <div class="title-bar">
-        <div class="title-bar-text">Profil: Informacje :)</div>
+        <div class="title-bar-text">Profil: Moje Informacje :)</div>
         <div class="title-bar-controls">
             <button aria-label="Minimize"></button>
             <button aria-label="Maximize"></button>
@@ -128,18 +101,14 @@
     </div>
 
     <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
-        
         <div class="header-profile">
             <div class="picture-frame">
                 <img src="profilowe.pfp.jpg" alt="PFP">
-                <div class="status-badge">OK</div>
+                <div style="position: absolute; bottom: -5px; right: -5px; background: #5cb85c; color: white; font-size: 10px; padding: 1px 4px; border: 2px solid white;">OK</div>
             </div>
-            <div class="info-column">
-                <div class="display-name">Imię "Nick" Nazwisko</div>
-                <div class="personal-msg">< . . . Status tekstowy . . . ></div>
-                <div style="font-size: 11px; color: #666; margin-top: 5px;">
-                    Status: [ Dostępny ]
-                </div>
+            <div>
+                <div style="font-size: 18px; font-weight: bold; color: #003399;">Twoje Imię</div>
+                <div style="font-size: 13px; color: #444; margin-top: 5px;">< . . . Zalogowany . . . ></div>
             </div>
         </div>
 
@@ -147,31 +116,10 @@
             <ul class="tree-view has-connector">
                 <li>
                     <details open>
-                        <summary>[+] Sekcja O Mnie</summary>
+                        <summary>[+] Kim jestem?</summary>
                         <ul>
-                            <li>> Tu wpisz coś o sobie</li>
-                            <li>> Twój cel lub motto</li>
-                            <li>> Lokalizacja: Polska</li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details open>
-                        <summary>[+] Umiejętności</summary>
-                        <ul>
-                            <li>> Kodowanie HTML/CSS</li>
-                            <li>> Projektowanie retro UI</li>
-                            <li>> Obsługa komputera :)</li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>[+] Kontakt / Inne</summary>
-                        <ul>
-                            <li>> E-mail: przyklad@poczta.pl</li>
-                            <li>> GitHub: twoj-nick</li>
-                            <li>> Ulubione: Stare gry</li>
+                            <li>> Tu wpisz o sobie</li>
+                            <li>> Zainteresowania</li>
                         </ul>
                     </details>
                 </li>
@@ -179,33 +127,63 @@
         </div>
 
         <div class="status-bar">
-            <p class="status-bar-field">Status: Gotowy</p>
-            <p class="status-bar-field">Sesja: Aktywna</p>
-        </div>
-
-        <div style="padding: 10px; display: flex; justify-content: flex-end; gap: 5px;">
-            <button>Edytuj profil</button>
-            <button class="default">Zamknij</button>
+            <p class="status-bar-field">Połączono z serwerem</p>
+            <p class="status-bar-field">Wersja 1.0</p>
         </div>
     </div>
 </div>
 
 <script>
-    window.addEventListener('load', () => {
-        const loader = document.getElementById('loading-overlay');
-        const toast = document.getElementById('msn-toast');
+    const overlay = document.getElementById('loading-overlay');
+    const mainWindow = document.getElementById('main-window');
+    const bar = document.querySelector('#connection-bar div');
+    const percentLabel = document.getElementById('loading-percent');
+    const statusLabel = document.getElementById('loading-text');
 
-        setTimeout(() => {
-            loader.style.opacity = '0';
+    let progress = 0;
+    
+    // Statusy, które będą się zmieniać
+    const statuses = [
+        "Nawiązywanie połączenia...",
+        "Weryfikacja nazwy użytkownika...",
+        "Pobieranie listy kontaktów...",
+        "Synchronizacja danych..."
+    ];
+
+    function updateProgress() {
+        // Losowy skok postępu (od 2 do 15%)
+        let jump = Math.floor(Math.random() * 15) + 2;
+        progress += jump;
+
+        if (progress > 100) progress = 100;
+
+        // Aktualizacja UI
+        bar.style.width = progress + "%";
+        percentLabel.innerText = progress + "%";
+
+        // Zmiana tekstu statusu w zależności od postępu
+        if (progress > 25) statusLabel.innerText = statuses[1];
+        if (progress > 60) statusLabel.innerText = statuses[2];
+        if (progress > 85) statusLabel.innerText = statuses[3];
+
+        if (progress < 100) {
+            // Losowy czas oczekiwania (od 300ms do 1500ms), aby symulować "haczenie"
+            let delay = Math.floor(Math.random() * 1200) + 300;
+            setTimeout(updateProgress, delay);
+        } else {
+            // Koniec ładowania
             setTimeout(() => {
-                loader.classList.add('hidden');
+                overlay.style.opacity = '0';
                 setTimeout(() => {
-                    toast.classList.add('show');
-                    setTimeout(() => { toast.classList.remove('show'); }, 5000);
-                }, 1000);
-            }, 500);
-        }, 1500);
-    });
+                    overlay.classList.add('hidden');
+                    mainWindow.style.display = 'flex';
+                }, 500);
+            }, 800);
+        }
+    }
+
+    // Start ładowania po wejściu na stronę
+    window.addEventListener('load', updateProgress);
 </script>
 
 </body>
