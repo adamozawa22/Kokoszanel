@@ -1,182 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Windows 7 Aero System</title>
-    <link rel="stylesheet" href="https://unpkg.com/7.css@0.11.1/dist/7.css">
-    <style>
-        /* EKRAN BOOTOWANIA */
-        #boot-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            font-family: 'Segoe UI', sans-serif;
-            cursor: pointer; /* Kliknij gdziekolwiek, żeby zacząć */
-        }
+<html>
+  <head>
+    <title>7.css example</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://unpkg.com/7.css" />
+  </head>
 
-        .logo-win {
-            width: 150px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
-
-        .loader-bar {
-            width: 200px;
-            height: 10px;
-            border: 1px solid #333;
-            background: #111;
-            overflow: hidden;
-            border-radius: 5px;
-        }
-
-        #fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #2ecc71, #27ae60);
-            box-shadow: 0 0 10px #2ecc71;
-        }
-
-        /* PULPIT */
-        body {
-            margin: 0;
-            height: 100vh;
-            background: url('https://getwallpapers.com/wallpaper/full/f/b/e/801646-most-popular-microsoft-windows-7-desktop-backgrounds-1920x1200-for-ipad-pro.jpg') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        #main-system {
-            display: none; /* Ukryte na starcie */
-        }
-
-        .window {
-            width: 850px;
-            height: 550px;
-        }
-
-        /* UKŁAD WEWNĄTRZ OKNA */
-        .window-body {
-            display: flex !important;
-            flex-direction: column;
-            height: calc(100% - 30px);
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        .explorer-container {
-            display: flex;
-            flex: 1;
-            background: white;
-            margin: 4px;
-            border: 1px solid #999;
-        }
-
-        .sidebar {
-            width: 180px;
-            background: linear-gradient(to right, #f2f7fe, #dce8f7);
-            border-right: 1px solid #b5c7de;
-            padding: 10px;
-        }
-
-        .main-view {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-    </style>
-</head>
-<body>
-
-<div id="boot-screen" onclick="startSystem()">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Windows_7_logo.svg/1024px-Windows_7_logo.svg.png" class="logo-win">
-    <div id="status-text">Kliknij, aby uruchomić system...</div>
-    <div class="loader-bar">
-        <div id="fill"></div>
+  <body>
+    <div class="window" style="margin: 32px; width: 250px">
+      <div class="title-bar">
+        <div class="title-bar-text">My First Program</div>
+      </div>
+      <div class="window-body">
+        <p>Hello, world!</p>
+      </div>
     </div>
-</div>
-
-<audio id="startup-audio" src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=Windows+7+Startup&filename=mt/MTI0OTE3NTI1MTI0OTcw_N068t6NAnO0.MP3"></audio>
-
-<div id="main-system">
-    <div class="window glass">
-        <div class="title-bar">
-            <div class="title-bar-text">Eksplorator - O mnie</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize"></button>
-                <button aria-label="Maximize"></button>
-                <button aria-label="Close"></button>
-            </div>
-        </div>
-
-        <div class="window-body">
-            <menu role="tablist">
-                <li role="tab" aria-selected="true"><a href="#start">Start</a></li>
-                <li role="tab"><a href="#projekty">Projekty</a></li>
-                <li role="tab"><a href="#kontakt">Kontakt</a></li>
-            </menu>
-
-            <div class="explorer-container">
-                <aside class="sidebar">
-                    <ul class="tree-view">
-                        <li><strong>Użytkownik</strong></li>
-                        <li>Dokumenty</li>
-                        <li>Obrazy</li>
-                    </ul>
-                </aside>
-                <main class="main-view">
-                    <h1>Witaj w systemie!</h1>
-                    <p>Jeśli widzisz to okno, system został pomyślnie załadowany.</p>
-                    <fieldset>
-                        <legend>Informacje</legend>
-                        <p>Stylistyka oparta na bibliotece 7.css i motywie Aero Glass.</p>
-                    </fieldset>
-                </main>
-            </div>
-
-            <div class="status-bar">
-                <p class="status-bar-field">Status: Gotowy</p>
-                <p class="status-bar-field">Zasilanie: AC</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function startSystem() {
-        const fill = document.getElementById('fill');
-        const status = document.getElementById('status-text');
-        const audio = document.getElementById('startup-audio');
-        
-        status.innerText = "Trwa ładowanie plików...";
-        
-        // Pasek postępu
-        fill.style.transition = "width 3.5s linear";
-        fill.style.width = "100%";
-        
-        // Dźwięk
-        audio.play().catch(e => console.log("Audio play failed"));
-
-        setTimeout(() => {
-            document.getElementById('boot-screen').style.display = 'none';
-            document.getElementById('main-system').style.display = 'block';
-        }, 4000);
-    }
-</script>
-
-</body>
+  </body>
 </html>
