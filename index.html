@@ -1,273 +1,611 @@
 <!DOCTYPE html>
+
 <html lang="pl">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Windows Live Messenger - Adam</title>
+
     <link rel="stylesheet" href="https://unpkg.com/7.css">
+
     <style>
+
         body {
+
             background: #abd1ff url('login.jpg') no-repeat center center fixed;
+
             background-size: cover;
-            height: 100vh;
-            margin: 0;
-            font-family: "Segoe UI", Tahoma, sans-serif;
-            overflow: hidden;
-            user-select: none;
-        }
 
-        /* EKRAN ŁADOWANIA - Musi być na samym wierzchu */
-        #loading-overlay {
-            position: fixed;
-            inset: 0;
-            background: #e3efff;
-            z-index: 9999;
             display: flex;
-            flex-direction: column;
+
             justify-content: center;
+
             align-items: center;
-            transition: opacity 0.5s;
+
+            height: 100vh;
+
+            margin: 0;
+
+            font-family: "Segoe UI", Tahoma, sans-serif;
+
+            overflow: hidden;
+
         }
 
-        /* PASEK ZADAŃ WINDOWS 7 */
-        .taskbar {
+
+
+        /* EKRAN ŁADOWANIA */
+
+        #loading-overlay {
+
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: rgba(20, 45, 75, 0.8);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            display: none; /* Pojawi się po zalogowaniu */
+
+            inset: 0;
+
+            background: #e3efff;
+
+            z-index: 999;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
             align-items: center;
-            padding: 0 10px;
-            z-index: 5000;
+
+            transition: opacity 0.5s;
+
         }
 
-        .start-button {
-            width: 34px;
-            height: 34px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Windows_7_Start_button_icon.svg/1024px-Windows_7_Start_button_icon.svg.png') no-repeat center;
-            background-size: contain;
-            cursor: pointer;
+
+
+        #connection-bar div {
+
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
         }
 
-        .taskbar-button {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 3px;
-            padding: 4px 12px;
-            color: white;
-            font-size: 11px;
-            margin-left: 8px;
-            cursor: pointer;
-        }
+
 
         /* OKNA */
-        .window {
-            position: absolute;
-            z-index: 10;
-            display: none; /* Pojawią się po zalogowaniu */
+
+        .msn-card {
+
+            width: 420px;
+
+            max-height: 90vh;
+
+            display: none; 
+
+            flex-direction: column;
+
+            position: relative;
+
         }
 
-        .title-bar { cursor: move; }
 
-        .msn-card { width: 420px; }
-        #chat-window { width: 300px; }
 
-        /* LICZNIKI */
-        .holiday-progress { margin: 8px 0 2px 15px; width: 85%; height: 14px; }
-        .holiday-timer { 
-            font-size: 11px; 
-            color: #15428b; 
-            margin-left: 15px; 
-            margin-bottom: 12px; 
-            font-weight: bold;
+        /* Tylko do pierwszego pokazania */
+
+        .initial-fade { animation: fadeIn 0.4s ease-in; }
+
+
+
+        #chat-window {
+
+            width: 300px;
+
+            position: fixed;
+
+            top: 20px;
+
+            left: 20px;
+
+            display: none;
+
+            z-index: 100;
+
         }
+
+
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+
+
+        /* NUDGE ANIMACJA - Czyste trzęsienie bez fade */
 
         @keyframes nudge {
-            0%, 100% { transform: translate(0,0); }
+
+            0% { transform: translate(0,0); }
+
             20% { transform: translate(-8px,-8px); }
+
             40% { transform: translate(8px,8px); }
+
             60% { transform: translate(-8px,8px); }
+
             80% { transform: translate(8px,-8px); }
+
+            100% { transform: translate(0,0); }
+
         }
-        .nudge-effect { animation: nudge 0.2s linear 2; }
+
+        .nudge-effect { animation: nudge 0.2s linear 2 !important; }
+
+
+
+        .header-profile {
+
+            display: flex;
+
+            padding: 20px;
+
+            gap: 20px;
+
+            background: rgba(255, 255, 255, 0.2);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        }
+
+
+
+        .picture-frame {
+
+            width: 100px;
+
+            height: 100px;
+
+            border: 1px solid #718597;
+
+            background: white;
+
+            padding: 4px;
+
+            position: relative;
+
+        }
+
+
+
+        .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+
+
+        .status-dot {
+
+            position: absolute;
+
+            bottom: -5px;
+
+            right: -5px;
+
+            background: #5cb85c;
+
+            color: white;
+
+            font-size: 10px;
+
+            padding: 1px 4px;
+
+            border: 2px solid white;
+
+            font-weight: bold;
+
+        }
+
+
+
+        .content-scroll {
+
+            background: white;
+
+            margin: 10px;
+
+            border: 1px solid #919191;
+
+            flex-grow: 1;
+
+            overflow-y: auto;
+
+        }
+
+
+
+        #msn-toast {
+
+            position: fixed;
+
+            bottom: 20px;
+
+            right: 20px;
+
+            width: 250px;
+
+            transform: translateY(150%);
+
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+            z-index: 1000;
+
+        }
+
+
+
+        #msn-toast.show { transform: translateY(0); }
+
+        .hidden { display: none !important; }
+
     </style>
+
 </head>
+
 <body>
 
+
+
 <div id="loading-overlay">
+
     <div style="width: 300px; text-align: center;">
-        <div class="loader animate"></div>
-        <p style="font-weight: bold; color: #15428b; margin: 15px 0 5px 0;">Nawiązywanie połączenia...</p>
-        <div role="progressbar" id="connection-bar"><div id="bar-fill" style="width: 0%;"></div></div>
-        <p id="percent-text" style="font-size: 10px; margin-top: 5px; color: #666;">0%</p>
+
+        <div class="loader animate" style="margin-bottom: 20px;"></div>
+
+        <p id="loading-text" style="font-weight: bold; color: #15428b; margin-bottom: 10px;">Nawiązywanie połączenia...</p>
+
+        <div role="progressbar" id="connection-bar"><div style="width: 0%;"></div></div>
+
+        <p id="loading-percent" style="font-size: 10px; margin-top: 5px; color: #666;">0%</p>
+
     </div>
+
 </div>
 
-<div id="taskbar" class="taskbar">
-    <div class="start-button"></div>
-    <div class="taskbar-button" onclick="toggleWin('main-window')">Messenger (Adam)</div>
-    <div class="taskbar-button" onclick="toggleWin('chat-window')">Rozmowa</div>
+
+
+<div id="msn-toast" class="window glass">
+
+    <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
+
+        <img src="profilowe.pfp.jpg" width="40" style="border: 1px solid #ccc;">
+
+        <div>
+
+            <div style="font-size: 11px; font-weight: bold;">Adam</div>
+
+            <div style="font-size: 10px;">właśnie się zalogował.</div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div id="main-window" class="window glass msn-card" style="top: 80px; left: 400px;">
+
+
+<div id="chat-window" class="window glass">
+
     <div class="title-bar">
-        <div class="title-bar-text">Windows Live Messenger</div>
-    </div>
-    <div class="window-body" style="margin: 0; padding: 0;">
-        <div style="display: flex; padding: 20px; gap: 20px; background: rgba(255,255,255,0.2);">
-            <div style="width: 100px; height: 100px; border: 1px solid #718597; background: white; padding: 4px; position: relative;">
-                <img src="profilowe.pfp.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-                <div style="position: absolute; bottom: -5px; right: -5px; background: #5cb85c; color: white; font-size: 10px; padding: 1px 4px; border: 2px solid white; font-weight: bold;">OK</div>
-            </div>
-            <div>
-                <div style="font-size: 18px; font-weight: bold; color: #003399;">Adam</div>
-                <div style="font-size: 12px; color: #444; margin-top: 5px;">&lt; Szukam wyzwań! &gt;</div>
-            </div>
-        </div>
 
-        <div style="background: white; margin: 10px; border: 1px solid #919191; height: 320px; overflow-y: auto;">
-            <ul class="tree-view has-connector">
-                <li>
-                    <details open>
-                        <summary>[+] Odliczanie do świąt</summary>
-                        <ul>
-                            <li>> Wielkanoc (2026):
-                                <div role="progressbar" class="holiday-progress"><div id="p-wielkanoc"></div></div>
-                                <div id="t-wielkanoc" class="holiday-timer"></div>
-                            </li>
-                            <li>> Wigilia:
-                                <div role="progressbar" class="holiday-progress"><div id="p-wigilia"></div></div>
-                                <div id="t-wigilia" class="holiday-timer"></div>
-                            </li>
-                            <li>> Nowy Rok:
-                                <div role="progressbar" class="holiday-progress"><div id="p-nowyrok"></div></div>
-                                <div id="t-nowyrok" class="holiday-timer"></div>
-                            </li>
-                        </ul>
-                    </details>
-                </li>
-            </ul>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field">Dostępny</p>
-            <button onclick="doNudge()" style="height: 18px; font-size: 10px; cursor: pointer;">NUDGE</button>
-        </div>
-    </div>
-</div>
+        <div class="title-bar-text">Rozmowa z: Adam</div>
 
-<div id="chat-window" class="window glass" style="top: 150px; left: 80px;">
-    <div class="title-bar">
-        <div class="title-bar-text">Rozmowa</div>
         <div class="title-bar-controls">
-            <button aria-label="Minimize" onclick="toggleWin('chat-window')"></button>
-            <button aria-label="Close" onclick="toggleWin('chat-window')"></button>
+
+            <button aria-label="Close" onclick="this.closest('#chat-window').style.display='none'"></button>
+
         </div>
+
     </div>
+
     <div class="window-body">
-        <div style="background: white; border: 1px solid #718597; height: 80px; padding: 8px; font-size: 12px; margin-bottom: 10px;">
-            <strong style="color: #0066cc;">Adam mówi:</strong><br>Cześć! Fajnie, że wpadłeś na mój profil.
+
+        <div style="background: white; border: 1px solid #718597; height: 100px; padding: 5px; font-size: 12px; overflow-y: auto; margin-bottom: 10px;">
+
+            <p><strong style="color: #0066cc;">Adam mówi:</strong><br>Cześć! Skoro tu jesteś, pewnie chcesz nawiązać współpracę? :)</p>
+
         </div>
-        <input type="text" placeholder="Napisz..." style="width: 100%;" disabled>
+
+        <input type="text" placeholder="Napisz odpowiedź..." style="width: 100%;" disabled>
+
     </div>
+
 </div>
+
+
+
+<div id="main-window" class="window glass msn-card">
+
+    <div class="title-bar">
+
+        <div class="title-bar-text">Profil: Adam :)</div>
+
+        <div class="title-bar-controls">
+
+            <button aria-label="Minimize"></button>
+
+            <button aria-label="Maximize"></button>
+
+            <button aria-label="Close"></button>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
+
+        <div class="header-profile">
+
+            <div class="picture-frame">
+
+                <img src="profilowe.pfp.jpg" alt="PFP">
+
+                <div class="status-dot">Zalogowany</div>
+
+            </div>
+
+            <div>
+
+                <div style="font-size: 18px; font-weight: bold; color: #003399;">Adam</div>
+
+                <div style="font-size: 13px; color: #444; margin-top: 5px;">< . . . Szukam wyzwań! . . . ></div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="content-scroll has-scrollbar">
+
+            <ul class="tree-view has-connector">
+
+                <li>
+
+                    <details open>
+
+                        <summary>[+] Kim jestem?</summary>
+
+                        <ul>
+
+                            <li>> Pasjonat UI/UX z Polski</li>
+
+                            <li>> Web Developer & Designer</li>
+
+                            <li>> Lubię retro-design</li>
+
+                        </ul>
+
+                    </details>
+
+                </li>
+
+                <li>
+
+                    <details open>
+
+                        <summary>[+] Umiejętności</summary>
+
+                        <ul>
+
+                            <li>> Piracenie gier</li>
+
+                            <li>> Tworzenie stron internetowych</li>
+
+                            <li>> Łatwe nawiązywanie relacji</li>
+
+                        </ul>
+
+                    </details>
+
+                </li>
+
+                <li>
+
+                    <details>
+
+                        <summary>[+] Edukacja</summary>
+
+                        <ul>
+
+                            <li>> Szkoła podstawowa :(</li>
+
+                            <li>> Kursy online</li>
+
+                        </ul>
+
+                    </details>
+
+                </li>
+
+                <li>
+
+                    <details>
+
+                        <summary>[+] Zainteresowania</summary>
+
+                        <ul>
+
+                            <li>> Gry komputerowe</li>
+
+                            <li>> Muzyka pop</li>
+
+                            <li>> Tworzenie stron internetowych</li>
+
+                        </ul>
+
+                    </details>
+
+                </li>
+
+                <li>
+
+                    <details>
+
+                        <summary>[+] Kontakt</summary>
+
+                        <ul>
+
+                            <li>> E-mail: adambiznes@tutamail.com</li>
+
+                            <li>> Discord: elagawin</li>
+
+                        </ul>
+
+                    </details>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="status-bar">
+
+            <p class="status-bar-field">Status: Dostępny</p>
+
+            <button style="margin: 2px; height: 18px; font-size: 10px; cursor: pointer;" onclick="doNudge()">NUDGE</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 
 <script>
-    const barFill = document.getElementById('bar-fill');
-    const percentText = document.getElementById('percent-text');
+
     const overlay = document.getElementById('loading-overlay');
-    const taskbar = document.getElementById('taskbar');
-    const mainWin = document.getElementById('main-window');
+
+    const mainWindow = document.getElementById('main-window');
+
+    const bar = document.querySelector('#connection-bar div');
+
+    const percentLabel = document.getElementById('loading-percent');
+
+    const statusLabel = document.getElementById('loading-text');
+
+    const toast = document.getElementById('msn-toast');
+
     const chatWin = document.getElementById('chat-window');
 
-    // Funkcja logowania
-    let prg = 0;
-    function startLoading() {
-        prg += Math.floor(Math.random() * 15) + 5;
-        if (prg > 100) prg = 100;
-        
-        barFill.style.width = prg + "%";
-        percentText.innerText = prg + "%";
 
-        if (prg < 100) {
-            setTimeout(startLoading, 300);
+
+    let progress = 0;
+
+    const statuses = ["Nawiązywanie połączenia...", "Logowanie...", "Pobieranie profilu...", "Gotowe!"];
+
+
+
+    function updateProgress() {
+
+        let jump = Math.floor(Math.random() * 15) + 15;
+
+        progress += jump;
+
+        if (progress > 100) progress = 100;
+
+
+
+        bar.style.width = progress + "%";
+
+        percentLabel.innerText = progress + "%";
+
+
+
+        if (progress > 30) statusLabel.innerText = statuses[1];
+
+        if (progress > 70) statusLabel.innerText = statuses[2];
+
+        if (progress >= 100) statusLabel.innerText = statuses[3];
+
+
+
+        if (progress < 100) {
+
+            let delay = Math.floor(Math.random() * 400) + 300;
+
+            setTimeout(updateProgress, delay);
+
         } else {
+
             setTimeout(() => {
+
                 overlay.style.opacity = '0';
+
                 setTimeout(() => {
-                    overlay.style.display = 'none';
-                    // Pokaż pasek zadań i okna
-                    taskbar.style.display = 'flex';
-                    mainWin.style.display = 'flex';
-                    // Czat z lekkim opóźnieniem
-                    setTimeout(() => { chatWin.style.display = 'flex'; }, 1500);
-                    // Odpal liczniki
-                    setInterval(updateTimers, 1000);
-                }, 500);
-            }, 500);
+
+                    overlay.classList.add('hidden');
+
+                    // Pokazujemy okno i dodajemy animację wejścia tylko raz
+
+                    mainWindow.style.display = 'flex';
+
+                    mainWindow.classList.add('initial-fade');
+
+                    
+
+                    setTimeout(() => {
+
+                        toast.classList.add('show');
+
+                        setTimeout(() => toast.classList.remove('show'), 3500);
+
+                    }, 800);
+
+
+
+                    setTimeout(() => {
+
+                        chatWin.style.display = 'block';
+
+                    }, 3000);
+
+
+
+                }, 400);
+
+            }, 600);
+
         }
+
     }
 
-    // Funkcja odliczania
-    function updateTimers() {
-        const now = new Date();
-        const dates = {
-            "wielkanoc": new Date(2026, 3, 5), // 5 kwietnia 2026
-            "wigilia": new Date(2026, 11, 24),
-            "nowyrok": new Date(2027, 0, 1)
-        };
 
-        for (let k in dates) {
-            const diff = dates[k] - now;
-            const d = Math.floor(diff / 86400000);
-            const h = Math.floor((diff % 86400000) / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            
-            document.getElementById('t-' + k).innerText = `Pozostało: ${d}d ${h}g ${m}m ${s}s`;
-            
-            // Pasek postępu (od początku 2026 roku)
-            const yearStart = new Date(2026, 0, 1);
-            const total = dates[k] - yearStart;
-            const current = now - yearStart;
-            const perc = (current / total) * 100;
-            document.getElementById('p-' + k).style.width = Math.min(100, Math.max(0, perc)) + "%";
-        }
-    }
-
-    function toggleWin(id) {
-        const el = document.getElementById(id);
-        el.style.display = (el.style.display === 'none') ? 'flex' : 'none';
-    }
 
     function doNudge() {
-        mainWin.classList.add('nudge-effect');
-        setTimeout(() => mainWin.classList.remove('nudge-effect'), 400);
+
+        // Usuwamy klasę fadeIn jeśli jest, żeby nie przeszkadzała
+
+        mainWindow.classList.remove('initial-fade');
+
+        // Dodajemy potrząsanie
+
+        mainWindow.classList.add('nudge-effect');
+
+        setTimeout(() => {
+
+            mainWindow.classList.remove('nudge-effect');
+
+        }, 400);
+
     }
 
-    // Przeciąganie
-    function makeDraggable(el) {
-        let p1=0, p2=0, p3=0, p4=0;
-        const tb = el.querySelector(".title-bar");
-        tb.onmousedown = (e) => {
-            p3 = e.clientX; p4 = e.clientY;
-            document.onmouseup = () => { document.onmousemove = null; };
-            document.onmousemove = (e) => {
-                p1 = p3 - e.clientX; p2 = p4 - e.clientY;
-                p3 = e.clientX; p4 = e.clientY;
-                el.style.top = (el.offsetTop - p2) + "px";
-                el.style.left = (el.offsetLeft - p1) + "px";
-            };
-        };
-    }
 
-    makeDraggable(mainWin);
-    makeDraggable(chatWin);
 
-    window.onload = startLoading;
+    window.addEventListener('load', updateProgress);
+
 </script>
+
 </body>
+
 </html>
