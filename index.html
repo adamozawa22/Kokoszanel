@@ -2,7 +2,6 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows Live Messenger</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
@@ -32,9 +31,9 @@
             transition: opacity 0.5s;
         }
 
-        /* Płynny progres bar */
+        /* Płynny progres bar - przyspieszona animacja przejścia */
         #connection-bar div {
-            transition: width 0.6s ease-in-out; /* Delikatne przesuwanie */
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* OKNO PROFILU */
@@ -44,10 +43,10 @@
             display: flex;
             flex-direction: column;
             display: none; 
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.4s ease-in;
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
         .header-profile {
             display: flex;
@@ -128,15 +127,14 @@
     </div>
 
     <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
-        
         <div class="header-profile">
             <div class="picture-frame">
                 <img src="profilowe.pfp.jpg" alt="PFP">
                 <div style="position: absolute; bottom: -5px; right: -5px; background: #5cb85c; color: white; font-size: 10px; padding: 1px 4px; border: 2px solid white; font-weight: bold;">OK</div>
             </div>
-            <div class="info-column">
+            <div>
                 <div style="font-size: 18px; font-weight: bold; color: #003399;">Imię "Kandydat" Nazwisko</div>
-                <div style="font-size: 13px; color: #444; margin-top: 5px;">< . . . Kodowanie to pasja . . . ></div>
+                <div style="font-size: 13px; color: #444; margin-top: 5px;">< . . . Zalogowany . . . ></div>
             </div>
         </div>
 
@@ -148,7 +146,6 @@
                         <ul>
                             <li>> Fan technologii retro</li>
                             <li>> Web Developer</li>
-                            <li>> Miłośnik UI z ery Windows 7</li>
                         </ul>
                     </details>
                 </li>
@@ -157,17 +154,7 @@
                         <summary>[+] Umiejętności</summary>
                         <ul>
                             <li>> HTML5 / CSS3 / JavaScript</li>
-                            <li>> Projektowanie interfejsów</li>
-                            <li>> Rozwiązywanie problemów</li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>[+] Kontakt</summary>
-                        <ul>
-                            <li>> E-mail: twoj@mail.pl</li>
-                            <li>> GitHub: github.com/user</li>
+                            <li>> UI Designer</li>
                         </ul>
                     </details>
                 </li>
@@ -176,7 +163,7 @@
 
         <div class="status-bar">
             <p class="status-bar-field">Status: Połączono</p>
-            <p class="status-bar-field">Ostatnie logowanie: Dzisiaj</p>
+            <p class="status-bar-field">2026</p>
         </div>
     </div>
 </div>
@@ -190,16 +177,11 @@
     const toast = document.getElementById('msn-toast');
 
     let progress = 0;
-    const statuses = [
-        "Nawiązywanie połączenia...",
-        "Weryfikacja profilu...",
-        "Pobieranie danych...",
-        "Kończenie..."
-    ];
+    const statuses = ["Nawiązywanie połączenia...", "Weryfikacja...", "Synchronizacja...", "Gotowe!"];
 
     function updateProgress() {
-        // Losowy, ale mniejszy skok dla płynności
-        let jump = Math.floor(Math.random() * 10) + 5;
+        // Większe skoki (15-25%), aby szybciej dobić do końca
+        let jump = Math.floor(Math.random() * 10) + 15;
         progress += jump;
 
         if (progress > 100) progress = 100;
@@ -208,28 +190,28 @@
         percentLabel.innerText = progress + "%";
 
         if (progress > 30) statusLabel.innerText = statuses[1];
-        if (progress > 70) statusLabel.innerText = statuses[2];
-        if (progress > 90) statusLabel.innerText = statuses[3];
+        if (progress > 65) statusLabel.innerText = statuses[2];
+        if (progress >= 100) statusLabel.innerText = statuses[3];
 
         if (progress < 100) {
-            // Czas oczekiwania od 0.6s do 1.8s (symulacja doczytywania)
-            let delay = Math.floor(Math.random() * 1200) + 600;
+            // Skrócone opóźnienie (0.4s - 0.9s)
+            let delay = Math.floor(Math.random() * 500) + 400;
             setTimeout(updateProgress, delay);
         } else {
+            // Krótka pauza na końcu i wejście
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.classList.add('hidden');
                     mainWindow.style.display = 'flex';
                     
-                    // POJAWIENIE SIĘ TOASTA (Znajomy się zalogował)
+                    // Toast wyskakuje szybciej po wejściu
                     setTimeout(() => {
                         toast.classList.add('show');
-                        setTimeout(() => toast.classList.remove('show'), 4000);
-                    }, 1500);
-
-                }, 500);
-            }, 1000);
+                        setTimeout(() => toast.classList.remove('show'), 3500);
+                    }, 800);
+                }, 400);
+            }, 600);
         }
     }
 
