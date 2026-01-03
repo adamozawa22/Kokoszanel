@@ -3,188 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O mnie - Windows 7 Style</title>
+    <title>Windows 7 Aero</title>
+    <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
-        * { box-sizing: border-box; }
-        
+        /* EKRAN STARTOWY (BOOT SCREEN) */
+        #boot-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .loader-bar {
+            width: 250px;
+            height: 18px;
+            border: 1px solid #444;
+            margin-top: 25px;
+            background: #111;
+            padding: 2px;
+            border-radius: 2px;
+        }
+
+        .loader-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            box-shadow: 0 0 12px #2ecc71;
+            transition: width 4s ease-in-out;
+        }
+
+        /* PULPIT I TŁO */
         body {
             margin: 0;
-            padding: 0;
             height: 100vh;
+            background: url('https://getwallpapers.com/wallpaper/full/f/b/e/801646-most-popular-microsoft-windows-7-desktop-backgrounds-1920x1200-for-ipad-pro.jpg') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Kultowa tapeta Windows 7 Harmony */
-            background: url('https://images.wallpapersden.com/image/download/windows-7-original-wallpaper_bWltZ26UmZqaraWkpJRmbmdlrWZlbWU.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+            overflow: hidden;
+            visibility: hidden; /* Ukryte do końca ładowania */
         }
 
-        /* GŁÓWNE OKNO AERO GLASS */
+        /* PERSONALIZACJA OKNA 7.CSS */
         .window {
-            width: 850px;
-            height: 550px;
+            width: 900px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Nadpisanie efektu Aero Glass dla okna głównego */
+        .window.glass {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 2px white;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
         }
 
-        /* PASEK TYTUŁOWY */
-        .title-bar {
-            height: 38px;
-            padding: 0 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%);
-        }
-
-        .title-text {
-            color: white;
-            font-size: 13px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 3px black;
-        }
-
-        /* ZAKTUALIZOWANE MENU */
-        .nav-menu {
-            list-style-type: none;
-            margin: 0;
-            padding: 2px 10px;
-            display: flex;
-            gap: 2px;
-            background: rgba(240, 240, 240, 0.8);
-            border-bottom: 1px solid #a0a0a0;
-        }
-
-        .nav-menu li a {
-            text-decoration: none;
-            color: #111;
-            font-size: 12px;
-            padding: 7px 15px;
-            display: block;
-            border-radius: 2px;
-            border: 1px solid transparent;
-            transition: 0.2s;
-        }
-
-        .nav-menu li a:hover {
-            background: linear-gradient(to bottom, #fdfdfd, #dceefb);
-            border: 1px solid #7eb4ea;
-            box-shadow: inset 0 0 2px white;
-        }
-
-        .nav-menu li a.active {
-            background: #fff;
-            border: 1px solid #a0a0a0;
-            border-bottom-color: transparent;
-            font-weight: bold;
-            position: relative;
-            z-index: 10;
-            margin-bottom: -1px; /* Efekt zakładki */
-        }
-
-        /* GŁÓWNA TREŚĆ */
-        .main-container {
+        /* Układ wnętrza okna */
+        .window-body {
             flex-grow: 1;
             display: flex;
-            background: #fff;
-            margin: 0 4px 4px 4px;
-            border: 1px solid #a0a0a0;
-            border-top: none;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 180px;
-            background: linear-gradient(to right, #f0f7ff, #d9e7f9);
-            border-right: 1px solid #b5c7de;
-            padding: 20px;
-            display: flex;
             flex-direction: column;
-            align-items: center;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        .profile-pic {
-            width: 100px;
-            height: 100px;
-            background: #fff;
-            border: 1px solid #707070;
-            padding: 3px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            background: white;
+            margin: 0 5px 5px 5px;
+            border: 1px solid #999;
         }
 
-        .content {
+        /* Lewy panel boczny (Explorer style) */
+        .left-pane {
+            width: 200px;
+            background: linear-gradient(to right, #f2f7fe, #dce8f7);
+            border-right: 1px solid #b5c7de;
+            padding: 15px;
+        }
+
+        /* Prawy panel treści */
+        .right-pane {
             flex-grow: 1;
             padding: 30px;
             overflow-y: auto;
             color: #333;
         }
 
-        h1 { font-size: 24px; color: #1e395b; margin-top: 0; font-weight: normal; }
-        h2 { font-size: 16px; color: #1e395b; border-bottom: 1px solid #b5c7de; padding-bottom: 8px; margin-top: 25px;}
-        
-        /* Przyciski operacyjne */
-        .win7-btn {
-            display: inline-block;
-            padding: 6px 18px;
-            background: linear-gradient(to bottom, #f2f2f2, #ebebeb 50%, #dddddd 51%, #cfcfcf);
-            border: 1px solid #707070;
-            border-radius: 3px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-right: 10px;
+        /* Menu zakładki */
+        menu[role="tablist"] {
+            padding: 0 10px;
+            margin-bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
         }
 
-        .win7-btn:hover {
-            border-color: #3c7fb1;
-            background: linear-gradient(to bottom, #f0f7ff, #d9eefc 50%, #bee0f7 51%, #a7d9f5);
-        }
+        /* Dźwięk - ukryty */
+        #startup-sound { display: none; }
     </style>
 </head>
 <body>
 
-<div class="window">
+<div id="boot-screen">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Windows_7_logo.svg/1024px-Windows_7_logo.svg.png" width="160" alt="Logo">
+    <div class="loader-bar">
+        <div class="loader-fill" id="fill"></div>
+    </div>
+    <button id="boot-btn" style="margin-top: 40px; padding: 10px 25px; cursor: pointer; border-radius: 4px; background: #333; color: white; border: 1px solid #555;">
+        Uruchom System
+    </button>
+</div>
+
+<audio id="startup-sound">
+    <source src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=Windows+7+Startup&filename=mt/MTI0OTE3NTI1MTI0OTcw_N068t6NAnO0.MP3" type="audio/mpeg">
+</audio>
+
+<div class="window glass">
     <div class="title-bar">
-        <div class="title-text">Panel sterowania profilem</div>
-        <div style="color: white; font-size: 16px; letter-spacing: 5px; cursor: default;">_ ▢ ✕</div>
+        <div class="title-bar-text">Eksplorator Windows - O mnie</div>
+        <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+        </div>
     </div>
 
-    <ul class="nav-menu">
-        <li><a href="index.html" class="active">START</a></li>
-        <li><a href="projekty.html">PROJEKTY</a></li>
-        <li><a href="kontakt.html">KONTAKT</a></li>
-    </ul>
+    <div class="window-body">
+        <menu role="tablist">
+            <li role="tab" aria-selected="true"><a href="index.html">Start</a></li>
+            <li role="tab"><a href="projekty.html">Projekty</a></li>
+            <li role="tab"><a href="kontakt.html">Kontakt</a></li>
+        </menu>
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <img src="https://via.placeholder.com/100" alt="Profil" class="profile-pic">
-            <div style="font-size: 11px; color: #4d6082; text-align: center;">
-                <strong style="font-size: 13px;">Użytkownik</strong><br>
-                Zalogowano
-            </div>
-        </aside>
+        <div class="main-content">
+            <aside class="left-pane">
+                <ul class="tree-view">
+                    <li>
+                        <details open>
+                            <summary>Użytkownik</summary>
+                            <ul>
+                                <li>Profil</li>
+                                <li>Lokalizacja</li>
+                                <li>Aktywność</li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary>System</summary>
+                            <ul>
+                                <li>Wersja Aero</li>
+                                <li>Pamięć</li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </aside>
 
-        <section class="content">
-            <h1>O mnie</h1>
-            <p>To jest Twoja nowa strona główna zainspirowana estetyką Windows 7 Aero. Wszystkie elementy zostały zoptymalizowane pod kątem przejrzystości i klasycznego stylu.</p>
-            
-            <h2>Moja działalność</h2>
-            <p>Kliknij w zakładkę <strong>Projekty</strong>, aby zobaczyć nad czym aktualnie pracuję, lub przejdź do sekcji <strong>Kontakt</strong>, jeśli chcesz porozmawiać o współpracy.</p>
-            
-            <div style="margin-top: 30px;">
-                <button class="win7-btn">Edytuj profil</button>
-                <button class="win7-btn">Wyloguj</button>
-            </div>
-        </section>
+            <section class="right-pane">
+                <h1 style="margin-top: 0; font-weight: 400; color: #1e395b;">Witaj w moim systemie</h1>
+                <p>Ten interfejs został zbudowany przy użyciu <strong>7.css</strong> – biblioteki, która wiernie oddaje wygląd Windows 7 w CSS/HTML.</p>
+                
+                <hr>
+
+                <p>Możesz tutaj opisać swoją historię. Wykorzystujemy natywne style kontrolek, takie jak poniższy suwak:</p>
+                
+                <div class="field-row" style="width: 300px">
+                    <label for="range25">Głośność:</label>
+                    <input id="range25" type="range" min="0" max="100" value="70">
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <button>Więcej szczegółów</button>
+                    <button disabled>Zastosuj</button>
+                </div>
+            </section>
+        </div>
+
+        <div class="status-bar">
+            <p class="status-bar-field">Elementy: 3</p>
+            <p class="status-bar-field">Status: Gotowy</p>
+            <p class="status-bar-field">Zalogowano: Administrator</p>
+        </div>
     </div>
 </div>
+
+<script>
+    const btn = document.getElementById('boot-btn');
+    const fill = document.getElementById('fill');
+    const screen = document.getElementById('boot-screen');
+    const sound = document.getElementById('startup-sound');
+
+    btn.onclick = () => {
+        btn.style.visibility = 'hidden';
+        fill.style.width = '100%';
+        
+        // Próba odtworzenia dźwięku
+        sound.play().catch(e => console.log("Audio block: " + e));
+
+        // Czas bootowania: 4 sekundy
+        setTimeout(() => {
+            screen.style.display = 'none';
+            document.body.style.visibility = 'visible';
+        }, 4000);
+    };
+</script>
 
 </body>
 </html>
