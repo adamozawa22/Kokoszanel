@@ -132,4 +132,87 @@
         </div>
     </div>
 
-    <div class="window
+    <div class="window-body" style="margin: 0; display: flex; flex-direction: column; flex-grow: 1;">
+        <div class="ie-nav-bar">
+            <div class="back-forward-btns">
+                <button disabled style="min-width: 30px; border-radius: 50%;">←</button>
+                <button disabled style="min-width: 30px; border-radius: 50%;">→</button>
+            </div>
+            <div class="ie-address-bar">
+                <span style="color: green; margin-right: 5px;">🔒</span>
+                <span>http://www.twoje-cv-2026.pl/o-mnie</span>
+            </div>
+            <button>Odśwież</button>
+        </div>
+
+        <div class="ie-tabs">
+            <div class="ie-tab active">O mnie - Moje CV</div>
+            <div class="ie-tab">Projekty</div>
+            <div class="ie-tab">Kontakt</div>
+            <div class="ie-tab" style="width: 20px; text-align: center;">+</div>
+        </div>
+
+        <div class="ie-content-area">
+            <div class="website-header">
+                <h1 style="color: #0055aa; margin: 0;">Jan Kowalski</h1>
+                <p style="font-style: italic; color: #666;">Fullstack Developer & UI Enthusiast</p>
+            </div>
+
+            <section>
+                <h3>Witamy na mojej stronie!</h3>
+                <p>Używając technologii z 2011 roku w 2026 roku, pokazuję swoje przywiązanie do detali i klasycznego designu. Poniżej znajdziesz moje doświadczenie:</p>
+                
+                <table class="listview" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Rok</th>
+                            <th>Firma</th>
+                            <th>Stanowisko</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024-2026</td>
+                            <td>Future Tech</td>
+                            <td>Senior React Developer</td>
+                        </tr>
+                        <tr>
+                            <td>2022-2024</td>
+                            <td>OldSchool Solutions</td>
+                            <td>Junior Web Designer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section style="margin-top: 30px;">
+                <h3>Umiejętności techniczne</h3>
+                <div class="group">
+                    <p>Programowanie: JavaScript, HTML5, CSS3, PHP</p>
+                    <div role="progressbar" class="animate"><div style="width: 85%;"></div></div>
+                    
+                    <p>Projektowanie: Photoshop, Figma, Windows Aero</p>
+                    <div role="progressbar" class="animate"><div style="width: 70%;"></div></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="status-bar">
+            <p class="status-bar-field">Gotowe</p>
+            <p class="status-bar-field">Internet | Tryb chroniony: Włączony</p>
+            <p class="status-bar-field" style="width: 100px;">100%</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Symulacja ładowania strony
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('loading-screen').classList.add('hidden');
+        }, 3000); // Ładuje przez 3 sekundy
+    });
+</script>
+
+</body>
+</html>
