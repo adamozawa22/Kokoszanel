@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
-            background: #abd1ff url('login.jpg') no-repeat center center fixed;
+            background: #abd1ff url('https://wallpapercave.com/wp/wp2590209.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -18,11 +18,11 @@
             overflow: hidden;
         }
 
-        /* EKRAN ŁADOWANIA - Dostosowany do 7.css */
+        /* EKRAN ŁADOWANIA */
         #loading-overlay {
             position: fixed;
             inset: 0;
-            background: #e3efff; /* Jasny błękit typowy dla instalatorów Win7 */
+            background: #e3efff;
             z-index: 999;
             display: flex;
             flex-direction: column;
@@ -31,13 +31,14 @@
             transition: opacity 0.5s;
         }
 
-        /* OKNA */
+        /* GŁÓWNE OKNO PROFILU */
         .msn-card {
             width: 420px;
             max-height: 90vh;
             display: none; 
             flex-direction: column;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .initial-fade { animation: fadeIn 0.4s ease-in; }
@@ -49,6 +50,15 @@
             left: 20px;
             display: none;
             z-index: 100;
+        }
+
+        #events-window {
+            width: 280px;
+            position: fixed;
+            top: 140px;
+            right: 20px;
+            display: none; /* Pokazane po zalogowaniu */
+            z-index: 90;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
@@ -79,7 +89,6 @@
             background: white;
             padding: 4px;
             position: relative;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
 
         .picture-frame img { width: 100%; height: 100%; object-fit: cover; }
@@ -94,7 +103,6 @@
             padding: 1px 4px;
             border: 2px solid white;
             font-weight: bold;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         .content-scroll {
@@ -105,12 +113,6 @@
             overflow-y: auto;
             padding: 5px;
         }
-        
-        /* Stylizacja listy w stylu drzewka */
-        .tree-view ul { list-style-type: none; padding-left: 20px; }
-        .tree-view li { margin-bottom: 5px; }
-        .tree-view summary { cursor: pointer; font-weight: bold; color: #333; }
-        .tree-view summary:hover { color: #0066cc; }
 
         #msn-toast {
             position: fixed;
@@ -125,20 +127,21 @@
         #msn-toast.show { transform: translateY(0); }
         .hidden { display: none !important; }
         
-        /* Dodatkowe style dla paska statusu na dole */
         .status-bar { display: flex; align-items: center; justify-content: space-between; padding: 2px 5px; }
+
+        /* Style dla pasków w widżecie */
+        .event-item { margin-bottom: 12px; }
+        .event-label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px; }
     </style>
 </head>
 <body>
 
-<div id="loading-overlay" class="win7">
+<div id="loading-overlay">
     <div style="width: 300px; text-align: center;">
-        <span class="loader animate" aria-label="Processing" style="margin-bottom: 15px;"></span>
-        
-        <p id="loading-text" style="font-weight: bold; color: #1e395b; margin-bottom: 10px;">Nawiązywanie połączenia...</p>
-        
+        <span class="loader animate" style="margin-bottom: 15px;"></span>
+        <p id="loading-text" style="font-weight: bold; color: #1e395b; margin-bottom: 10px;">Logowanie...</p>
         <div role="progressbar" class="animate">
-            <div id="progress-fill" style="width: 0%;"></div>
+            <div id="login-progress-fill" style="width: 0%;"></div>
         </div>
         <p id="loading-percent" style="font-size: 11px; margin-top: 5px; color: #444;">0%</p>
     </div>
@@ -146,7 +149,7 @@
 
 <div id="msn-toast" class="window glass active">
     <div class="window-body" style="display: flex; align-items: center; gap: 10px; padding: 10px;">
-        <img src="profilowe.pfp.jpg" width="40" height="40" style="border: 1px solid #ccc; background: #fff;">
+        <div style="width: 40px; height: 40px; background: #eee; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 20px;">👤</div>
         <div>
             <div style="font-size: 12px; font-weight: bold;">Adam</div>
             <div style="font-size: 11px;">właśnie się zalogował.</div>
@@ -158,18 +161,41 @@
     <div class="title-bar">
         <div class="title-bar-text">Rozmowa z: Adam</div>
         <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
-            <button aria-label="Maximize"></button>
             <button aria-label="Close" onclick="this.closest('#chat-window').style.display='none'"></button>
         </div>
     </div>
     <div class="window-body">
-        <div class="has-scrollbar" style="background: white; border: 1px solid #8e9cab; height: 120px; padding: 8px; font-size: 12px; overflow-y: auto; margin-bottom: 10px;">
+        <div class="has-scrollbar" style="background: white; border: 1px solid #8e9cab; height: 100px; padding: 8px; font-size: 12px; overflow-y: auto; margin-bottom: 10px;">
             <p style="margin: 0;"><strong style="color: #0066cc;">Adam mówi:</strong><br>Cześć! Skoro tu jesteś, pewnie chcesz nawiązać współpracę? :)</p>
         </div>
         <div style="display: flex; gap: 5px;">
             <input type="text" placeholder="Napisz odpowiedź..." style="flex-grow: 1;">
-            <button class="default" disabled>Wyślij</button>
+            <button class="default">Wyślij</button>
+        </div>
+    </div>
+</div>
+
+<div id="events-window" class="window glass active">
+    <div class="title-bar">
+        <div class="title-bar-text">Kalendarz & Status AI</div>
+    </div>
+    <div class="window-body">
+        <div class="event-item">
+            <div class="event-label"><span>Postęp roku:</span><span id="label-newyear">0%</span></div>
+            <div role="progressbar" class="animate"><div id="bar-newyear" style="width: 0%"></div></div>
+        </div>
+        <div class="event-item">
+            <div class="event-label"><span>Do Wielkanocy:</span><span id="label-easter">...</span></div>
+            <div role="progressbar" class="paused"><div id="bar-easter" style="width: 0%"></div></div>
+        </div>
+        <div class="event-item">
+            <div class="event-label"><span>Do Świąt (24.12):</span><span id="label-xmas">0%</span></div>
+            <div role="progressbar" class="error"><div id="bar-xmas" style="width: 0%"></div></div>
+        </div>
+        <hr>
+        <div class="event-item">
+            <div class="event-label"><span style="font-weight: bold; color: #003399;">Inicjalizacja Gemini...</span><span>∞</span></div>
+            <div role="progressbar" class="marquee"></div>
         </div>
     </div>
 </div>
@@ -187,11 +213,11 @@
     <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column; height: 100%;">
         <div class="header-profile">
             <div class="picture-frame">
-                <img src="profilowe.pfp.jpg" alt="PFP">
+                <div style="width: 100%; height: 100%; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 40px;">👤</div>
                 <div class="status-dot">Dostępny</div>
             </div>
             <div style="display: flex; flex-direction: column; justify-content: center;">
-                <div style="font-size: 20px; font-weight: bold; color: #1e395b; text-shadow: 0px 0px 5px rgba(255,255,255,0.8);">Adam</div>
+                <div style="font-size: 20px; font-weight: bold; color: #1e395b;">Adam</div>
                 <div style="font-size: 12px; color: #333; margin-top: 5px; font-style: italic;">< . . . Szukam wyzwań! . . . ></div>
             </div>
         </div>
@@ -204,7 +230,7 @@
                         <ul>
                             <li>Pasjonat UI/UX z Polski</li>
                             <li>Web Developer & Designer</li>
-                            <li>Lubię retro-design</li>
+                            <li>Fan klimatu Frutiger Aero</li>
                         </ul>
                     </details>
                 </li>
@@ -212,25 +238,11 @@
                     <details open>
                         <summary>Umiejętności</summary>
                         <fieldset style="margin-top: 5px;">
-                            <legend>Techniczne</legend>
-                            <div>
-                                <input type="checkbox" id="skill1" checked disabled>
-                                <label for="skill1">HTML/CSS (Expert)</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="skill2" checked disabled>
-                                <label for="skill2">Piracenie gier (Advanced)</label>
-                            </div>
+                            <legend>Skille</legend>
+                            <input type="checkbox" checked disabled> <label>HTML/CSS/JS</label><br>
+                            <input type="checkbox" checked disabled> <label>Retro UI Design</label><br>
+                            <input type="checkbox" checked disabled> <label>Nawiązywanie relacji</label>
                         </fieldset>
-                    </details>
-                </li>
-                <li style="margin-top: 10px;">
-                    <details>
-                        <summary>Kontakt</summary>
-                         <ul style="margin-top: 5px;">
-                            <li>📧 adambiznes@tutamail.com</li>
-                            <li>💬 Discord: elagawin</li>
-                        </ul>
                     </details>
                 </li>
             </ul>
@@ -244,10 +256,98 @@
 </div>
 
 <script>
+    // --- ELEMENTY ---
     const overlay = document.getElementById('loading-overlay');
     const mainWindow = document.getElementById('main-window');
-    // Zmiana selectora na nowy pasek
-    const barFill = document.getElementById('progress-fill');
+    const eventsWindow = document.getElementById('events-window');
+    const loginBar = document.getElementById('login-progress-fill');
     const percentLabel = document.getElementById('loading-percent');
-    const statusLabel = document.getElementById('loading-text');
-    const toast = document.
+    const toast = document.getElementById('msn-toast');
+    const chatWin = document.getElementById('chat-window');
+
+    // --- LOGOWANIE ---
+    let loginProgress = 0;
+    function updateLogin() {
+        loginProgress += Math.floor(Math.random() * 15) + 5;
+        if (loginProgress > 100) loginProgress = 100;
+        
+        loginBar.style.width = loginProgress + "%";
+        percentLabel.innerText = loginProgress + "%";
+
+        if (loginProgress < 100) {
+            setTimeout(updateLogin, 300);
+        } else {
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    mainWindow.style.display = 'flex';
+                    eventsWindow.style.display = 'block';
+                    mainWindow.classList.add('initial-fade');
+                    
+                    // Pokazuj toast po zalogowaniu
+                    setTimeout(() => {
+                        toast.classList.add('show');
+                        setTimeout(() => toast.classList.remove('show'), 3500);
+                    }, 800);
+
+                    // Otwórz czat po chwili
+                    setTimeout(() => { chatWin.style.display = 'block'; }, 2500);
+                }, 500);
+            }, 500);
+        }
+    }
+
+    // --- NUDGE ---
+    function doNudge() {
+        mainWindow.classList.remove('initial-fade');
+        mainWindow.classList.add('nudge-effect');
+        setTimeout(() => mainWindow.classList.remove('nudge-effect'), 400);
+    }
+
+    // --- KALENDARZ (TWOJE PASKI) ---
+    function getEasterDate(year) {
+        const a = year % 19, b = Math.floor(year / 100), c = year % 100,
+              d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25),
+              g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30,
+              i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7,
+              m = Math.floor((a + 11 * h + 22 * l) / 451);
+        const month = Math.floor((h + l - 7 * m + 114) / 31) - 1,
+              day = ((h + l - 7 * m + 114) % 31) + 1;
+        return new Date(year, month, day);
+    }
+
+    function updateEventBars() {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const startOfYear = new Date(currentYear, 0, 1);
+        const dayOfYear = (now - startOfYear) / (1000 * 60 * 60 * 24);
+
+        // 1. Rok
+        const pYear = (dayOfYear / 365) * 100;
+        document.getElementById('bar-newyear').style.width = pYear + "%";
+        document.getElementById('label-newyear').innerText = Math.floor(pYear) + "%";
+
+        // 2. Święta (24.12)
+        const xmas = new Date(currentYear, 11, 24);
+        const totalXmas = (xmas - startOfYear) / (1000 * 60 * 60 * 24);
+        const pXmas = (dayOfYear / totalXmas) * 100;
+        document.getElementById('bar-xmas').style.width = (pXmas > 100 ? 100 : pXmas) + "%";
+        document.getElementById('label-xmas').innerText = pXmas > 100 ? "Już były!" : Math.floor(pXmas) + "%";
+
+        // 3. Wielkanoc
+        let easter = getEasterDate(currentYear);
+        if (now > easter) easter = getEasterDate(currentYear + 1);
+        const daysLeft = Math.ceil((easter - now) / (1000 * 60 * 60 * 24));
+        document.getElementById('bar-easter').style.width = (100 - (daysLeft/365*100)) + "%";
+        document.getElementById('label-easter').innerText = daysLeft + " dni";
+    }
+
+    window.addEventListener('load', () => {
+        updateLogin();
+        updateEventBars();
+    });
+</script>
+
+</body>
+</html>
