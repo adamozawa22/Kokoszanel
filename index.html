@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O mnie - Windows 7 Style</title>
     <style>
-        /* RESET I PODSTAWY */
         * { box-sizing: border-box; }
+        
         body {
             margin: 0;
             padding: 0;
@@ -14,8 +14,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Kultowa tapeta Windows 7 */
-            background: url('https://wallpaperaccess.com/full/1567665.jpg') no-repeat center center fixed;
+            /* Kultowa tapeta Windows 7 Harmony */
+            background: url('https://images.wallpapersden.com/image/download/windows-7-original-wallpaper_bWltZ26UmZqaraWkpJRmbmdlrWZlbWU.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
         }
@@ -24,12 +24,12 @@
         .window {
             width: 850px;
             height: 550px;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.4);
             border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 2px white;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 2px white;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -37,7 +37,7 @@
 
         /* PASEK TYTUŁOWY */
         .title-bar {
-            height: 35px;
+            height: 38px;
             padding: 0 15px;
             display: flex;
             justify-content: space-between;
@@ -48,56 +48,61 @@
         .title-text {
             color: white;
             font-size: 13px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 3px black;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 3px black;
         }
 
-        /* TWOJE MENU NAV-MENU */
+        /* ZAKTUALIZOWANE MENU */
         .nav-menu {
             list-style-type: none;
             margin: 0;
-            padding: 5px 15px;
+            padding: 2px 10px;
             display: flex;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.15);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            gap: 2px;
+            background: rgba(240, 240, 240, 0.8);
+            border-bottom: 1px solid #a0a0a0;
         }
 
         .nav-menu li a {
             text-decoration: none;
             color: #111;
             font-size: 12px;
-            padding: 6px 14px;
-            border-radius: 3px;
+            padding: 7px 15px;
+            display: block;
+            border-radius: 2px;
             border: 1px solid transparent;
             transition: 0.2s;
         }
 
         .nav-menu li a:hover {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
-            border-color: rgba(255,255,255,0.5);
-            box-shadow: 0 0 5px rgba(255,255,255,0.3);
+            background: linear-gradient(to bottom, #fdfdfd, #dceefb);
+            border: 1px solid #7eb4ea;
+            box-shadow: inset 0 0 2px white;
         }
 
         .nav-menu li a.active {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: #fff;
+            border: 1px solid #a0a0a0;
+            border-bottom-color: transparent;
             font-weight: bold;
+            position: relative;
+            z-index: 10;
+            margin-bottom: -1px; /* Efekt zakładki */
         }
 
-        /* GŁÓWNA TREŚĆ - UKŁAD "O MNIE" */
+        /* GŁÓWNA TREŚĆ */
         .main-container {
             flex-grow: 1;
             display: flex;
-            background: #f0f0f0; /* Typowe tło okna Windows */
-            margin: 2px 5px 5px 5px;
-            border-radius: 0 0 3px 3px;
+            background: #fff;
+            margin: 0 4px 4px 4px;
             border: 1px solid #a0a0a0;
+            border-top: none;
         }
 
-        /* Sidebar po lewej */
+        /* Sidebar */
         .sidebar {
-            width: 200px;
-            background: linear-gradient(to right, #e8f1fc, #d2e3f7);
+            width: 180px;
+            background: linear-gradient(to right, #f0f7ff, #d9e7f9);
             border-right: 1px solid #b5c7de;
             padding: 20px;
             display: flex;
@@ -106,86 +111,21 @@
         }
 
         .profile-pic {
-            width: 120px;
-            height: 120px;
-            background: #ccc;
-            border: 4px solid white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border-radius: 4px; /* Win7 używał lekko zaokrąglonych kwadratów */
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border: 1px solid #707070;
+            padding: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             margin-bottom: 15px;
-            object-fit: cover;
         }
 
-        /* Treść po prawej */
         .content {
             flex-grow: 1;
-            padding: 25px;
+            padding: 30px;
             overflow-y: auto;
             color: #333;
         }
 
-        h1 { font-size: 22px; color: #003399; margin-top: 0; font-weight: normal; }
-        h2 { font-size: 16px; color: #003399; border-bottom: 1px solid #b5c7de; padding-bottom: 5px; }
-        p { font-size: 13px; line-height: 1.6; }
-
-        /* Przycisk w stylu Win7 */
-        .win7-btn {
-            display: inline-block;
-            padding: 5px 20px;
-            background: linear-gradient(to bottom, #f2f2f2, #ebebeb 50%, #dddddd 51%, #cfcfcf);
-            border: 1px solid #707070;
-            border-radius: 3px;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .win7-btn:hover {
-            border-color: #3c7fb1;
-            box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
-        }
-    </style>
-</head>
-<body>
-
-<div class="window">
-    <div class="title-bar">
-        <div class="title-text">O mnie - Eksplorator Systemu</div>
-        <div style="color: white; font-size: 18px; letter-spacing: 5px;">_ ▢ ✕</div>
-    </div>
-
-    <ul class="nav-menu">
-        <li><a href="index.html" class="active">START</a></li>
-        <li><a href="inne.html">INNE</a></li>
-        <li><a href="kontakt.html">KONTAKT</a></li>
-        <li><a href="diy_serwis.html">DIY / SERWIS</a></li>
-    </ul>
-
-    <div class="main-container">
-        <aside class="sidebar">
-            <img src="https://via.placeholder.com/120" alt="Avatar" class="profile-pic">
-            <div style="font-size: 12px; color: #444; text-align: center;">
-                <strong>Użytkownik</strong><br>
-                Online
-            </div>
-        </aside>
-
-        <section class="content">
-            <h1>Cześć, tutaj [Twoje Imię]</h1>
-            <p>Witamy w moim cyfrowym profilu. Jestem pasjonatem technologii, który uwielbia klasyczny design systemu Windows 7.</p>
-            
-            <h2>Moja Historia</h2>
-            <p>Tutaj możesz wpisać kilka słów o sobie. Czym się zajmujesz, jakie masz doświadczenie i dlaczego zdecydowałeś się na taką formę strony.</p>
-            
-            <h2>Umiejętności</h2>
-            <p>• HTML5 / CSS3 (Aero Design)<br>
-               • Majsterkowanie i DIY<br>
-               • Serwis urządzeń</p>
-
-            <button class="win7-btn">Pobierz CV</button>
-        </section>
-    </div>
-</div>
-
-</body>
-</html>
+        h1 { font-size: 24px; color: #1e395b; margin-top: 0; font-weight: normal; }
+        h2 { font-size: 16px
