@@ -121,3 +121,120 @@
     <div class="title-bar">
         <div class="title-bar-text">Profil: Informacje o mnie :)</div>
         <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="window-body" style="margin: 0; padding: 0; display: flex; flex-direction: column;">
+        
+        <div class="header-profile">
+            <div class="picture-frame">
+                <img src="profilowe.pfp.jpg" alt="PFP">
+                <div style="position: absolute; bottom: -5px; right: -5px; background: #5cb85c; color: white; font-size: 10px; padding: 1px 4px; border: 2px solid white; font-weight: bold;">OK</div>
+            </div>
+            <div class="info-column">
+                <div style="font-size: 18px; font-weight: bold; color: #003399;">Imię "Kandydat" Nazwisko</div>
+                <div style="font-size: 13px; color: #444; margin-top: 5px;">< . . . Kodowanie to pasja . . . ></div>
+            </div>
+        </div>
+
+        <div class="content-scroll has-scrollbar">
+            <ul class="tree-view has-connector">
+                <li>
+                    <details open>
+                        <summary>[+] Kim jestem?</summary>
+                        <ul>
+                            <li>> Fan technologii retro</li>
+                            <li>> Web Developer</li>
+                            <li>> Miłośnik UI z ery Windows 7</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details open>
+                        <summary>[+] Umiejętności</summary>
+                        <ul>
+                            <li>> HTML5 / CSS3 / JavaScript</li>
+                            <li>> Projektowanie interfejsów</li>
+                            <li>> Rozwiązywanie problemów</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>[+] Kontakt</summary>
+                        <ul>
+                            <li>> E-mail: twoj@mail.pl</li>
+                            <li>> GitHub: github.com/user</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+
+        <div class="status-bar">
+            <p class="status-bar-field">Status: Połączono</p>
+            <p class="status-bar-field">Ostatnie logowanie: Dzisiaj</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const overlay = document.getElementById('loading-overlay');
+    const mainWindow = document.getElementById('main-window');
+    const bar = document.querySelector('#connection-bar div');
+    const percentLabel = document.getElementById('loading-percent');
+    const statusLabel = document.getElementById('loading-text');
+    const toast = document.getElementById('msn-toast');
+
+    let progress = 0;
+    const statuses = [
+        "Nawiązywanie połączenia...",
+        "Weryfikacja profilu...",
+        "Pobieranie danych...",
+        "Kończenie..."
+    ];
+
+    function updateProgress() {
+        // Losowy, ale mniejszy skok dla płynności
+        let jump = Math.floor(Math.random() * 10) + 5;
+        progress += jump;
+
+        if (progress > 100) progress = 100;
+
+        bar.style.width = progress + "%";
+        percentLabel.innerText = progress + "%";
+
+        if (progress > 30) statusLabel.innerText = statuses[1];
+        if (progress > 70) statusLabel.innerText = statuses[2];
+        if (progress > 90) statusLabel.innerText = statuses[3];
+
+        if (progress < 100) {
+            // Czas oczekiwania od 0.6s do 1.8s (symulacja doczytywania)
+            let delay = Math.floor(Math.random() * 1200) + 600;
+            setTimeout(updateProgress, delay);
+        } else {
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    mainWindow.style.display = 'flex';
+                    
+                    // POJAWIENIE SIĘ TOASTA (Znajomy się zalogował)
+                    setTimeout(() => {
+                        toast.classList.add('show');
+                        setTimeout(() => toast.classList.remove('show'), 4000);
+                    }, 1500);
+
+                }, 500);
+            }, 1000);
+        }
+    }
+
+    window.addEventListener('load', updateProgress);
+</script>
+
+</body>
+</html>
