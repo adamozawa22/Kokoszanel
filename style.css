@@ -1,313 +1,154 @@
- /* TK TV - LIGHT APPLE 2012 STYLE + ROUNDED IMAGES */
-
-
+/* WINDOWS 7 AERO GLASS STYLE - REANIMATION */
 
 body {
-
     margin: 0;
-
     padding: 0;
-
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
-
-    /* Jasne lniane tło */
-
-    background: #d1d1d1 url('https://www.transparenttextures.com/patterns/linen.png');
-
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    /* Klasyczna tapeta Windows 7 (Aurora) lub jasny błękit */
+    background: #004687 linear-gradient(135deg, #004687 0%, #0099ff 100%);
     background-attachment: fixed;
-
-    color: #333;
-
+    color: #1a1a1a;
 }
-
-
 
 #wrapper {
-
     width: 980px;
-
-    margin: 30px auto;
-
-    background: #ffffff;
-
-    border-radius: 10px; /* Lekko zaokrąglony główny kontener */
-
-    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-
+    margin: 40px auto;
+    /* Efekt Aero Glass */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 
+                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
     overflow: hidden;
-
-    border: 1px solid #aaa;
-
 }
 
-
-
-/* Srebrny, aluminiowy nagłówek */
-
+/* Pasek tytułowy / Nagłówek */
 header {
-
-    background: linear-gradient(to bottom, #ebebeb 0%, #d5d5d5 50%, #c5c5c5 51%, #c5c5c5 100%);
-
-    padding: 30px;
-
-    border-bottom: 1px solid #999;
-
+    background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0.1) 51%, 
+                rgba(255, 255, 255, 0.3) 100%);
+    padding: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     text-align: center;
-
-    box-shadow: inset 0 1px 0 #fff;
-
 }
-
-
 
 header h1 {
-
     margin: 0;
-
-    font-size: 32px;
-
-    color: #333;
-
-    text-shadow: 0 1px 0 #fff;
-
-    font-weight: 200;
-
-    letter-spacing: 1px;
-
+    font-size: 28px;
+    color: #000;
+    font-weight: 500;
+    /* Glow pod tekstem dla czytelności na szkle */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5);
 }
-
-
 
 header p {
-
     margin: 5px 0 0 0;
-
-    color: #666;
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
+    color: #222;
+    font-size: 12px;
+    font-weight: 400;
 }
 
-
-
-/* Nawigacja Mac OS X */
-
+/* Nawigacja a la Pasek zadań / Menu */
 nav {
-
-    background: linear-gradient(to bottom, #f6f6f6 0%, #e1e1e1 100%);
-
-    border-bottom: 1px solid #ccc;
-
-    box-shadow: inset 0 1px 0 #fff;
-
+    background: rgba(200, 220, 240, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-
 
 .nav-menu {
-
     display: flex;
-
     justify-content: center;
-
     list-style: none;
-
     margin: 0; padding: 0;
-
 }
-
-
 
 .nav-menu li a {
-
-    padding: 12px 25px;
-
+    padding: 10px 25px;
     display: block;
-
     text-decoration: none;
-
-    color: #444;
-
-    font-weight: bold;
-
+    color: #111;
     font-size: 13px;
-
-    text-shadow: 0 1px 0 #fff;
-
-    border-right: 1px solid #d1d1d1;
-
-    transition: all 0.2s ease;
-
+    transition: all 0.3s ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.nav-menu li a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
 
-
-.nav-menu li a:hover, .nav-menu li a.active {
-
-    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
-
+.nav-menu li a.active {
+    background: linear-gradient(to bottom, #7db9e8 0%, #2989d8 100%);
     color: #fff;
-
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
-
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-
-
-/* Treść główna */
-
+/* Treść główna - biała, półprzezroczysta karta */
 #content-area {
-
-    padding: 50px;
-
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.85); /* Solidniejszy biały pod tekst */
+    margin: 10px;
+    border-radius: 4px;
 }
-
-
-
-/* --- NOWOŚĆ: STYL ZAOKRĄGLONYCH ZDJĘĆ --- */
 
 #content-area img {
-
-    border-radius: 12px; /* To zaokrągla rogi zdjęć */
-
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Miękki cień pod zdjęciem */
-
-    border: 1px solid rgba(0,0,0,0.1); /* Subtelna ramka */
-
+    border-radius: 4px; /* Win7 miał mniej zaokrąglone zdjęcia niż Apple */
+    border: 4px solid #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     display: block;
-
     max-width: 100%;
-
     height: auto;
-
-    margin: 20px auto; /* Centrowanie zdjęć */
-
+    margin: 20px auto;
 }
-
-/* ---------------------------------------- */
-
-
 
 .article-main-title {
-
-    font-size: 26px;
-
-    color: #222;
-
-    font-weight: 300;
-
-    margin-bottom: 30px;
-
-    padding-bottom: 15px;
-
-    border-bottom: 1px solid #e0e0e0;
-
-    text-align: center;
-
+    font-size: 24px;
+    color: #1a3b69; /* Klasyczny błękit Windows */
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c0c0c0;
+    padding-bottom: 10px;
 }
 
-
-
-section.post h2 {
-
-    font-weight: 300;
-
-    font-size: 28px;
-
-    color: #111;
-
-}
-
-
-
-section.post p {
-
-    font-size: 16px;
-
-    line-height: 1.7;
-
-    color: #444;
-
-}
-
-
-
-/* NIEBIESKIE PRZYCISKI APPLE (GUMDROP) */
-
+/* PRZYCISKI W STYLU AERO (Glow + Gel) */
 .btn-more {
-
     display: inline-block;
-
-    padding: 12px 35px;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
+    padding: 8px 25px;
+    font-size: 13px;
+    color: #111;
     text-decoration: none;
-
-    border-radius: 25px; /* Bardziej okrągłe przyciski */
-
-    color: #fff;
-
-    border: 1px solid #1a4d80;
-
-    /* Niebieski gradient Apple */
-
-    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
-
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
-
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
-
-    transition: all 0.1s ease;
-
+    border-radius: 5px;
+    border: 1px solid #707070;
+    position: relative;
+    /* Szklany gradient */
+    background: linear-gradient(to bottom, 
+                #f2f2f2 0%, 
+                #ebebeb 50%, 
+                #dddddd 51%, 
+                #cfcfcf 100%);
+    box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
 }
-
-
 
 .btn-more:hover {
-
-    /* Odwrócenie gradientu - efekt podświetlenia */
-
-    background: linear-gradient(to bottom, #2989d8 0%, #1e5799 50%, #207cca 51%, #7db9e8 100%);
-
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4), inset 0 -1px 0 rgba(0,0,0,0.2);
-
-    transform: translateY(-1px);
-
+    border-color: #3c7fb1;
+    background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%);
+    box-shadow: 0 0 8px rgba(60, 127, 177, 0.6);
 }
-
-
 
 .btn-more:active {
-
-    transform: translateY(1px);
-
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
-
+    background: #cedbe3;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
 }
 
-
-
 footer {
-
-    padding: 30px;
-
+    padding: 20px;
     text-align: center;
-
-    background: #f4f4f4;
-
-    border-top: 1px solid #ddd;
-
+    background: rgba(255, 255, 255, 0.3);
     font-size: 11px;
-
-    color: #888;
-
-    box-shadow: inset 0 1px 0 #fff;
-
+    color: #333;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
