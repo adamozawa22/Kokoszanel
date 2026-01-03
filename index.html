@@ -173,4 +173,49 @@
                 </li>
                 <li>
                     <details>
-                        <summary>
+                        <summary><span class="section-icon">🛠️</span>Moje supermoce (Skille)</summary>
+                        <ul>
+                            <li><strong>Frontend:</strong> React, Vue, 7.css, Tailwind</li>
+                            <li><strong>Backend:</strong> Node.js, Python</li>
+                            <li><strong>Design:</strong> Photoshop, Figma</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary><span class="section-icon">🎮</span>Po godzinach (Zainteresowania)</summary>
+                        <ul>
+                            <li>Gry RPG z lat 2000.</li>
+                            <li>Kolekcjonowanie starych klawiatur.</li>
+                            <li>Górskie wędrówki.</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+
+        <div class="status-bar">
+            <p class="status-bar-field">Ostatnia aktywność: Dzisiaj</p>
+            <p class="status-bar-field">Wersja profilu: 1.0</p>
+        </div>
+
+        <div class="footer-actions">
+            <button onclick="alert('Wysłano zaproszenie!')">Dodaj mnie</button>
+            <button class="default">Napisz wiadomość</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Prosty skrypt zdejmujący ekran ładowania
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const loader = document.getElementById('loading-overlay');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        }, 1500);
+    });
+</script>
+
+</body>
+</html>
