@@ -1,59 +1,56 @@
-/* TK TV - PREMIUM GLASS STYLE WITH CUSTOM LOGO FONT */
+/* TK TV - APPLE 2015 MINIMAL GLASS STYLE */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Lucida Grande", "Segoe UI", sans-serif;
-    background: #a1a1a1 url('https://www.transparenttextures.com/patterns/linen.png');
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Bardziej nowoczesny font */
+    background: #b0b0b0 url('https://www.transparenttextures.com/patterns/linen.png');
     background-attachment: fixed;
 }
 
 #wrapper {
     width: 980px;
     margin: 40px auto;
-    background: rgba(255, 255, 255, 0.5); 
+    /* Czyste, lekkie szkło */
+    background: rgba(255, 255, 255, 0.75); 
     backdrop-filter: blur(20px); 
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.2);
     overflow: hidden;
 }
 
-/* --- NOWY STYL LOGO TK TV --- */
+/* Nowoczesne, czyste logo */
 header {
-    background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(200,200,200,0.4) 100%);
-    padding: 35px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.3);
+    padding: 40px;
     text-align: center;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 header h1 {
     margin: 0;
-    /* Inny font dla Logo: Trebuchet MS jest elegancki i nowoczesny */
-    font-family: "Trebuchet MS", "Arial Black", sans-serif;
-    font-size: 48px; /* Większe logo */
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 52px;
     font-weight: bold;
-    color: #111;
+    color: #1a1a1a;
+    letter-spacing: -1.5px;
     text-transform: uppercase;
-    letter-spacing: -2px; /* Ciasny odstęp liter jak w logotypach TV */
-    text-shadow: 0 1px 0 #fff, 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header p {
-    margin-top: -5px;
-    font-family: "Lucida Grande", sans-serif; /* Powrót do standardu dla podtytułu */
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #555;
-    font-weight: bold;
+    margin-top: 5px;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #666;
 }
 
-/* Menu w stylu "Zakładek" */
+/* Menu - Styl Zakładek */
 nav {
-    background: linear-gradient(to bottom, #f9f9f9 0%, #e2e2e2 100%);
-    border-bottom: 1px solid #bbb;
+    background: rgba(240, 240, 240, 0.8);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .nav-menu {
@@ -64,68 +61,68 @@ nav {
 }
 
 .nav-menu li a {
-    padding: 14px 28px;
+    padding: 16px 32px;
     display: block;
     text-decoration: none;
-    color: #444;
-    font-weight: bold;
+    color: #333;
+    font-weight: 500;
     font-size: 13px;
-    text-shadow: 0 1px 0 #fff;
-    border-right: 1px solid #ccc;
+    transition: all 0.2s;
 }
 
+/* Efekt zakładki - Niebieski Apple 2015 */
 .nav-menu li a:hover, .nav-menu li a.active {
-    background: linear-gradient(to bottom, #7db9e8 0%, #2989d8 100%);
+    background-color: #007aff; /* Oficjalny niebieski Apple */
     color: #fff;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
 }
 
 #content-area {
-    padding: 50px;
+    padding: 60px;
 }
 
-/* Nagłówek artykułu */
 .article-main-title {
-    font-size: 26px;
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 30px;
+    font-size: 28px;
+    color: #1a1a1a;
+    font-weight: 600;
+    margin-bottom: 40px;
     text-align: center;
-    font-family: "Lucida Grande", sans-serif;
 }
 
-/* Zaokrąglone zdjęcia */
+/* Zaokrąglone zdjęcia (2015 Style) */
 #content-area img {
-    border-radius: 20px; /* Mocniejsze zaokrąglenie */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 20px auto;
 }
 
-/* Przyciski w stylu niebieskich zakładek */
+/* --- PRZYCISKI IDENTYCZNE JAK ZAKŁADKI --- */
 .btn-more {
     display: inline-block;
-    padding: 12px 35px;
-    font-size: 14px;
-    font-weight: bold;
+    padding: 14px 32px;
+    font-size: 13px;
+    font-weight: 500;
     text-decoration: none;
-    color: #fff;
-    border-radius: 6px;
-    border: 1px solid #1e5799;
-    background: linear-gradient(to bottom, #7db9e8 0%, #2989d8 100%);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+    color: #333;
+    background: rgba(0,0,0,0.05); /* Lekkie tło domyślne */
+    border: none; /* Brak zbędnych obramowań */
+    transition: all 0.2s;
 }
 
 .btn-more:hover {
-    opacity: 0.9;
-    box-shadow: 0 4px 12px rgba(41, 137, 216, 0.4);
+    background-color: #007aff; /* Taki sam niebieski jak w menu */
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+}
+
+.btn-more:active {
+    background-color: #005ecb;
 }
 
 footer {
     padding: 40px;
     text-align: center;
-    background: rgba(255,255,255,0.2);
-    border-top: 1px solid rgba(0,0,0,0.1);
-    font-size: 11px;
-    color: #444;
+    background: rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    font-size: 12px;
+    color: #777;
 }
