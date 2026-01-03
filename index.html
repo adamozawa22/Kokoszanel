@@ -2,69 +2,189 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>TK TV - O nas i Redakcja</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O mnie - Windows 7 Style</title>
+    <style>
+        /* RESET I PODSTAWY */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Kultowa tapeta Windows 7 */
+            background: url('https://wallpaperaccess.com/full/1567665.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+        }
+
+        /* GŁÓWNE OKNO AERO GLASS */
+        .window {
+            width: 850px;
+            height: 550px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 2px white;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* PASEK TYTUŁOWY */
+        .title-bar {
+            height: 35px;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%);
+        }
+
+        .title-text {
+            color: white;
+            font-size: 13px;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 3px black;
+        }
+
+        /* TWOJE MENU NAV-MENU */
+        .nav-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 15px;
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #111;
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 3px;
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+
+        .nav-menu li a:hover {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 5px rgba(255,255,255,0.3);
+        }
+
+        .nav-menu li a.active {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+        }
+
+        /* GŁÓWNA TREŚĆ - UKŁAD "O MNIE" */
+        .main-container {
+            flex-grow: 1;
+            display: flex;
+            background: #f0f0f0; /* Typowe tło okna Windows */
+            margin: 2px 5px 5px 5px;
+            border-radius: 0 0 3px 3px;
+            border: 1px solid #a0a0a0;
+        }
+
+        /* Sidebar po lewej */
+        .sidebar {
+            width: 200px;
+            background: linear-gradient(to right, #e8f1fc, #d2e3f7);
+            border-right: 1px solid #b5c7de;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            background: #ccc;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 4px; /* Win7 używał lekko zaokrąglonych kwadratów */
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        /* Treść po prawej */
+        .content {
+            flex-grow: 1;
+            padding: 25px;
+            overflow-y: auto;
+            color: #333;
+        }
+
+        h1 { font-size: 22px; color: #003399; margin-top: 0; font-weight: normal; }
+        h2 { font-size: 16px; color: #003399; border-bottom: 1px solid #b5c7de; padding-bottom: 5px; }
+        p { font-size: 13px; line-height: 1.6; }
+
+        /* Przycisk w stylu Win7 */
+        .win7-btn {
+            display: inline-block;
+            padding: 5px 20px;
+            background: linear-gradient(to bottom, #f2f2f2, #ebebeb 50%, #dddddd 51%, #cfcfcf);
+            border: 1px solid #707070;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .win7-btn:hover {
+            border-color: #3c7fb1;
+            box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+        }
+    </style>
 </head>
 <body>
 
-<div id="wrapper">
-    <header>
-        <div id="logo-box">
-            <h1>TK TV</h1>
-            <p>TWOJA GAZETA O ELEKTRONICE • WYDANIE CYFROWE</p>
-        </div>
-    </header>
+<div class="window">
+    <div class="title-bar">
+        <div class="title-text">O mnie - Eksplorator Systemu</div>
+        <div style="color: white; font-size: 18px; letter-spacing: 5px;">_ ▢ ✕</div>
+    </div>
 
-    <nav>
-        <ul class="nav-menu">
-            <li><a href="index.html" class="active">START</a></li>
-            <li><a href="artykul.html">ARTYKUŁY</a></li>
-            <li><a href="inne.html">INNE</a></li>
-            <li><a href="kontakt.html">KONTAKT</a></li>
-        </ul>
-    </nav>
+    <ul class="nav-menu">
+        <li><a href="index.html" class="active">START</a></li>
+        <li><a href="inne.html">INNE</a></li>
+        <li><a href="kontakt.html">KONTAKT</a></li>
+        <li><a href="diy_serwis.html">DIY / SERWIS</a></li>
+    </ul>
 
-    <main id="content-area">
-        
-        <section class="category-header">
-            <h2>Kim jesteśmy?</h2>
-        </section>
-
-        <article class="post">
-            <div class="post-description" style="font-size: 16px; line-height: 1.8; color: #333;">
-                <p><strong>TK TV</strong> to niezależna gazeta internetowa, która od lat dokumentuje świat technologii, systemów operacyjnych i inżynierii elektronicznej. Nie jesteśmy korporacją – jesteśmy grupą pasjonatów, dla których każdy rezystor i każda linijka kodu mają znaczenie.</p>
-                <p>Nasza redakcja dostarcza rzetelne testy sprzętu, poradniki serwisowe oraz analizy systemów Windows i Linux. Wszystko to robimy w duchu <em>Open Source</em> i wolności informacji – dlatego nasze treści są publikowane bez praw zastrzeżonych, aby mogły służyć każdemu.</p>
+    <div class="main-container">
+        <aside class="sidebar">
+            <img src="https://via.placeholder.com/120" alt="Avatar" class="profile-pic">
+            <div style="font-size: 12px; color: #444; text-align: center;">
+                <strong>Użytkownik</strong><br>
+                Online
             </div>
-            <div class="line-divider"></div>
-        </article>
+        </aside>
 
-        <section class="category-header">
-            <h2>Współpraca i Redakcja</h2>
+        <section class="content">
+            <h1>Cześć, tutaj [Twoje Imię]</h1>
+            <p>Witamy w moim cyfrowym profilu. Jestem pasjonatem technologii, który uwielbia klasyczny design systemu Windows 7.</p>
+            
+            <h2>Moja Historia</h2>
+            <p>Tutaj możesz wpisać kilka słów o sobie. Czym się zajmujesz, jakie masz doświadczenie i dlaczego zdecydowałeś się na taką formę strony.</p>
+            
+            <h2>Umiejętności</h2>
+            <p>• HTML5 / CSS3 (Aero Design)<br>
+               • Majsterkowanie i DIY<br>
+               • Serwis urządzeń</p>
+
+            <button class="win7-btn">Pobierz CV</button>
         </section>
-
-        <article class="post" style="text-align: center;">
-            <div class="post-description">
-                <p>Chcesz współtworzyć TK TV? Nasza gazeta jest otwarta na treści od czytelników. Jeśli masz gotowy artykuł, projekt DIY lub ciekawą recenzję, prześlij ją do nas za pomocą oficjalnego arkusza redakcyjnego.</p>
-                
-                <p style="margin: 40px 0;">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdwl5ifxUrO0clgywE4c0xL4dBfsswB6GEV5_q5c3bsaNavbw/viewform?usp=publish-editor" target="_blank" class="btn-more" style="font-size: 16px; padding: 15px 40px;">
-                        KLIKNIJ TUTAJ, ABY DODAĆ ARTYKUŁ
-                    </a>
-                </p>
-
-                <p style="font-size: 13px; color: #777;">
-                    Link prowadzi do zewnętrznego formularza zgłoszeniowego. <br>
-                    Po wysłaniu, nasi moderatorzy sprawdzą treść i opublikują ją w odpowiednim dziale.
-                </p>
-            </div>
-        </article>
-
-    </main>
-
-    <footer>
-        <p><strong>TK TV - GAZETA ELEKTRONICZNA</strong></p>
-        <p>Wszystkie materiały dostępne są za darmo dla całej społeczności.</p>
-    </footer>
+    </div>
 </div>
 
 </body>
