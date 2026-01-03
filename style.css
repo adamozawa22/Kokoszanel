@@ -1,56 +1,60 @@
-/* TK TV - APPLE 2015 MINIMAL GLASS STYLE */
+/* TK TV - COMPLETE APPLE 2015 MINIMALIST SYSTEM */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Bardziej nowoczesny font */
-    background: #b0b0b0 url('https://www.transparenttextures.com/patterns/linen.png');
-    background-attachment: fixed;
+    /* Apple 2015 odszedł od lnu na rzecz czystych, jasnych teł lub rozmytych barw */
+    background: #f5f5f7; 
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1d1d1f;
+    -webkit-font-smoothing: antialiased;
 }
 
 #wrapper {
-    width: 980px;
-    margin: 40px auto;
-    /* Czyste, lekkie szkło */
-    background: rgba(255, 255, 255, 0.75); 
-    backdrop-filter: blur(20px); 
-    -webkit-backdrop-filter: blur(20px);
+    width: 1000px;
+    margin: 50px auto;
+    /* Ultra-czyste szkło (Vibrant Glass) */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
-/* Nowoczesne, czyste logo */
+/* Header - Pełny minimalizm */
 header {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 40px;
+    padding: 60px 20px;
     text-align: center;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: transparent;
 }
 
 header h1 {
     margin: 0;
     font-family: "Trebuchet MS", sans-serif;
-    font-size: 52px;
-    font-weight: bold;
-    color: #1a1a1a;
-    letter-spacing: -1.5px;
+    font-size: 56px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -2px;
     text-transform: uppercase;
 }
 
 header p {
-    margin-top: 5px;
-    font-size: 11px;
-    letter-spacing: 5px;
-    color: #666;
+    margin: 10px 0 0 0;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: #86868b;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
-/* Menu - Styl Zakładek */
+/* Nawigacja - Styl "Tab" bez linii */
 nav {
-    background: rgba(240, 240, 240, 0.8);
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .nav-menu {
@@ -61,68 +65,66 @@ nav {
 }
 
 .nav-menu li a {
-    padding: 16px 32px;
+    padding: 18px 35px;
     display: block;
     text-decoration: none;
     color: #333;
-    font-weight: 500;
-    font-size: 13px;
-    transition: all 0.2s;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.2s ease;
 }
 
-/* Efekt zakładki - Niebieski Apple 2015 */
+/* Niebieski akcent Apple (bez ramek) */
 .nav-menu li a:hover, .nav-menu li a.active {
-    background-color: #007aff; /* Oficjalny niebieski Apple */
+    background-color: #007aff;
     color: #fff;
 }
 
+/* Treść główna */
 #content-area {
-    padding: 60px;
+    padding: 60px 80px;
 }
 
 .article-main-title {
-    font-size: 28px;
-    color: #1a1a1a;
+    font-size: 32px;
+    color: #000;
     font-weight: 600;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     text-align: center;
+    letter-spacing: -0.5px;
 }
 
-/* Zaokrąglone zdjęcia (2015 Style) */
+/* Zaokrąglone zdjęcia (Smooth Corners) */
 #content-area img {
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    margin: 20px auto;
+    border-radius: 14px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    margin: 30px auto;
 }
 
-/* --- PRZYCISKI IDENTYCZNE JAK ZAKŁADKI --- */
+/* PRZYCISKI - IDENTYCZNE JAK ZAKŁADKI */
 .btn-more {
     display: inline-block;
-    padding: 14px 32px;
-    font-size: 13px;
-    font-weight: 500;
+    padding: 15px 40px;
+    font-size: 14px;
+    font-weight: 400;
     text-decoration: none;
     color: #333;
-    background: rgba(0,0,0,0.05); /* Lekkie tło domyślne */
-    border: none; /* Brak zbędnych obramowań */
-    transition: all 0.2s;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 0; /* Kwadratowe jak zakładki w menu */
+    transition: all 0.2s ease;
 }
 
 .btn-more:hover {
-    background-color: #007aff; /* Taki sam niebieski jak w menu */
+    background-color: #007aff;
     color: #fff;
-    box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
 }
 
-.btn-more:active {
-    background-color: #005ecb;
-}
-
+/* Stopka */
 footer {
-    padding: 40px;
+    padding: 50px;
     text-align: center;
-    background: rgba(255,255,255,0.1);
-    border-top: 1px solid rgba(0,0,0,0.05);
     font-size: 12px;
-    color: #777;
+    color: #86868b;
+    background: rgba(0,0,0,0.02);
 }
