@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <style>
         body {
-            background: #abd1ff url('login.jpg') no-repeat center center fixed;
+            background: #abd1ff url('https://wallpaperaccess.com/full/2160100.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -16,6 +16,7 @@
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
             overflow: hidden;
+            user-select: none;
         }
 
         /* EKRAN ŁADOWANIA */
@@ -23,7 +24,7 @@
             position: fixed;
             inset: 0;
             background: #e3efff;
-            z-index: 999;
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -31,34 +32,31 @@
             transition: opacity 0.5s;
         }
 
-        #connection-bar div {
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        #connection-bar div { transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
         /* OKNA */
-        .msn-card {
-            width: 420px;
-            max-height: 90vh;
-            display: none; 
-            flex-direction: column;
-            position: relative;
+        .window {
+            position: absolute;
+            z-index: 10;
         }
 
-        /* Tylko do pierwszego pokazania */
-        .initial-fade { animation: fadeIn 0.4s ease-in; }
+        .title-bar { cursor: move; }
+
+        #main-window {
+            width: 420px;
+            display: none;
+        }
 
         #chat-window {
             width: 300px;
-            position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 50px;
+            left: 50px;
             display: none;
-            z-index: 100;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        .initial-fade { animation: fadeIn 0.4s ease-in; }
 
-        /* NUDGE ANIMACJA - Czyste trzęsienie bez fade */
         @keyframes nudge {
             0% { transform: translate(0,0); }
             20% { transform: translate(-8px,-8px); }
@@ -106,6 +104,13 @@
             border: 1px solid #919191;
             flex-grow: 1;
             overflow-y: auto;
+            max-height: 350px;
+        }
+
+        /* Stylizacja pasków postępu wewnątrz drzewka */
+        .holiday-progress {
+            margin: 5px 0 10px 15px;
+            width: 80%;
         }
 
         #msn-toast {
@@ -117,7 +122,6 @@
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1000;
         }
-
         #msn-toast.show { transform: translateY(0); }
         .hidden { display: none !important; }
     </style>
@@ -147,22 +151,23 @@
     <div class="title-bar">
         <div class="title-bar-text">Rozmowa z: Adam</div>
         <div class="title-bar-controls">
-            <button aria-label="Close" onclick="this.closest('#chat-window').style.display='none'"></button>
+            <button aria-label="Minimize" onclick="this.closest('.window').style.display='none'"></button>
+            <button aria-label="Close" onclick="this.closest('.window').style.display='none'"></button>
         </div>
     </div>
     <div class="window-body">
-        <div style="background: white; border: 1px solid #718597; height: 100px; padding: 5px; font-size: 12px; overflow-y: auto; margin-bottom: 10px;">
+        <div style="background: white; border: 1px solid #718597; height: 80px; padding: 5px; font-size: 12px; overflow-y: auto; margin-bottom: 10px;">
             <p><strong style="color: #0066cc;">Adam mówi:</strong><br>Cześć! Skoro tu jesteś, pewnie chcesz nawiązać współpracę? :)</p>
         </div>
         <input type="text" placeholder="Napisz odpowiedź..." style="width: 100%;" disabled>
     </div>
 </div>
 
-<div id="main-window" class="window glass msn-card">
+<div id="main-window" class="window glass">
     <div class="title-bar">
         <div class="title-bar-text">Profil: Adam :)</div>
         <div class="title-bar-controls">
-            <button aria-label="Minimize"></button>
+            <button aria-label="Minimize" onclick="this.closest('.window').style.display='none'"></button>
             <button aria-label="Maximize"></button>
             <button aria-label="Close"></button>
         </div>
@@ -172,7 +177,7 @@
         <div class="header-profile">
             <div class="picture-frame">
                 <img src="profilowe.pfp.jpg" alt="PFP">
-                <div class="status-dot">Zalogowany</div>
+                <div class="status-dot">OK</div>
             </div>
             <div>
                 <div style="font-size: 18px; font-weight: bold; color: #003399;">Adam</div>
@@ -184,39 +189,34 @@
             <ul class="tree-view has-connector">
                 <li>
                     <details open>
-                        <summary>[+] Kim jestem?</summary>
+                        <summary>[+] Odliczanie do świąt</summary>
                         <ul>
-                            <li>> Pasjonat UI/UX z Polski</li>
-                            <li>> Web Developer & Designer</li>
-                            <li>> Lubię retro-design</li>
+                            <li>> Wielkanoc (2026):
+                                <div role="progressbar" class="holiday-progress"><div id="p-wielkanoc" style="width: 0%;"></div></div>
+                            </li>
+                            <li>> Wigilia:
+                                <div role="progressbar" class="holiday-progress"><div id="p-wigilia" style="width: 0%;"></div></div>
+                            </li>
+                            <li>> Nowy Rok:
+                                <div role="progressbar" class="holiday-progress"><div id="p-nowyrok" style="width: 0%;"></div></div>
+                            </li>
                         </ul>
                     </details>
                 </li>
                 <li>
                     <details open>
+                        <summary>[+] Kim jestem?</summary>
+                        <ul>
+                            <li>> Pasjonat UI/UX z Polski</li>
+                            <li>> Web Developer & Designer</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
                         <summary>[+] Umiejętności</summary>
                         <ul>
                             <li>> Piracenie gier</li>
-                            <li>> Tworzenie stron internetowych</li>
-                            <li>> Łatwe nawiązywanie relacji</li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>[+] Edukacja</summary>
-                        <ul>
-                            <li>> Szkoła podstawowa :(</li>
-                            <li>> Kursy online</li>
-                        </ul>
-                    </details>
-                </li>
-                <li>
-                    <details>
-                        <summary>[+] Zainteresowania</summary>
-                        <ul>
-                            <li>> Gry komputerowe</li>
-                            <li>> Muzyka pop</li>
                             <li>> Tworzenie stron internetowych</li>
                         </ul>
                     </details>
@@ -241,6 +241,7 @@
 </div>
 
 <script>
+    // --- OBSŁUGA ŁADOWANIA ---
     const overlay = document.getElementById('loading-overlay');
     const mainWindow = document.getElementById('main-window');
     const bar = document.querySelector('#connection-bar div');
@@ -250,54 +251,88 @@
     const chatWin = document.getElementById('chat-window');
 
     let progress = 0;
-    const statuses = ["Nawiązywanie połączenia...", "Logowanie...", "Pobieranie profilu...", "Gotowe!"];
-
     function updateProgress() {
         let jump = Math.floor(Math.random() * 15) + 15;
         progress += jump;
         if (progress > 100) progress = 100;
-
         bar.style.width = progress + "%";
         percentLabel.innerText = progress + "%";
 
-        if (progress > 30) statusLabel.innerText = statuses[1];
-        if (progress > 70) statusLabel.innerText = statuses[2];
-        if (progress >= 100) statusLabel.innerText = statuses[3];
-
         if (progress < 100) {
-            let delay = Math.floor(Math.random() * 400) + 300;
-            setTimeout(updateProgress, delay);
+            setTimeout(updateProgress, Math.floor(Math.random() * 400) + 300);
         } else {
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.classList.add('hidden');
-                    // Pokazujemy okno i dodajemy animację wejścia tylko raz
                     mainWindow.style.display = 'flex';
                     mainWindow.classList.add('initial-fade');
-                    
-                    setTimeout(() => {
-                        toast.classList.add('show');
-                        setTimeout(() => toast.classList.remove('show'), 3500);
-                    }, 800);
-
-                    setTimeout(() => {
-                        chatWin.style.display = 'block';
-                    }, 3000);
-
+                    calculateHolidays();
+                    setTimeout(() => { toast.classList.add('show'); }, 800);
+                    setTimeout(() => { chatWin.style.display = 'block'; }, 2500);
                 }, 400);
             }, 600);
         }
     }
 
+    // --- PRZECIĄGANIE OKIEN ---
+    function makeDraggable(el) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        const titleBar = el.querySelector(".title-bar");
+        if (titleBar) {
+            titleBar.onmousedown = dragMouseDown;
+        }
+        function dragMouseDown(e) {
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+            el.style.zIndex = "100"; // Przenieś na wierzch przy kliknięciu
+        }
+        function elementDrag(e) {
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            el.style.top = (el.offsetTop - pos2) + "px";
+            el.style.left = (el.offsetLeft - pos1) + "px";
+        }
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+
+    makeDraggable(mainWindow);
+    makeDraggable(chatWin);
+
+    // --- ODLICZANIE ---
+    function calculateHolidays() {
+        const now = new Date();
+        const year = now.getFullYear();
+        
+        const holidays = {
+            "p-wielkanoc": new Date(year, 3, 5), // 5 Kwietnia 2026
+            "p-wigilia": new Date(year, 11, 24),
+            "p-nowyrok": new Date(year + 1, 0, 1)
+        };
+
+        for (let id in holidays) {
+            const startOfYear = new Date(year, 0, 1);
+            const diffTotal = holidays[id] - startOfYear;
+            const diffCurrent = now - startOfYear;
+            let perc = (diffCurrent / diffTotal) * 100;
+            if (perc > 100) perc = 100;
+            document.getElementById(id).style.width = perc + "%";
+        }
+    }
+
     function doNudge() {
-        // Usuwamy klasę fadeIn jeśli jest, żeby nie przeszkadzała
         mainWindow.classList.remove('initial-fade');
-        // Dodajemy potrząsanie
         mainWindow.classList.add('nudge-effect');
-        setTimeout(() => {
-            mainWindow.classList.remove('nudge-effect');
-        }, 400);
+        setTimeout(() => mainWindow.classList.remove('nudge-effect'), 400);
     }
 
     window.addEventListener('load', updateProgress);
