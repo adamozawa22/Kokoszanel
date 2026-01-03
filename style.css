@@ -1,56 +1,53 @@
-/* TK TV - LIGHT APPLE 2012 STYLE + ROUNDED IMAGES */
+/* TK TV - ULTRA AERO GLASS APPLE STYLE */
 
 body {
     margin: 0;
     padding: 0;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
-    /* Jasne lniane tło */
-    background: #d1d1d1 url('https://www.transparenttextures.com/patterns/linen.png');
+    font-family: "Lucida Grande", sans-serif;
+    /* Ciemniejsze tło lnu, żeby szkło było lepiej widoczne */
+    background: #a1a1a1 url('https://www.transparenttextures.com/patterns/linen.png');
     background-attachment: fixed;
-    color: #333;
 }
 
 #wrapper {
     width: 980px;
-    margin: 30px auto;
-    background: #ffffff;
-    border-radius: 10px; /* Lekko zaokrąglony główny kontener */
-    box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+    margin: 40px auto;
+    /* Mocna przezroczystość i rozmycie (Aero Effect) */
+    background: rgba(255, 255, 255, 0.45); 
+    backdrop-filter: blur(25px); 
+    -webkit-backdrop-filter: blur(25px);
+    
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.4);
     overflow: hidden;
-    border: 1px solid #aaa;
 }
 
-/* Srebrny, aluminiowy nagłówek */
+/* Szklany, jasny nagłówek */
 header {
-    background: linear-gradient(to bottom, #ebebeb 0%, #d5d5d5 50%, #c5c5c5 51%, #c5c5c5 100%);
-    padding: 30px;
-    border-bottom: 1px solid #999;
+    background: linear-gradient(to bottom, 
+        rgba(255,255,255,0.8) 0%, 
+        rgba(220,220,220,0.4) 50%, 
+        rgba(200,200,200,0.3) 51%, 
+        rgba(220,220,220,0.4) 100%);
+    padding: 35px;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
     text-align: center;
-    box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 header h1 {
     margin: 0;
-    font-size: 32px;
-    color: #333;
-    text-shadow: 0 1px 0 #fff;
+    font-size: 36px;
+    color: #222;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
     font-weight: 200;
-    letter-spacing: 1px;
 }
 
-header p {
-    margin: 5px 0 0 0;
-    color: #666;
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* Nawigacja Mac OS X */
+/* Przezroczysta nawigacja */
 nav {
-    background: linear-gradient(to bottom, #f6f6f6 0%, #e1e1e1 100%);
-    border-bottom: 1px solid #ccc;
-    box-shadow: inset 0 1px 0 #fff;
+    background: rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .nav-menu {
@@ -61,97 +58,89 @@ nav {
 }
 
 .nav-menu li a {
-    padding: 12px 25px;
+    padding: 15px 30px;
     display: block;
     text-decoration: none;
-    color: #444;
+    color: #222;
     font-weight: bold;
     font-size: 13px;
-    text-shadow: 0 1px 0 #fff;
-    border-right: 1px solid #d1d1d1;
-    transition: all 0.2s ease;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    border-right: 1px solid rgba(0,0,0,0.05);
 }
 
 .nav-menu li a:hover, .nav-menu li a.active {
-    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
+    background: linear-gradient(to bottom, #7db9e8 0%, #1e5799 100%);
     color: #fff;
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.4);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.4);
 }
 
-/* Treść główna */
 #content-area {
     padding: 50px;
 }
 
-/* --- NOWOŚĆ: STYL ZAOKRĄGLONYCH ZDJĘĆ --- */
-#content-area img {
-    border-radius: 12px; /* To zaokrągla rogi zdjęć */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Miękki cień pod zdjęciem */
-    border: 1px solid rgba(0,0,0,0.1); /* Subtelna ramka */
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 20px auto; /* Centrowanie zdjęć */
-}
-/* ---------------------------------------- */
-
 .article-main-title {
-    font-size: 26px;
-    color: #222;
-    font-weight: 300;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-    text-align: center;
-}
-
-section.post h2 {
-    font-weight: 300;
     font-size: 28px;
-    color: #111;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
 }
 
-section.post p {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #444;
+/* ZAOKRĄGLONE ZDJĘCIA Z EFEKTEM POŁYSKU */
+#content-area img {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.5);
+    margin: 25px auto;
 }
 
-/* NIEBIESKIE PRZYCISKI APPLE (GUMDROP) */
+/* --- PRZYCISKI ULTRA AERO / AQUA --- */
 .btn-more {
     display: inline-block;
-    padding: 12px 35px;
+    padding: 12px 40px;
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
-    border-radius: 25px; /* Bardziej okrągłe przyciski */
     color: #fff;
-    border: 1px solid #1a4d80;
-    /* Niebieski gradient Apple */
-    background: linear-gradient(to bottom, #7db9e8 0%, #207cca 50%, #1e5799 51%, #2989d8 100%);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+    border-radius: 30px;
+    border: 1px solid #0e3866;
+    
+    /* Wielowarstwowy gradient (efekt mokrego szkła) */
+    background: linear-gradient(to bottom, 
+        #a6d5ff 0%, 
+        #7db9e8 49%, 
+        #207cca 50%, 
+        #1e5799 100%);
+    
+    box-shadow: 
+        0 4px 15px rgba(0,0,0,0.2), 
+        inset 0 1px 1px rgba(255,255,255,0.7);
+    
     text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
-    transition: all 0.1s ease;
+    transition: all 0.2s ease;
 }
 
 .btn-more:hover {
-    /* Odwrócenie gradientu - efekt podświetlenia */
-    background: linear-gradient(to bottom, #2989d8 0%, #1e5799 50%, #207cca 51%, #7db9e8 100%);
-    box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4), inset 0 -1px 0 rgba(0,0,0,0.2);
-    transform: translateY(-1px);
+    /* Rozświetlenie Aero przy najechaniu */
+    transform: translateY(-2px);
+    background: linear-gradient(to bottom, 
+        #bce0ff 0%, 
+        #8ccbff 49%, 
+        #3d94e6 50%, 
+        #2989d8 100%);
+    box-shadow: 0 8px 25px rgba(30, 144, 255, 0.5), inset 0 1px 1px #fff;
 }
 
 .btn-more:active {
     transform: translateY(1px);
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.4);
 }
 
 footer {
-    padding: 30px;
+    padding: 40px;
     text-align: center;
-    background: #f4f4f4;
-    border-top: 1px solid #ddd;
+    background: rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(0,0,0,0.1);
     font-size: 11px;
-    color: #888;
-    box-shadow: inset 0 1px 0 #fff;
 }
