@@ -250,7 +250,61 @@
     </div>
      <div role="tooltip" class="is-bottom is-left">Nie klikaj prosze...</div>
 </div>
-   
+
+    <div class="window active" style="max-width: 300px">
+  <div class="title-bar">
+    <div class="title-bar-text">Odliczanie</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize"></button>
+      <button aria-label="Close"></button>
+    </div>
+  </div>
+  <div class="window-body has-space">
+    <p><div role="progressbar" class="animate">
+  <div id="progress-bar" style="width: 0%"></div>
+</div>
+<p id="timer-text" style="font-family: sans-serif; text-align: center;"></p>
+
+<script>
+  function updateCountdown() {
+    const now = new Date();
+    // Ustawiamy datę docelową: 4 kwietnia 2026, godzina 00:00
+    const target = new Date(2026, 3, 4, 0, 0, 0); // Miesiące w JS liczone są od 0 (styczeń=0, kwiecień=3)
+    
+    // Ustawiamy punkt startowy (np. 1 stycznia), żeby wiedzieć od czego liczyć postęp paska
+    const start = new Date(2026, 0, 1, 0, 0, 0); 
+    
+    const totalDuration = target - start;
+    const timePassed = now - start;
+    
+    // Obliczamy procent (ile czasu z tego przedziału już upłynęło)
+    let progress = (timePassed / totalDuration) * 100;
+    
+    // Ograniczamy do przedziału 0-100%
+    progress = Math.min(100, Math.max(0, progress));
+    
+    document.getElementById('progress-bar').style.width = progress + "%";
+    
+    // Opcjonalnie: wyświetlanie ile dni zostało
+    const diff = target - now;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    
+    if (diff > 0) {
+      document.getElementById('timer-text').innerText = `Zostało: ${days} dni i ${hours}h do 04.04`;
+    } else {
+      document.getElementById('timer-text').innerText = "Nadszedł 4 kwietnia!";
+      document.getElementById('progress-bar').style.width = "100%";
+    }
+  }
+
+  // Odświeżaj co minutę
+  setInterval(updateCountdown, 60000);
+  updateCountdown();
+</script></p>
+  </div>
+</div>
 
 
 <script>
